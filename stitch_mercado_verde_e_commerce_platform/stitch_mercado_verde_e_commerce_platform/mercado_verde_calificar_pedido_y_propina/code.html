@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-tertiary-container": "#cfdbd3", "surface-container-low": "#eff4ff", "outline": "#6f7a71", "tertiary-fixed-dim": "#bdcac1", "inverse-primary": "#88d7a8", "background": "#f8f9ff", "secondary-fixed": "#83fc8e", "surface-container-high": "#dee9fc", "on-primary": "#ffffff", "on-error-container": "#93000a", "secondary-fixed-dim": "#66df75", "surface-container-highest": "#d9e3f6", "primary-container": "#176b45", "on-primary-fixed": "#002111", "on-surface": "#121c2a", "surface-tint": "#186c45", "secondary-container": "#80f98b", "on-secondary-fixed": "#002106", "error": "#ba1a1a", "on-secondary-container": "#007327", "on-secondary": "#ffffff", "on-primary-container": "#99e9b9", "surface-container": "#e6eeff", "surface-bright": "#f8f9ff", "on-secondary-fixed-variant": "#00531a", "surface-container-lowest": "#ffffff", "inverse-on-surface": "#eaf1ff", "on-error": "#ffffff", "tertiary-fixed": "#d9e6dd", "on-tertiary-fixed-variant": "#3e4943", "surface-variant": "#d9e3f6", "tertiary": "#3e4943", "tertiary-container": "#55615a", "on-tertiary": "#ffffff", "on-primary-fixed-variant": "#005232", "on-tertiary-fixed": "#131e19", "error-container": "#ffdad6", "secondary": "#006e25", "surface": "#f8f9ff", "primary-fixed": "#a4f4c3", "primary": "#005131", "primary-fixed-dim": "#88d7a8", "on-surface-variant": "#3f4942", "on-background": "#121c2a", "inverse-surface": "#27313f", "surface-dim": "#d0dbed", "outline-variant": "#bfc9c0" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xs": "0.25rem", "gutter-desktop": "1.5rem", "margin": "1rem", "gutter": "1rem", "space-xl": "2.5rem", "space-md": "1rem", "space-lg": "1.5rem", "margin-desktop": "3rem", "margin-tablet": "2rem", "space-sm": "0.5rem" }, fontFamily: { "price-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "price-md": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"] }, fontSize: { "price-lg": ["20px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" }], "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "price-md": ["16px", { "lineHeight": "20px", "fontWeight": "700" }], "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between"><button aria-label="Cerrar" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[24px]">close</span></button><h1 class="font-headline-sm text-headline-sm text-on-surface text-center flex-1 truncate px-space-sm">Calificar Pedido</h1><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 bg-surface pb-safe"><div class="flex flex-col w-full pb-16 px-margin space-y-space-md">
+<!-- Status Celebration Card -->
+<div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary-fixed/40 via-surface-container-low to-surface-container-lowest p-space-md shadow-sm">
+<div class="absolute -right-6 -bottom-6 w-28 h-28 rounded-full bg-secondary-container/30 blur-2xl pointer-events-none"></div>
+<div class="flex items-start gap-space-sm relative z-10">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-md">
+<span class="material-symbols-outlined text-on-primary text-[22px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container/60 text-on-secondary-container text-label-sm font-label-sm mb-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span>Entregado hoy • 15:40 hrs</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-tight">¡Pedido Entregado con Éxito!</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Edificio Florencia, Nivel 4 • Zona 13, CDGT</p>
+<div class="mt-2.5 inline-flex items-center gap-2 text-label-md font-label-md text-primary bg-surface-container-lowest px-3 py-1 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+<span>#MV-2024-9120 • 4 productos frescos</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Delivery Driver Section -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-14 h-14 shrink-0">
+<img class="w-full h-full rounded-full object-cover shadow-inner" data-alt="Close up warm friendly portrait of a Guatemalan grocery delivery driver named Erick wearing a dark forest green Mercado Verde baseball cap and vest, smiling proudly in warm natural afternoon sunlight with thermal delivery cooler in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjrz7-qvlqISfXTs1NuBiQvaACa6CRIN_TnjdxKj7DG3l9MKe-o2LnddBlOhqSKDjW2lJS0nmpbyHOwtJ5Y51Ln4KyhTTahi63le9oIWNyaOsZM78un5MHGaNW8jHNk_APTBTgY-Mjik0r5236suMzydESIBQOYNe1djQFsauuMPXTbc3Ql1ZyI3bfvGQEB1us_9EQ9FX5R_bY6xvG-zIwQYwhpaohMzwyBvBfCdsEEJjUeRowSdez"/>
+<span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-secondary flex items-center justify-center text-on-secondary shadow-sm">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">electric_moped</span>
+</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<h3 class="font-title-md text-title-md text-on-surface truncate">Erick Morales</h3>
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Piloto &amp; Shopper • Hub Central Z.12</p>
+<div class="flex items-center gap-1 mt-1 text-label-sm font-label-sm text-primary">
+<span class="material-symbols-outlined text-[14px]">ac_unit</span>
+<span>Moto Térmica #04 • Certificado Frío 3°C</span>
+</div>
+</div>
+</div>
+<!-- Star Rating Interaction -->
+<div class="flex flex-col items-center justify-center pt-1 pb-1">
+<p class="font-label-lg text-label-lg text-on-surface mb-2 font-semibold">¿Cómo calificarías el servicio de Erick?</p>
+<div class="flex items-center gap-2" id="star-rating-group">
+<button aria-label="1 estrella" class="star-btn p-1 text-[#f59e0b] hover:scale-110 active:scale-95 transition-transform" data-index="1" type="button">
+<span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button aria-label="2 estrellas" class="star-btn p-1 text-[#f59e0b] hover:scale-110 active:scale-95 transition-transform" data-index="2" type="button">
+<span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button aria-label="3 estrellas" class="star-btn p-1 text-[#f59e0b] hover:scale-110 active:scale-95 transition-transform" data-index="3" type="button">
+<span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button aria-label="4 estrellas" class="star-btn p-1 text-[#f59e0b] hover:scale-110 active:scale-95 transition-transform" data-index="4" type="button">
+<span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button aria-label="5 estrellas" class="star-btn p-1 text-[#f59e0b] hover:scale-110 active:scale-95 transition-transform" data-index="5" type="button">
+<span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold mt-1.5" id="rating-feedback">¡Excelente servicio! (5 de 5)</span>
+</div>
+<!-- Quick Compliment Badges -->
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-2">Reconoce sus virtudes:</p>
+<div class="flex flex-wrap gap-2" id="compliments-container">
+<button class="compliment-chip px-3 py-1.5 rounded-full text-label-md font-label-md transition-all active:scale-95 bg-primary-fixed text-on-primary-fixed font-semibold" data-active="true" type="button">
+          Puntual y amable ⏱️
+        </button>
+<button class="compliment-chip px-3 py-1.5 rounded-full text-label-md font-label-md transition-all active:scale-95 bg-primary-fixed text-on-primary-fixed font-semibold" data-active="true" type="button">
+          Mantuvo cadena de frío ❄️
+        </button>
+<button class="compliment-chip px-3 py-1.5 rounded-full text-label-md font-label-md transition-all active:scale-95 bg-surface-container text-on-surface" data-active="false" type="button">
+          Siguió garita al pie 🏢
+        </button>
+<button class="compliment-chip px-3 py-1.5 rounded-full text-label-md font-label-md transition-all active:scale-95 bg-surface-container text-on-surface" data-active="false" type="button">
+          Manejo cuidadoso 🛍️
+        </button>
+</div>
+</div>
+</div>
+<!-- Tipping Section -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm space-y-space-sm">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Reconoce a Erick con propina</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">El 100% va directo al piloto, libre de comisión bancaria.</p>
+</div>
+<div class="w-9 h-9 rounded-full bg-secondary-container/40 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+</div>
+</div>
+<!-- Tip Options Buttons -->
+<div class="grid grid-cols-3 gap-2 pt-1" id="tips-grid">
+<button class="tip-option py-2.5 px-2 rounded-xl text-center transition-all active:scale-95 bg-surface-container-low text-on-surface hover:bg-surface-container" data-amount="5.00" type="button">
+<span class="font-price-md text-price-md block">Q 5.00</span>
+</button>
+<button class="tip-option relative py-2.5 px-2 rounded-xl text-center transition-all active:scale-95 bg-primary text-on-primary shadow-sm" data-amount="10.00" data-selected="true" type="button">
+<span class="absolute -top-2 left-1/2 -translate-x-1/2 bg-secondary-container text-on-secondary-container text-[9px] font-bold px-1.5 py-0.2 rounded-full uppercase tracking-tight shadow-xs whitespace-nowrap">Sugerido</span>
+<span class="font-price-md text-price-md block">Q 10.00</span>
+</button>
+<button class="tip-option py-2.5 px-2 rounded-xl text-center transition-all active:scale-95 bg-surface-container-low text-on-surface hover:bg-surface-container" data-amount="15.00" type="button">
+<span class="font-price-md text-price-md block">Q 15.00</span>
+</button>
+<button class="tip-option py-2.5 px-2 rounded-xl text-center transition-all active:scale-95 bg-surface-container-low text-on-surface hover:bg-surface-container" data-amount="20.00" type="button">
+<span class="font-price-md text-price-md block">Q 20.00</span>
+</button>
+<button class="tip-option col-span-2 py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 transition-all active:scale-95 bg-surface-container-low text-on-surface hover:bg-surface-container" data-amount="custom" id="custom-tip-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+<span class="font-label-lg text-label-lg font-semibold">Otro monto</span>
+</button>
+</div>
+<!-- Charge Payment Info Pill -->
+<div class="flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-low text-on-surface-variant mt-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">credit_card</span>
+<span class="font-body-sm text-body-sm">Cobrar a <strong>Visa •••• 9010</strong></span>
+</div>
+<span class="text-label-sm font-label-sm text-primary font-bold">Cambiar</span>
+</div>
+</div>
+<!-- Produce & Freshness Evaluation -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm space-y-space-md">
+<div class="flex items-start justify-between">
+<div>
+<div class="inline-flex items-center gap-1 text-primary text-label-sm font-label-sm font-bold uppercase tracking-wide">
+<span class="material-symbols-outlined text-[15px]">eco</span>
+<span>Garantía Cero Mermas Chapina</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface">Evaluación de Frescura y Madurez</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">¿El lote de cosecha cumplió tus expectativas?</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-fixed/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">nutrition</span>
+</div>
+</div>
+<!-- Items Mini-Review List -->
+<div class="space-y-space-sm divide-y-0">
+<!-- Item 1 -->
+<div class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low">
+<div class="w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Two perfectly ripe Hass avocados cut in half showing creamy yellow green core with seed on a wooden kitchen board with soft daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe_vVdK3aTzNBHtOYgfK5IdYHKi2LlLwHAHqLsZwQ_RwRCr73QPg856M8MWau663SiCN3yogMScs7v_FSgoqtQZguKft77sLUxly7c-5MA0ZCdbQDc3COK7Xlc-JA3Myzfw-SlVesJBS7sTGfLs8gWB05IuXfCUVDteC9rkntT8QykneB3VnYqqYcIBMPhkue8QQNa83mthnXtgsn-8m8evBW4kTvizKlQ2zgBZ06fY3TfIeLCLLzU"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-title-md text-title-md text-on-surface truncate">Aguacate Hass Maduro</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">2 lbs • Punto exacto para comer hoy</p>
+</div>
+<div class="flex items-center gap-0.5 text-secondary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">sentiment_very_satisfied</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low">
+<div class="w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Fresh vibrant red strawberries packed in an eco friendly cardboard basket from Almolonga Guatemala with fresh green leaves" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt2TbWpBhkf04UWy2URRoP_S4t-7ucEtN0XWt7ZH9hsxIIvV2FTPfXzCNU8zNw3e0Vt-DkSQtQ1lMoDk58rDDrX2W1U-ERh2kM99JcrmFjzeBVuSdO2nX4y0eaUElZxgF-ra-XDOK2-_H0px9A5O0WCw85jqoa6t60gcTx00Q3mRCqueDRNH-R6TqpKgvMBeyufxX_E6Ti_ljgDQJT4cMSCBLQ8qsivqvfDHcmdtY_cW6yRWCt1XbP"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-title-md text-title-md text-on-surface truncate">Fresas de Almolonga</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">500g • Cosecha matutina dulce</p>
+</div>
+<div class="flex items-center gap-0.5 text-secondary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">sentiment_very_satisfied</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low">
+<div class="w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Crisp fresh heirloom tomatoes Manzano variety piled on artisan woven napkin in rustic kitchen table bright natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA16t8W1RmfT5J4CcE6KsuUAKzCTtMNsj9JFwTjq9eXQkMighLlVygvOU_v_ZoHAQ8_4qMebxlUcxWO8yKMO1h8UaazLI94wPmIgGsgMce18TOeH0q4092dqK_SLKghAFReIo3JeMxyzTEVV5r5550XGTqiQOIhrPj-tCJPG8IZTRxDEHoI1hj_d1j5TZU2h5vCSwzCArzLtW9HnqpLnOlvfLhqG95_hT-0QT1r1J37zfekRjUGHDTk"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-title-md text-title-md text-on-surface truncate">Tomate Manzano</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">1.5 lbs • Firme y sin golpes</p>
+</div>
+<div class="flex items-center gap-0.5 text-secondary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">sentiment_very_satisfied</span>
+</div>
+</div>
+<!-- Item 4 (Glass bottle return) -->
+<div class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low">
+<div class="w-12 h-12 rounded-lg overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Traditional glass bottle of fresh farm whole milk with vintage label and paper seal in a chilled morning setting with condensation droplets" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAcT_nyH1-TdD_Ze7Owd-w8jnIplf9gMKDC5Wg5yyw1ThRNZUFsf4tqlfz8ghDNGKbv4OmGI5qZPMKARl-mIS-uDGhrPBMWtHpVchC5ym6V31D2F3kOKHaJZUbNQ9eh4qOkDXC2W74auULWvtwSt5bAI3dM3oQFZOygAaoyeAp356oL8qDr5ySepSFn91oqj3Vg9OBqrnnnhGadxXKdPaPzhow9PVPkBSuWflrgzFuPSVVNm_CXX2L"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-title-md text-title-md text-on-surface truncate">Leche de Granja (Vidrio 1L)</p>
+<div class="flex items-center gap-1 text-label-sm font-label-sm text-on-secondary-container mt-0.5">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>Retornaste envase anterior (+Q 5.00 crédito)</span>
+</div>
+</div>
+<div class="flex items-center gap-0.5 text-secondary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">sentiment_very_satisfied</span>
+</div>
+</div>
+</div>
+<!-- Quick satisfaction checks -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<div class="flex items-center gap-2 p-2.5 rounded-lg bg-primary-fixed/20 text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">thermostat</span>
+<div class="min-w-0">
+<p class="text-label-sm font-label-sm font-bold text-primary truncate">Cadena de frío: Óptima</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-[11px] leading-tight">3.8°C verificado</p>
+</div>
+</div>
+<div class="flex items-center gap-2 p-2.5 rounded-lg bg-primary-fixed/20 text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">all_inbox</span>
+<div class="min-w-0">
+<p class="text-label-sm font-label-sm font-bold text-primary truncate">Empaques intactos</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-[11px] leading-tight">Bolsas kraft selladas</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Note for Erick & Hub Team -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm space-y-2">
+<div class="flex items-center justify-between">
+<label class="font-title-md text-title-md text-on-surface flex items-center gap-1.5" for="review-comment">
+<span class="material-symbols-outlined text-primary text-[20px]">chat_bubble_outline</span>
+<span>Mensaje para Erick o el Hub Z.12</span>
+</label>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Opcional</span>
+</div>
+<textarea class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg p-3 outline-none focus:bg-surface focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline" id="review-comment" placeholder="¡Muchas gracias por la rapidez! Los aguacates vinieron perfectos para el almuerzo..." rows="3"></textarea>
+</div>
+<!-- Impact / Security Note -->
+<div class="flex items-center gap-2.5 px-3 py-2.5 rounded-lg bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined text-primary shrink-0 text-[20px]">handshake</span>
+<p class="font-body-sm text-body-sm leading-snug">
+      Tu evaluación respalda el pago justo y el estándar de calidad a cooperativas agrícolas en <strong>Almolonga y Tecpán</strong>.
+    </p>
+</div>
+<!-- CTA Action Cluster -->
+<div class="space-y-2 pt-2">
+<button class="w-full h-12 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm flex items-center justify-center gap-2 shadow-md hover:bg-primary-container active:scale-[0.98] transition-all" id="submit-review-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">send</span>
+<span id="submit-label">Enviar Calificación y Propina (Q 10.00)</span>
+</button>
+<button class="w-full py-2.5 text-center font-label-lg text-label-lg text-primary hover:text-primary-container transition-colors" type="button">
+      Omitir propina y enviar solo calificación
+    </button>
+</div>
+</div>
+<script>
+  (function() {
+    // Star Rating Interactivity
+    const starButtons = document.querySelectorAll('.star-btn');
+    const ratingFeedback = document.getElementById('rating-feedback');
+    const feedbackTexts = [
+      'Por mejorar (1 de 5)',
+      'Regular (2 de 5)',
+      'Bueno (3 de 5)',
+      '¡Muy buen servicio! (4 de 5)',
+      '¡Excelente servicio! (5 de 5)'
+    ];
+
+    starButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const rating = parseInt(btn.getAttribute('data-index'), 10);
+        starButtons.forEach(s => {
+          const sIndex = parseInt(s.getAttribute('data-index'), 10);
+          const icon = s.querySelector('.material-symbols-outlined');
+          if (sIndex <= rating) {
+            s.classList.remove('text-outline-variant');
+            s.classList.add('text-[#f59e0b]');
+            icon.style.fontVariationSettings = "'FILL' 1";
+          } else {
+            s.classList.remove('text-[#f59e0b]');
+            s.classList.add('text-outline-variant');
+            icon.style.fontVariationSettings = "'FILL' 0";
+          }
+        });
+        if (ratingFeedback) {
+          ratingFeedback.textContent = feedbackTexts[rating - 1];
+        }
+      });
+    });
+
+    // Compliment chips toggle
+    const complimentChips = document.querySelectorAll('.compliment-chip');
+    complimentChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const isActive = chip.getAttribute('data-active') === 'true';
+        if (isActive) {
+          chip.setAttribute('data-active', 'false');
+          chip.classList.remove('bg-primary-fixed', 'text-on-primary-fixed', 'font-semibold');
+          chip.classList.add('bg-surface-container', 'text-on-surface');
+        } else {
+          chip.setAttribute('data-active', 'true');
+          chip.classList.remove('bg-surface-container', 'text-on-surface');
+          chip.classList.add('bg-primary-fixed', 'text-on-primary-fixed', 'font-semibold');
+        }
+      });
+    });
+
+    // Tip selection logic
+    const tipOptions = document.querySelectorAll('.tip-option');
+    const submitLabel = document.getElementById('submit-label');
+
+    tipOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        tipOptions.forEach(o => {
+          o.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+          o.classList.add('bg-surface-container-low', 'text-on-surface');
+        });
+        opt.classList.remove('bg-surface-container-low', 'text-on-surface');
+        opt.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+
+        const amount = opt.getAttribute('data-amount');
+        if (amount === 'custom') {
+          const customValue = prompt('Ingresa el monto de propina para Erick (en Quetzales):', '12.00');
+          if (customValue && !isNaN(customValue) && parseFloat(customValue) > 0) {
+            submitLabel.textContent = `Enviar Calificación y Propina (Q ${parseFloat(customValue).toFixed(2)})`;
+          } else {
+            submitLabel.textContent = 'Enviar Calificación';
+          }
+        } else {
+          submitLabel.textContent = `Enviar Calificación y Propina (Q ${amount})`;
+        }
+      });
+    });
+
+    // Main action feedback
+    const submitBtn = document.getElementById('submit-review-btn');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', () => {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-80');
+        submitBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span>
+          <span>Guardando y enviando...</span>
+        `;
+        setTimeout(() => {
+          submitBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            <span>¡Gracias por tu apoyo!</span>
+          `;
+          submitBtn.classList.remove('bg-primary');
+          submitBtn.classList.add('bg-secondary');
+        }, 800);
+      });
+    }
+  })();
+</script></main></body></html>

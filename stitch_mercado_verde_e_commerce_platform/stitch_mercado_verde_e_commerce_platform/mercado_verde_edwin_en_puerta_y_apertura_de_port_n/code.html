@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-error": "#ffffff", "on-secondary-fixed-variant": "#00531a", "secondary": "#006e25", "surface-container-highest": "#d9e3f6", "primary-container": "#176b45", "background": "#f8f9ff", "surface-bright": "#f8f9ff", "tertiary-fixed": "#d9e6dd", "on-secondary-container": "#007327", "on-tertiary-fixed": "#131e19", "inverse-on-surface": "#eaf1ff", "secondary-fixed": "#83fc8e", "on-primary-fixed": "#002111", "inverse-surface": "#27313f", "primary": "#005131", "on-background": "#121c2a", "surface-dim": "#d0dbed", "secondary-fixed-dim": "#66df75", "on-primary-container": "#99e9b9", "surface-variant": "#d9e3f6", "outline": "#6f7a71", "on-tertiary-fixed-variant": "#3e4943", "surface-container-lowest": "#ffffff", "surface-container": "#e6eeff", "on-secondary": "#ffffff", "outline-variant": "#bfc9c0", "primary-fixed-dim": "#88d7a8", "secondary-container": "#80f98b", "on-error-container": "#93000a", "on-surface": "#121c2a", "surface-container-high": "#dee9fc", "error": "#ba1a1a", "tertiary-fixed-dim": "#bdcac1", "surface-tint": "#186c45", "on-primary-fixed-variant": "#005232", "on-primary": "#ffffff", "inverse-primary": "#88d7a8", "on-tertiary-container": "#cfdbd3", "on-tertiary": "#ffffff", "on-surface-variant": "#3f4942", "surface-container-low": "#eff4ff", "tertiary-container": "#55615a", "surface": "#f8f9ff", "on-secondary-fixed": "#002106", "primary-fixed": "a4f4c3", "tertiary": "#3e4943", "error-container": "#ffdad6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "gutter-desktop": "1.5rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter": "1rem", "margin-desktop": "3rem", "margin-tablet": "2rem", "margin": "1rem", "space-md": "1rem" }, "fontFamily": { "body-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "price-lg": ["Plus Jakarta Sans"], "price-md": ["Plus Jakarta Sans"] }, "fontSize": { "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "700" }], "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" }], "price-lg": ["20px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "price-md": ["16px", { "lineHeight": "20px", "fontWeight": "700" }] } } } }</script><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Volver atrás" class="w-11 h-11 flex items-center justify-center rounded-full hover:bg-surface-container-high active:scale-95 transition-all text-on-surface flex-shrink-0" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><h1 class="font-headline-sm text-headline-sm text-on-surface truncate">Mercado Verde   Edwin En Puerta Y Apertura De Portón</h1></div><div class="flex items-center gap-space-sm flex-shrink-0"><button aria-label="Ayuda y Soporte" class="min-h-[44px] px-space-md py-space-xs rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center gap-space-xs font-label-md text-label-md active:scale-98 transition-transform"><span class="material-symbols-outlined text-[20px]">support_agent</span><span class="hidden xs:inline">Ayuda</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full pt-16 pb-safe bg-surface flex flex-col"><div class="flex flex-col w-full pb-28 space-y-space-md px-gutter">
+<!-- 1. Alerta de Llegada en Vivo (Hero Banner) -->
+<section class="w-full rounded-xl bg-primary text-on-primary p-space-md shadow-md overflow-hidden relative">
+<div class="flex items-center justify-between gap-space-sm mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-fixed opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-secondary-fixed"></span>
+</span>
+<span class="font-label-md text-label-md tracking-wider uppercase text-secondary-fixed">¡Edwin está en tu puerta!</span>
+</div>
+<span class="font-label-md text-label-md bg-on-primary-fixed-variant/40 px-space-sm py-0.5 rounded-full text-primary-fixed">17:28 hrs</span>
+</div>
+<div class="space-y-space-xs">
+<p class="font-title-md text-title-md font-bold leading-snug">
+        Moto térmica estacionada frente a Garita / Portón Principal
+      </p>
+<p class="font-body-sm text-body-sm text-on-primary-container flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+        Diagonal 6, Zona 10, Edificio / Residencial Carlos Mendoza
+      </p>
+</div>
+<!-- Telemetría & Proximidad BLE -->
+<div class="mt-space-md pt-space-xs flex items-center justify-between bg-primary-container/80 rounded-lg p-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]">sensors</span>
+<div class="min-w-0">
+<p class="font-label-md text-label-md text-on-primary font-semibold">Proximidad BLE: 6 metros</p>
+<p class="font-label-sm text-label-sm text-primary-fixed opacity-90 truncate">Enlace local directo • Señal Satelital Confirmada</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">verified</span>
+</div>
+</section>
+<!-- 2. Módulo de Apertura de Portón y Acceso de Garita (Acción Principal) -->
+<section class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-secondary-container/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">door_sliding</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Control de Acceso Residencial</h2>
+</div>
+<span class="font-label-sm text-label-sm px-space-sm py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-bold">Activo</span>
+</div>
+<!-- Botón Táctil de Apertura Directa -->
+<div class="relative w-full">
+<button class="w-full min-h-[52px] bg-primary hover:bg-primary-container active:scale-[0.98] transition-all rounded-full flex items-center justify-between px-space-md shadow-sm text-on-primary" id="gate-trigger" onclick="triggerGateOpen()">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-on-primary/10 flex items-center justify-center text-secondary-fixed">
+<span class="material-symbols-outlined text-[22px]" id="gate-icon">key</span>
+</div>
+<span class="font-title-md text-title-md font-bold text-left" id="gate-text">Abrir Portón Principal</span>
+</div>
+<div class="flex items-center gap-1 font-label-md text-label-md bg-primary-container px-space-sm py-1 rounded-full text-secondary-fixed">
+<span>Garita #02</span>
+<span class="material-symbols-outlined text-[16px]">send</span>
+</div>
+</button>
+<p class="hidden text-center font-label-md text-label-md text-secondary mt-1 font-semibold" id="gate-feedback">
+        Señal enviada a receptor de Garita #02 • Portón abriendo...
+      </p>
+</div>
+<!-- Pase Digital / PIN de Garita -->
+<div class="bg-surface-container-low rounded-lg p-space-sm flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-md bg-surface-container flex items-center justify-center text-on-surface flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">qr_code_2</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-sm text-label-sm text-on-surface-variant font-bold uppercase">Token de Garita / Guardia</p>
+<p class="font-price-md text-price-md text-on-surface tracking-wider font-extrabold truncate">MV-9421-Z10</p>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0">
+<span class="font-label-sm text-label-sm bg-surface-variant text-on-surface-variant px-space-xs py-0.5 rounded font-semibold">15 min</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold mt-0.5">Válido</span>
+</div>
+</div>
+<!-- Opciones Rápidas de Entrega -->
+<div class="space-y-space-xs">
+<p class="font-label-md text-label-md text-on-surface-variant font-semibold">Instrucción rápida a Edwin:</p>
+<div class="grid grid-cols-3 gap-space-xs">
+<button class="delivery-pref-btn active-pref p-space-xs rounded-lg bg-surface-container-high text-on-surface text-center flex flex-col items-center justify-center gap-1 transition-all" onclick="selectInstruction(this)">
+<span class="material-symbols-outlined text-[18px] text-primary">handshake</span>
+<span class="font-label-sm text-label-sm font-semibold leading-tight">En mano en portón</span>
+</button>
+<button class="delivery-pref-btn p-space-xs rounded-lg bg-surface-container-low text-on-surface-variant text-center flex flex-col items-center justify-center gap-1 transition-all" onclick="selectInstruction(this)">
+<span class="material-symbols-outlined text-[18px]">security</span>
+<span class="font-label-sm text-label-sm font-semibold leading-tight">Con guardia garita</span>
+</button>
+<button class="delivery-pref-btn p-space-xs rounded-lg bg-surface-container-low text-on-surface-variant text-center flex flex-col items-center justify-center gap-1 transition-all" onclick="selectInstruction(this)">
+<span class="material-symbols-outlined text-[18px]">directions_walk</span>
+<span class="font-label-sm text-label-sm font-semibold leading-tight">Pase peatonal</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 3. Intercomunicador y Contacto con Repartidor -->
+<section class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 shadow-sm bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Close up warm portrait of a friendly Guatemalan delivery courier named Edwin Morales in his early thirties wearing an emerald green polo uniform and Mercado Verde cap, smiling politely on a sunny day in Guatemala City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACxGgepUumMCAalUu2qOhpOWRres7wsRjK2KKHjSgv3S83QvjVydu7WHKD1R5N9z-oMaWEBVaKEWmNgZCfyudxWRs6PjeW_UosBW6dgLQ4FdrT4T53xQWYrRxbyrdM5mGsK0YwIntcw6LTZMIP_nxj6c_u6tHkGH4XtnQCfSHYRie-mgU-B2jOx4eigJis0bNFpGlDZ0vtCYMhL54L9oWFhJZ8uLUPTH9lEuFe4lgcVkX3bq7kAkxE"/>
+</div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<h3 class="font-title-md text-title-md text-on-surface font-bold truncate">Edwin Morales</h3>
+<span class="font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-space-xs py-0.5 rounded-full font-bold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            4.9
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Piloto Certificado #08 • Moto Térmica M-12</p>
+<span class="inline-block mt-0.5 font-label-sm text-label-sm px-space-xs rounded bg-surface-container text-on-surface font-mono font-semibold">
+          Placa M-882BKX
+        </span>
+</div>
+</div>
+<!-- Mensaje en Tiempo Real -->
+<div class="bg-surface-container-low rounded-lg p-space-sm flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px] flex-shrink-0 mt-0.5">chat_bubble</span>
+<div class="min-w-0">
+<p class="font-label-sm text-label-sm text-on-surface-variant font-bold">Mensaje de Edwin (17:27 hrs):</p>
+<p class="font-body-sm text-body-sm text-on-surface italic mt-0.5">
+          "Buenas tardes Don Carlos, ya estoy frente al portón con su huacal sellado y la leche fría."
+        </p>
+</div>
+</div>
+<!-- Botones de Acción de Comunicación -->
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="min-h-[44px] rounded-full bg-secondary-fixed text-on-secondary-fixed hover:bg-secondary-fixed-dim font-label-lg text-label-lg font-bold flex items-center justify-center gap-space-xs active:scale-98 transition-transform" onclick="handleIntercomCall()">
+<span class="material-symbols-outlined text-[20px]">call</span>
+<span>Intercom / Llamar</span>
+</button>
+<button class="min-h-[44px] rounded-full bg-surface-container-high text-primary hover:bg-surface-variant font-label-lg text-label-lg font-bold flex items-center justify-center gap-space-xs active:scale-98 transition-transform" id="quick-reply-btn" onclick="sendQuickReply(this)">
+<span class="material-symbols-outlined text-[20px]">campaign</span>
+<span id="quick-reply-text">¡Ya voy saliendo!</span>
+</button>
+</div>
+</section>
+<!-- 4. Certificación de Cadena de Frío e Inocuidad a la Entrega -->
+<section class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-secondary-container/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">ac_unit</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface">Cadena de Frío &amp; Seguridad</h3>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold bg-primary-fixed px-space-xs py-0.5 rounded">HACCP Tier 1</span>
+</div>
+<!-- Bento Grid de Sensores de Entrega -->
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Métrica Temperatura -->
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-secondary">
+<span class="font-label-sm text-label-sm uppercase font-bold">Temperatura</span>
+<span class="material-symbols-outlined text-[18px]">thermostat</span>
+</div>
+<div class="my-space-xs">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold text-on-surface">4.2°C</span>
+</div>
+<p class="font-label-sm text-label-sm text-secondary font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+          Óptimo Garantizado
+        </p>
+</div>
+<!-- Métrica Precinto -->
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-primary">
+<span class="font-label-sm text-label-sm uppercase font-bold">Precinto Hermético</span>
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div class="my-space-xs">
+<span class="font-label-sm text-label-sm font-mono text-on-surface font-extrabold break-all">#PRE-Z4-9421-HCL01</span>
+</div>
+<p class="font-label-sm text-label-sm text-primary font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+          Intacto y Auditado
+        </p>
+</div>
+</div>
+<!-- Detalle de Bultos Físicos -->
+<div class="space-y-space-xs pt-space-xs">
+<p class="font-label-sm text-label-sm font-bold text-on-surface-variant uppercase">Bultos en esta Entrega (Orden #ORD-9421):</p>
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-md overflow-hidden flex-shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="High quality fresh green produce inside a clean sanitized wooden produce crate including fresh broccoli, avocados, and carrots sourced from Almolonga Guatemala" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKp26hx7VwVj5fZT8AiUc2VqSuuSguc95txpJhSUd7L-Xjkj6PDm4coigSGl_DhgDqD47ITHcWfkZw66UOxDzsBXRQKgytDLqaZoWoFc4JG9lQBk5IhQRcAtVr4mDbGyA7_xOXtnNSdEH1glT2wGGajd580IvCvD5r_C2FJ4y0_eGGCm8RA9iOGosronKOoHDB9jQVxp1IWT22yH7DvIiU-SvEBWRiE90DoCs6SYNw2TY3uebI17Ma"/>
+</div>
+<div class="min-w-0">
+<p class="font-title-md text-title-md text-on-surface font-semibold truncate">Huacal Térmico #01</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">4.06 kg • 4 hortalizas (Almolonga y Tecpán)</p>
+</div>
+</div>
+<span class="font-label-md text-label-md font-bold text-secondary flex-shrink-0">Sellado</span>
+</div>
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-md overflow-hidden flex-shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Traditional glass bottles of whole farm milk in a wire basket, chilled with fresh droplets on glass, white dairy freshness" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUNSPdao9oVSKlfk6os126ue-orDq15u-xQmcB07JWffoqQSs4hM4Pd0suIe_X_xr-RVwBwk-ZU-H6-t88nF8wHbeRsAegjFxFemg0pLk_4lub4YPZhT85cLwzJapBSOp-jL7Hm-DfMWqvYfJyWnsE6XSnJLTte6Yvwq4LipM77If0PI9OUWO6dYC0URmSMrTzSzsJldQjgIfVRTptTIB1kNcPAXCy0AOgb959B-qBFdSsyfRwIT1C"/>
+</div>
+<div class="min-w-0">
+<p class="font-title-md text-title-md text-on-surface font-semibold truncate">Canastilla Lácteos #L-04</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">2x Leche 1L en Vidrio Retornable</p>
+</div>
+</div>
+<span class="font-label-md text-label-md font-bold text-secondary flex-shrink-0">4.2°C</span>
+</div>
+</div>
+</section>
+<!-- 5. Logística Inversa - Devolución de Envases Lista -->
+<section class="w-full bg-secondary-container/20 rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]">recycling</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Economía Circular</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Devolución de envases de vidrio</p>
+</div>
+</div>
+<span class="font-label-md text-label-md px-space-sm py-1 rounded-full bg-secondary text-on-secondary font-bold shadow-sm">
+        +Q 10.00 Reembolso
+      </span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-lowest shadow-sm flex items-center justify-between gap-space-sm">
+<div class="space-y-0.5">
+<p class="font-label-md text-label-md text-on-surface font-bold">¿Tienes listas tus 2 botellas de leche vacías?</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Entrégaselas limpias a Edwin para acreditar saldo a tu Billetera Verde.</p>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">local_cafe</span>
+</div>
+</div>
+<!-- Modal trigger / Botón de QR de Devolución -->
+<button class="w-full min-h-[44px] rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-space-xs active:scale-98 transition-all" id="qr-return-btn" onclick="toggleReturnQR()">
+<span class="material-symbols-outlined text-[20px]">qr_code</span>
+<span>Desplegar Pase QR de Devolución</span>
+</button>
+<!-- Miniatura QR Desplegable Oculta -->
+<div class="hidden flex-col items-center justify-center p-space-md rounded-lg bg-surface-container-lowest text-center space-y-space-sm" id="return-qr-drawer">
+<div class="p-space-sm bg-white rounded-lg shadow-sm">
+<!-- SVG QR Mockup de alta fidelidad -->
+<svg class="w-36 h-36 mx-auto text-on-surface" fill="currentColor" viewbox="0 0 100 100">
+<rect fill="none" height="30" rx="4" stroke="currentColor" stroke-width="6" width="30" x="0" y="0"></rect>
+<rect height="14" rx="2" width="14" x="8" y="8"></rect>
+<rect fill="none" height="30" rx="4" stroke="currentColor" stroke-width="6" width="30" x="70" y="0"></rect>
+<rect height="14" rx="2" width="14" x="78" y="8"></rect>
+<rect fill="none" height="30" rx="4" stroke="currentColor" stroke-width="6" width="30" x="0" y="70"></rect>
+<rect height="14" rx="2" width="14" x="8" y="78"></rect>
+<rect height="20" width="8" x="40" y="10"></rect>
+<rect height="10" width="10" x="52" y="18"></rect>
+<rect fill="#176b45" height="20" rx="2" width="20" x="40" y="40"></rect>
+<rect height="8" width="12" x="70" y="42"></rect>
+<rect height="10" width="14" x="86" y="54"></rect>
+<rect height="14" width="14" x="42" y="70"></rect>
+<rect height="15" width="25" x="65" y="75"></rect>
+</svg>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Pase: RET-2BTL-9421</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Edwin lo escaneará desde su app con su terminal</p>
+</div>
+</div>
+</section>
+<!-- 6. Barra Flotante de Acciones Inferior -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md px-gutter py-space-sm shadow-[0_-4px_20px_0_rgba(18,28,42,0.08)] flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm w-full max-w-md mx-auto">
+<button aria-label="Reportar Inconveniente" class="w-12 h-12 rounded-full bg-surface-container-high hover:bg-surface-variant flex items-center justify-center text-error flex-shrink-0 active:scale-95 transition-transform" onclick="reportIssue()">
+<span class="material-symbols-outlined text-[24px]">report_problem</span>
+</button>
+<button class="flex-1 min-h-[48px] rounded-full bg-primary hover:bg-primary-container active:scale-[0.98] transition-transform text-on-primary font-title-md text-title-md font-bold flex items-center justify-center gap-space-xs shadow-md" onclick="confirmOrderDelivery()">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+<span class="truncate">Confirmar Recepción</span>
+</button>
+</div>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant">
+      Orden #ORD-9421 • Carlos Mendoza • Zona 10
+    </p>
+</div>
+</div>
+<script>
+  function triggerGateOpen() {
+    const btn = document.getElementById('gate-trigger');
+    const text = document.getElementById('gate-text');
+    const icon = document.getElementById('gate-icon');
+    const feedback = document.getElementById('gate-feedback');
+    
+    btn.classList.add('bg-secondary');
+    text.innerText = 'Abriendo Garita #02...';
+    icon.innerText = 'sync';
+    icon.classList.add('animate-spin');
+    feedback.classList.remove('hidden');
+
+    setTimeout(() => {
+      text.innerText = '¡Portón Abierto con Éxito!';
+      icon.innerText = 'check_circle';
+      icon.classList.remove('animate-spin');
+    }, 1800);
+  }
+
+  function selectInstruction(selectedElement) {
+    const buttons = document.querySelectorAll('.delivery-pref-btn');
+    buttons.forEach(btn => {
+      btn.classList.remove('bg-surface-container-high', 'text-on-surface');
+      btn.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+      const icon = btn.querySelector('.material-symbols-outlined');
+      if (icon) icon.classList.remove('text-primary');
+    });
+
+    selectedElement.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+    selectedElement.classList.add('bg-surface-container-high', 'text-on-surface');
+    const activeIcon = selectedElement.querySelector('.material-symbols-outlined');
+    if (activeIcon) activeIcon.classList.add('text-primary');
+  }
+
+  function sendQuickReply(btn) {
+    const label = document.getElementById('quick-reply-text');
+    btn.classList.replace('bg-surface-container-high', 'bg-secondary-container');
+    btn.classList.replace('text-primary', 'text-on-secondary-container');
+    label.innerText = '¡Aviso Enviado!';
+    setTimeout(() => {
+      btn.classList.replace('bg-secondary-container', 'bg-surface-container-high');
+      btn.classList.replace('text-on-secondary-container', 'text-primary');
+      label.innerText = '¡Ya voy saliendo!';
+    }, 3000);
+  }
+
+  function handleIntercomCall() {
+    alert('Conectando por audio bidireccional con el casco de Edwin Morales (M-12)...');
+  }
+
+  function toggleReturnQR() {
+    const drawer = document.getElementById('return-qr-drawer');
+    const btn = document.getElementById('qr-return-btn');
+    const isHidden = drawer.classList.contains('hidden');
+    if (isHidden) {
+      drawer.classList.remove('hidden');
+      drawer.classList.add('flex');
+      btn.querySelector('span:last-child').innerText = 'Ocultar Pase QR';
+    } else {
+      drawer.classList.add('hidden');
+      drawer.classList.remove('flex');
+      btn.querySelector('span:last-child').innerText = 'Desplegar Pase QR de Devolución';
+    }
+  }
+
+  function confirmOrderDelivery() {
+    alert('¡Pedido #ORD-9421 marcado como recibido! Redirigiendo a calificación y propina para Edwin...');
+  }
+
+  function reportIssue() {
+    alert('Abriendo soporte prioritario en vivo con la central de Mercado Verde Guatemala...');
+  }
+</script></main></body></html>

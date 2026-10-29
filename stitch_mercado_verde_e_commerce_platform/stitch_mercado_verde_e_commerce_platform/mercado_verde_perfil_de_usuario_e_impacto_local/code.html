@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "outline": "#6f7a71", "surface-container-lowest": "#ffffff", "inverse-surface": "#27313f", "surface-container-highest": "#d9e3f6", "surface-container": "#e6eeff", "secondary": "#006e25", "surface-variant": "#d9e3f6", "on-error": "#ffffff", "on-primary": "#ffffff", "error-container": "#ffdad6", "background": "#f8f9ff", "on-error-container": "#93000a", "on-primary-fixed": "#002111", "primary-container": "#176b45", "secondary-fixed": "#83fc8e", "on-primary-container": "#99e9b9", "on-surface-variant": "#3f4942", "on-tertiary-fixed-variant": "#3e4943", "surface-container-low": "#eff4ff", "tertiary-fixed-dim": "#bdcac1", "primary": "#005131", "on-secondary-fixed-variant": "#00531a", "primary-fixed-dim": "#88d7a8", "on-tertiary-container": "#cfdbd3", "surface": "#f8f9ff", "on-background": "#121c2a", "secondary-container": "#80f98b", "inverse-on-surface": "#eaf1ff", "on-secondary-container": "#007327", "surface-tint": "#186c45", "on-secondary-fixed": "#002106", "tertiary": "#3e4943", "on-primary-fixed-variant": "#005232", "on-surface": "#121c2a", "on-tertiary": "#ffffff", "on-tertiary-fixed": "#131e19", "outline-variant": "#bfc9c0", "secondary-fixed-dim": "#66df75", "primary-fixed": "#a4f4c3", "on-secondary": "#ffffff", "surface-bright": "#f8f9ff", "tertiary-container": "#55615a", "surface-container-high": "#dee9fc", "inverse-primary": "#88d7a8", "error": "#ba1a1a", "tertiary-fixed": "#d9e6dd", "surface-dim": "#d0dbed" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin": "1rem", "gutter": "1rem", "margin-desktop": "3rem", "space-md": "1rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "margin-tablet": "2rem", "gutter-desktop": "1.5rem" }, fontFamily: { "headline-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "price-lg": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "price-md": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"] }, fontSize: { "headline-md": ["22px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-lg": ["14px", { lineHeight: "18px", letterSpacing: "0.01em", fontWeight: "600" }], "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.015em", fontWeight: "700" }], "headline-lg-mobile": ["26px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "700" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }], "display": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "800" }], "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }], "title-md": ["16px", { lineHeight: "22px", fontWeight: "600" }], "price-lg": ["20px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "800" }], "label-sm": ["10px", { lineHeight: "12px", letterSpacing: "0.04em", fontWeight: "700" }], "price-md": ["16px", { lineHeight: "20px", fontWeight: "700" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }] } } } }</script><style>@layer base{html,body{width:100vw;min-height:100vh;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-full"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[22px]">eco</span></div><div class="flex flex-col"><h1 class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">Perfil</h1><span class="font-label-sm text-label-sm text-secondary font-bold tracking-wide uppercase mt-0.5">Carlos Mendoza • Mercado Verde</span></div></div><div class="flex items-center gap-space-xs"><a aria-label="Soporte WhatsApp" class="w-11 h-11 flex items-center justify-center rounded-full text-secondary hover:bg-surface-container transition-colors" href="https://wa.me/50200000000" target="_blank"><span class="material-symbols-outlined text-[24px]">support_agent</span></a><button aria-label="Configuración" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[24px]">settings</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-1"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 px-margin bg-surface"><div class="flex flex-col w-full pb-8 space-y-4">
+<!-- Tarjeta de Perfil & Billetera Ecológica -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm relative overflow-hidden">
+<div class="absolute -right-6 -top-6 w-28 h-28 bg-secondary-container/20 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex gap-space-sm items-center">
+<div class="relative">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait of Carlos Mendoza, a friendly smiling Guatemalan man in his 30s wearing a comfortable forest green casual shirt, natural morning lighting, warm authentic expression, crisp professional portrait photography style with a fresh modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLimRHIlaSk2pJqJB3svUc51IaTKU73rHgUk4E5V-7W1iajx3BAJxheaQ0VswgITdT6Tvn9s9MngxoVbJB0NR5qUQ5ree_vbPbxx-xTDtPTG4aEoXHCLg8JSxQwg1MgBNtSGohX7z1YLg7PocN6q0iLCr1JQyyRvV7U40gaRnL-b66iHu7LXj0otBODwqKAv7oBZO-RBrg6XybQ46yhRnAtsX4DtY7IT9OgCdjYA0LSDYmEVh3RS-3"/>
+</div>
+<span class="absolute -bottom-1 -right-1 bg-secondary text-on-primary rounded-full p-0.5 shadow-sm flex items-center justify-center" title="Cuenta Verificada">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap">
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate">Carlos Mendoza</h2>
+<span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-secondary-container/50 text-on-secondary-container font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+              Socio Chapín Fiel
+            </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">mail</span>
+            carlos.mendoza@email.com
+          </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">phone_iphone</span>
+            +502 5544-9812
+          </span>
+</div>
+</div>
+<button aria-label="Editar datos personales" class="w-9 h-9 rounded-full bg-surface-container-low text-primary flex items-center justify-center transition-transform active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+<!-- Dirección Predeterminada -->
+<div class="mt-4 p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-7 h-7 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider">Dirección Predeterminada</span>
+<p class="font-body-sm text-body-sm text-on-surface truncate font-semibold">Edificio Florencia, Apto 402 • Zona 13, Guatemala</p>
+</div>
+</div>
+<button class="text-secondary font-label-md text-label-md hover:underline shrink-0">Cambiar</button>
+</div>
+<!-- Billetera Ecológica: Envases Retornables -->
+<div class="mt-3 bg-primary-container text-on-primary rounded-xl p-3 flex items-center justify-between shadow-md relative overflow-hidden">
+<div class="flex items-center gap-3 relative z-10">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest/20 flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[22px]">recycling</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm uppercase font-bold text-on-primary-container tracking-wider">Billetera de Envases</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-1.5 py-0.2 rounded-full font-label-sm text-label-sm">5 botellas</span>
+</div>
+<span class="font-price-md text-price-md text-on-primary mt-0.5">Saldo: Q 25.00 a favor</span>
+</div>
+</div>
+<button class="relative z-10 bg-surface-container-lowest text-primary px-3 py-1.5 rounded-full font-label-md text-label-md font-bold shadow-sm active:scale-95 transition-transform">
+        Ver saldo
+      </button>
+</div>
+</div>
+<!-- SECCIÓN DE IMPACTO AGRÍCOLA & PRODUCTORES LOCALES -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-container/30 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">potted_plant</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Tu Impacto Social y Agrícola</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Compras directas y justas en Guatemala desde 2024</p>
+</div>
+</div>
+</div>
+<!-- Reconocimiento Pill -->
+<div class="inline-flex items-center gap-2 bg-surface-container-high px-3 py-1 rounded-full text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span class="font-bold">Nivel Sembrador Consciente 🌱</span>
+<span class="text-on-surface-variant font-normal">• 100% Cosecha Nacional</span>
+</div>
+<!-- Métricas Grid -->
+<div class="grid grid-cols-3 gap-2 pt-1">
+<div class="bg-surface-container-low rounded-lg p-2.5 flex flex-col justify-between">
+<span class="material-symbols-outlined text-secondary text-[20px]">handshake</span>
+<div class="mt-2">
+<span class="font-price-md text-price-md text-on-surface block leading-tight">18</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-3 block mt-0.5">Compras directas al altiplano</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2.5 flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary text-[20px]">payments</span>
+<div class="mt-2">
+<span class="font-price-md text-price-md text-primary block leading-tight">Q 1,420</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-3 block mt-0.5">Transferidos a precio justo</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2.5 flex flex-col justify-between">
+<span class="material-symbols-outlined text-secondary text-[20px]">ac_unit</span>
+<div class="mt-2">
+<span class="font-price-md text-price-md text-secondary block leading-tight">0%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-3 block mt-0.5">Merma con cadena de frío</span>
+</div>
+</div>
+</div>
+<!-- Comunidades Beneficiadas -->
+<div class="pt-2">
+<span class="font-label-md text-label-md text-on-surface-variant font-bold uppercase tracking-wider block mb-2">Comunidades Beneficiadas por tus pedidos</span>
+<div class="space-y-2">
+<div class="p-2.5 bg-surface-container-low rounded-lg flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="text-[20px]">🍓</span>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-on-surface truncate">Huertos de Almolonga, Quetzaltenango</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Fresas y hortalizas de altura</span>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-bold rounded-full shrink-0">8 pedidos</span>
+</div>
+<div class="p-2.5 bg-surface-container-low rounded-lg flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="text-[20px]">🥑</span>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-on-surface truncate">Cooperativa El Porvenir, Tecpán</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Aguacate Hass y legumbres frescas</span>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-bold rounded-full shrink-0">6 pedidos</span>
+</div>
+<div class="p-2.5 bg-surface-container-low rounded-lg flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="text-[20px]">🍅</span>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-on-surface truncate">Finca El Durazno, Jalapa</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Tomates de vara y chiles pimientos</span>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-bold rounded-full shrink-0">4 pedidos</span>
+</div>
+</div>
+</div>
+</div>
+<!-- HISTORIAL DE PEDIDOS RECIENTES -->
+<div class="w-full space-y-3">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Mis Pedidos Recientes</h3>
+<button class="font-label-md text-label-md text-primary font-bold flex items-center gap-0.5 hover:underline">
+        Ver todos (18)
+        <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+<!-- Pedido Último (Entregado Hoy) -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface font-bold">#MV-2024-9120</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-secondary font-label-sm text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Entregado Hoy • 15:40 hrs
+            </span>
+</div>
+<span class="font-price-md text-price-md text-on-surface mt-0.5 block">Q 94.38 <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">• 4 productos</span></span>
+</div>
+<button class="text-on-surface-variant p-1 rounded-full hover:bg-surface-container" title="Detalles">
+<span class="material-symbols-outlined text-[20px]">receipt</span>
+</button>
+</div>
+<!-- Thumbnails de items -->
+<div class="flex items-center gap-2 py-1 overflow-x-auto">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low p-1 shrink-0 overflow-hidden" title="Aguacate Hass">
+<img class="w-full h-full object-cover rounded" data-alt="Fresh dark green textured ripe Hass avocados arranged cleanly on a rustic light wood table in daylight, close-up fresh market photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDEOHmBNbbsA2epaFuC_ohn4shs7RtbvkyyTxlzkbASKZmasYZbfCjXML_AB1_je0dIpP5QcxGE9pbtMYh6xETYVt8Tov46mczneaLYzQLayUw44jpmiELbqUkhjhcMr0d0J5KRACUaoPUfra-l7cAAEJEInJeP4ImWuq2O6hLkk6k7ReHCv9DV8qF4kRFcf-5UEzRhz6MS4Thj6hV8EYsjJxKjFs9MFjjr8Hb25fYn4rzXTwe5f-M"/>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-low p-1 shrink-0 overflow-hidden" title="Fresas de Almolonga">
+<img class="w-full h-full object-cover rounded" data-alt="Bright red fresh Almolonga mountain strawberries with vibrant green leafy caps in a small woven wicker basket, shallow depth of field, warm morning light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaRgJm1CtQr4-qwFlQ68CrUXOfjIpaej5HryNifKUJ7PRMV4W5dFW2j7QGg6TCVptRxjSUG85T5Lw5k0tMfVDs_mZJXl3ASrHNTUP2wbU6ZVp_TaVkuMxT2U4MSU4Ig0eED35LzyL9ApzL2QTRAd7uKBALL8qAvsJrgmymyWEDP-RnaDsZZuH0uc1wMF0up8xQkj9hsZFiIaucZAxjx7FEMirIbYGGAB8DqEluAybDoan5O4VTaHe-"/>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-low p-1 shrink-0 overflow-hidden" title="Tomate Manzano">
+<img class="w-full h-full object-cover rounded" data-alt="Glossy organic red farm fresh manzano tomatoes with dewdrops, clean studio organic market setup, vibrant colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAtUIrKTwHXF0MZqqbruywMcUL3i_vshYAQP0TLE55wP4madl548WeARtAmpEBtlfG_LeM93c4fqbz3QHBfdvJi7dr6voOZ6RmlhsOBhzfDBUBl3aPgM9AAPtszLQL5p5yvxp8jaJ09Uf6UTaJ0ij3uyvt7pTcZoYMqlA3rZpQB0INT_QLag5b-xiAszSxC2rPN99EpPHXZsPELgmtT5aBeDnRt6wtnubwhzQPcAB6TeN6v12a1id3"/>
+</div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-low p-1 shrink-0 overflow-hidden" title="Leche de Granja">
+<img class="w-full h-full object-cover rounded" data-alt="Traditional glass milk bottle with fresh farm milk and kraft paper tag cap on a clean kitchen tabletop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEQtQr0NpambI6cOAuSbAQ10QfgIpRrI873QrKA0Z0n6lVZjMP3v9UXxaTxnUUjlKFq4aU9BRKnUXsXjduTYB4y2OM-d5FAy8UOoSiD3LYm4IBI-A6EnLS9ksm2WJv6HnGhh6cKljkOYhWGTBE7ubiP2P8ENhqRWTQtzDHIlawk0Yqn82XMC90Vsc1VYQfZ_aAeI_o6HWUpt0aIjf2iUYTxGEqunFKuhuUQphqBlXhCIwNGl19v-em"/>
+</div>
+</div>
+<!-- Piloto & Calificación -->
+<div class="flex items-center justify-between text-body-sm py-1.5 px-2.5 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">two_wheeler</span>
+<span class="text-on-surface font-medium">Piloto: Erick Morales</span>
+</div>
+<span class="flex items-center gap-0.5 text-on-surface font-bold text-label-md">
+<span class="material-symbols-outlined text-[16px] text-amber-500" style="font-variation-settings: 'FILL' 1;">star</span>
+          5.0
+        </span>
+</div>
+<!-- Acciones de Pedido -->
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 h-10 rounded-full bg-primary text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-sm" onclick="repetirPedido(this)">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+          Repetir Pedido
+        </button>
+<button class="h-10 px-4 rounded-full bg-surface-container-high text-primary font-label-md text-label-md font-bold flex items-center gap-1 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[16px]">description</span>
+          FEL SAT
+        </button>
+</div>
+</div>
+<!-- Pedido Anterior -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-2">
+<div class="flex items-center justify-between">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface font-bold">#MV-2024-8842</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">
+              Entregado • 18 Octubre
+            </span>
+</div>
+<span class="font-price-md text-price-md text-on-surface mt-0.5 block">Q 145.50 <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">• 6 productos</span></span>
+</div>
+<button class="h-9 px-3 rounded-full bg-surface-container-low text-primary font-label-md text-label-md font-bold flex items-center gap-1 active:scale-95 transition-transform" onclick="repetirPedido(this)">
+<span class="material-symbols-outlined text-[16px]">replay</span>
+          Repetir
+        </button>
+</div>
+</div>
+</div>
+<!-- GESTIÓN FISCAL SAT & PREFERENCIAS -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Datos Fiscales y Preferencias</h3>
+</div>
+<!-- Facturación FEL SAT -->
+<div class="p-3 bg-surface-container-low rounded-lg space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-bold">Facturación Electrónica (FEL)</span>
+<span class="px-1.5 py-0.2 bg-secondary-container text-secondary font-label-sm text-label-sm font-bold rounded">SAT ✓</span>
+</div>
+<button class="text-primary font-label-sm text-label-sm font-bold hover:underline">Editar</button>
+</div>
+<div class="flex flex-col text-body-sm text-body-sm">
+<span class="text-on-surface font-semibold">NIT: 7492019-K • Carlos Mendoza</span>
+<span class="text-on-surface-variant text-[12px] flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">check_circle</span>
+          Facturación automática activada para cada entrega
+        </span>
+</div>
+</div>
+<!-- Método de Pago Guardado -->
+<div class="p-3 bg-surface-container-low rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-6 bg-surface-container-highest rounded flex items-center justify-center font-bold text-[10px] text-on-surface">
+          VISA
+        </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">•••• 9010</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Tarjeta Predeterminada</span>
+</div>
+</div>
+<button class="text-secondary font-label-sm text-label-sm font-bold hover:underline">Administrar</button>
+</div>
+<!-- Preferencias de Entrega en Guatemala -->
+<div class="space-y-2 pt-1">
+<span class="font-label-md text-label-md text-on-surface-variant font-bold uppercase tracking-wider block">Instrucciones de Entrega</span>
+<div class="flex items-start gap-2.5 p-2 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">ring_volume</span>
+<div class="flex flex-col text-body-sm text-body-sm min-w-0">
+<span class="text-on-surface font-medium">Llamarme antes de sustituir</span>
+<span class="text-on-surface-variant text-[12px]">Si no hay madurez óptima en aguacate o fruta</span>
+</div>
+</div>
+<div class="flex items-start gap-2.5 p-2 bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">security</span>
+<div class="flex flex-col text-body-sm text-body-sm min-w-0">
+<span class="text-on-surface font-medium">Instrucción en Garita</span>
+<span class="text-on-surface-variant text-[12px]">Autorizado en garita Edificio Florencia Z.13</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CENTRO DE AYUDA Y CIERRE -->
+<div class="w-full space-y-3 pt-2">
+<!-- Asistencia WhatsApp Hub Central Z.12 -->
+<a class="w-full p-space-md rounded-xl bg-secondary-container/30 flex items-center justify-between text-on-surface hover:bg-secondary-container/40 transition-colors" href="https://wa.me/50223456789" target="_blank">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md font-bold text-on-surface">¿Dudas con tu Cosecha?</span>
+<span class="font-body-sm text-body-sm text-secondary font-medium">Chat directo Hub Central Z.12 (+502 2345-6789)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px]">chevron_right</span>
+</a>
+<!-- Botón Cerrar Sesión -->
+<button class="w-full py-3 rounded-full text-error font-label-md text-label-md font-bold flex items-center justify-center gap-1.5 hover:bg-error-container/30 transition-colors">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+      Cerrar Sesión en este dispositivo
+    </button>
+</div>
+</div>
+<script>
+  function repetirPedido(btn) {
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">progress_activity</span> Agregando al Carrito...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> ¡Listo en Carrito!';
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }, 2000);
+    }, 700);
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-4px_20px_0_rgba(31,41,55,0.08)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 text-on-surface-variant transition-colors" data-path="inicio" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="font-label-sm text-label-sm leading-none">Inicio</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 text-on-surface-variant transition-colors" data-path="catalogo" href="#"><span class="material-symbols-outlined text-[24px]">storefront</span><span class="font-label-sm text-label-sm leading-none">Catálogo</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 text-on-surface-variant transition-colors" data-path="pedidos" href="#"><span class="material-symbols-outlined text-[24px]">receipt_long</span><span class="font-label-sm text-label-sm leading-none">Pedidos</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-11 transition-colors text-primary font-bold" data-path="perfil" href="#"><span class="material-symbols-outlined text-[24px]">person</span><span class="font-label-sm text-label-sm leading-none">Perfil</span></a></div></nav></body></html>

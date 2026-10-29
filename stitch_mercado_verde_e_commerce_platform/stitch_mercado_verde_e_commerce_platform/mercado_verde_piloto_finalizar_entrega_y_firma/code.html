@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"inverse-primary":"#88d7a8","on-secondary-fixed":"#002106","outline":"#6f7a71","surface-bright":"#f8f9ff","on-secondary-container":"#007327","on-secondary-fixed-variant":"#00531a","error-container":"#ffdad6","on-tertiary-container":"#cfdbd3","tertiary-fixed-dim":"#bdcac1","on-secondary":"#ffffff","on-tertiary":"#ffffff","surface-container-low":"#eff4ff","primary-fixed":"#a4f4c3","on-primary-fixed-variant":"#005232","surface-container":"#e6eeff","on-primary-container":"#99e9b9","on-surface-variant":"#3f4942","primary-container":"#176b45","on-background":"#121c2a","inverse-on-surface":"#eaf1ff","on-error":"#ffffff","surface-dim":"#d0dbed","tertiary":"#3e4943","secondary-fixed-dim":"#66df75","tertiary-container":"#55615a","background":"#f8f9ff","secondary-container":"#80f98b","surface-variant":"#d9e3f6","surface-tint":"#186c45","on-primary":"#ffffff","surface-container-highest":"#d9e3f6","surface-container-lowest":"#ffffff","on-tertiary-fixed-variant":"#3e4943","on-surface":"#121c2a","inverse-surface":"#27313f","primary":"#005131","surface":"#f8f9ff","secondary":"#006e25","on-primary-fixed":"#002111","outline-variant":"#bfc9c0","primary-fixed-dim":"#88d7a8","tertiary-fixed":"#d9e6dd","surface-container-high":"#dee9fc","on-error-container":"#93000a","secondary-fixed":"#83fc8e","error":"#ba1a1a","on-tertiary-fixed":"#131e19"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter":"1rem","space-lg":"1.5rem","margin-tablet":"2rem","margin":"1rem","space-xs":"0.25rem","margin-desktop":"3rem","space-sm":"0.5rem","gutter-desktop":"1.5rem","space-xl":"2.5rem","space-md":"1rem"},fontFamily:{"price-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],display:["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"price-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"title-md":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"]},fontSize:{"price-lg":["20px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"800"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],display:["40px",{lineHeight:"48px",letterSpacing:"-0.02em",fontWeight:"800"}],"headline-lg-mobile":["26px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"700"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.015em",fontWeight:"700"}],"label-lg":["14px",{lineHeight:"18px",letterSpacing:"0.01em",fontWeight:"600"}],"headline-sm":["18px",{lineHeight:"24px",fontWeight:"600"}],"price-md":["16px",{lineHeight:"20px",fontWeight:"700"}],"headline-md":["22px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"title-md":["16px",{lineHeight:"22px",fontWeight:"600"}],"label-sm":["10px",{lineHeight:"12px",letterSpacing:"0.04em",fontWeight:"700"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Volver" class="w-11 h-11 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface active:scale-95 transition-transform flex-shrink-0" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant truncate uppercase tracking-wider">Erick Morales • Huacal #04</span></div><div class="flex items-center gap-space-xs"><h1 class="font-headline-sm text-headline-sm text-on-surface truncate">Confirmación De Entrega</h1><span class="bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm px-space-xs py-0.5 rounded-full font-bold flex-shrink-0">#MV-8492</span></div></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><a aria-label="Llamar al cliente" class="w-11 h-11 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high text-primary active:scale-95 transition-transform" href="tel:12345678"><span class="material-symbols-outlined text-[20px]">call</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-20 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full pb-28">
+<!-- Top Ambient Verification Card -->
+<div class="px-margin pt-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="bg-primary-fixed text-on-primary-fixed font-label-md text-label-md px-space-sm py-0.5 rounded-full font-bold">Entrega #MV-8492</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Zona 13 • Florencia</span>
+</div>
+<span class="flex items-center gap-1 font-label-sm text-label-sm font-bold text-on-secondary-container bg-secondary-container/30 px-space-sm py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> En Destino
+        </span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Carlos Mendoza</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">apartment</span> Edificio Florencia, Apto. 402
+          </p>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex flex-col items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">door_front</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">402</span>
+</div>
+</div>
+<!-- Quick Metrics Strip -->
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Carga Fresca</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">3 art. entregados</span>
+</div>
+</div>
+<div class="bg-primary-fixed/20 p-space-sm rounded-lg flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[18px]">recycling</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-primary font-bold truncate">Retornables +Q10</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">2 frascos recolectados</span>
+</div>
+</div>
+</div>
+<!-- Cold Chain Live Badge -->
+<div class="flex items-center justify-between bg-surface-container-low px-space-sm py-2 rounded-lg">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">ac_unit</span>
+<span class="font-label-sm text-label-sm text-on-surface">Cadena de Frío: <strong class="font-bold text-primary">4.1°C (Óptimo)</strong></span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sensor IoT activo</span>
+</div>
+</div>
+</div>
+<!-- Method Segmented Selector -->
+<div class="px-margin pt-space-md">
+<div class="bg-surface-container p-1 rounded-xl flex items-center gap-1" id="verification-tabs">
+<button class="flex-1 py-2 rounded-lg bg-surface-container-lowest text-primary shadow-sm font-label-md text-label-md flex items-center justify-center gap-1 transition-all" id="tab-signature" onclick="selectTab('signature')" type="button">
+<span class="material-symbols-outlined text-[18px]">draw</span> Firma
+      </button>
+<button class="flex-1 py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center justify-center gap-1 transition-all" id="tab-pin" onclick="selectTab('pin')" type="button">
+<span class="material-symbols-outlined text-[18px]">pin</span> PIN (9120)
+      </button>
+<button class="flex-1 py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center justify-center gap-1 transition-all" id="tab-photo" onclick="selectTab('photo')" type="button">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span> Portería
+      </button>
+</div>
+</div>
+<!-- Signer Delegate Toggle -->
+<div class="px-margin pt-space-sm">
+<div class="bg-surface-container-lowest p-space-sm rounded-xl flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Receptor</span>
+<span class="font-label-md text-label-md text-on-surface font-bold truncate" id="recipient-name">Carlos Mendoza (Titular)</span>
+</div>
+</div>
+<button class="bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm px-space-sm py-1.5 rounded-full font-bold flex items-center gap-1 active:scale-95 transition-transform" id="toggle-recipient-btn" onclick="toggleRecipient()" type="button">
+<span class="material-symbols-outlined text-[14px]">swap_horiz</span> Conserjería
+      </button>
+</div>
+</div>
+<!-- Signature Interactive Canvas Card -->
+<div class="px-margin pt-space-sm" id="signature-panel">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-[18px]">signature</span> Firma en Pantalla
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">El cliente debe firmar con el dedo en el recuadro</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center active:scale-95 transition-transform" onclick="clearCanvas()" title="Limpiar trazo" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center active:scale-95 transition-transform" onclick="fullscreenTip()" title="Girar pantalla" type="button">
+<span class="material-symbols-outlined text-[18px]">screen_rotation</span>
+</button>
+</div>
+</div>
+<!-- Canvas Area with Simulated Preset Stroke & Watermark -->
+<div class="relative w-full h-44 bg-surface-container-low rounded-lg overflow-hidden flex flex-col justify-between p-space-sm touch-none select-none" id="canvas-container">
+<!-- Background guide line -->
+<div class="absolute bottom-10 left-6 right-6 h-[1px] bg-outline-variant/50 pointer-events-none"></div>
+<span class="absolute bottom-5 left-6 font-label-sm text-label-sm text-outline-variant pointer-events-none select-none">Firma del cliente aquí ✍️</span>
+<!-- HTML5 Canvas for real touch/mouse drawing -->
+<canvas class="absolute inset-0 w-full h-full cursor-crosshair" id="signature-pad"></canvas>
+<!-- Top right status pill -->
+<div class="relative z-10 self-end">
+<span class="bg-surface-container-lowest/80 backdrop-blur-sm text-primary font-label-sm text-label-sm px-2 py-0.5 rounded-full font-bold" id="canvas-badge">Trazo listo</span>
+</div>
+<!-- Geo & Time Stamp Watermark -->
+<div class="relative z-10 flex items-center justify-between text-outline pointer-events-none">
+<span class="font-label-sm text-label-sm">15:44 hrs • 14.582° N, 90.528° W</span>
+<span class="font-label-sm text-label-sm font-bold text-primary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]">verified</span> GPS Validado
+          </span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">security</span> Cifrado biométrico local
+        </span>
+<button class="text-primary font-label-sm text-label-sm font-bold hover:underline" onclick="loadSampleStroke()" type="button">
+          Reingresar trazo
+        </button>
+</div>
+</div>
+</div>
+<!-- PIN Alternative Card (Hidden by default) -->
+<div class="px-margin pt-space-sm hidden" id="pin-panel">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">Confirmación con Código PIN</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Solicite el código de 4 dígitos enviado al WhatsApp del cliente</span>
+</div>
+<div class="flex justify-center gap-space-sm">
+<input class="w-12 h-14 bg-surface-container text-center font-headline-md text-headline-md text-primary rounded-lg font-bold" maxlength="1" readonly="" type="text" value="9"/>
+<input class="w-12 h-14 bg-surface-container text-center font-headline-md text-headline-md text-primary rounded-lg font-bold" maxlength="1" readonly="" type="text" value="1"/>
+<input class="w-12 h-14 bg-surface-container text-center font-headline-md text-headline-md text-primary rounded-lg font-bold" maxlength="1" readonly="" type="text" value="2"/>
+<input class="w-12 h-14 bg-surface-container text-center font-headline-md text-headline-md text-primary rounded-lg font-bold" maxlength="1" readonly="" type="text" value="0"/>
+</div>
+<span class="font-label-sm text-label-sm text-on-secondary-container bg-secondary-container/20 p-2 rounded-lg text-center font-bold">
+        ✓ PIN #9120 coincide con la orden #MV-8492
+      </span>
+</div>
+</div>
+<!-- Delivery Photographic Evidence Card -->
+<div class="px-margin pt-space-sm">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center gap-space-md">
+<div class="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A clean top-down mobile photograph of a green thermal delivery tote bag resting neatly beside an apartment door marked 402 with fresh produce visibly packed, warm apartment hallway daylight, professional courier delivery verification proof." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsh1LtUI_I3aoZFdb41RpMs-R9tsbLAL6wdwK8dtvBGP89jrR0iCkbbKLOafJkjP9bAYmQlR1r_ht5WNsUbEWPtQI4uj32jqn2M_Oz3NrIu-tudR8Govx7afxTzYPjNzYXA5YXzt1EY5HasVIR3-QcH1fxjAzx8NkKUOAl3o6eM8Z_19Rf2sO3JudVGp1612-R5vL2lHs71eXyNEDhYQISrVNDLnrU9dMoIPmgJeiaDeRX8HDEyJMj"/>
+<div class="absolute bottom-1 right-1 bg-surface-container-lowest/90 rounded-full p-0.5">
+<span class="material-symbols-outlined text-primary text-[14px]">check</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center gap-1">
+<span class="bg-surface-container-high text-on-surface font-label-sm text-label-sm px-space-xs py-0.5 rounded-full font-bold">Foto Capturada</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm truncate">Puerta 402</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-1 truncate">Huacal visible con precinto intacto</p>
+<div class="pt-2 flex items-center gap-space-sm">
+<button class="text-primary font-label-sm text-label-sm font-bold flex items-center gap-0.5 hover:underline" type="button">
+<span class="material-symbols-outlined text-[16px]">flip_camera_ios</span> Cambiar foto
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Ecological Footprint & Operational Checklist Card -->
+<div class="px-margin pt-space-sm">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-[18px]">eco</span> Impacto y Logística Verde
+      </span>
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">pallet</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-bold">Huacal #04 Liberado</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Contenedor térmico sanitizado listo para retornar al micro-hub Zona 4.</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">receipt_long</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-bold">Facturación Electrónica SAT FEL</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Comprobante tributario listo para envío automático a cmendoza@correo.gt.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Toast Notification Container (Dynamic) -->
+<div class="fixed top-24 left-margin right-margin z-50 transition-all duration-300 transform -translate-y-12 opacity-0 pointer-events-none" id="toast-notif">
+<div class="bg-primary text-on-primary px-space-md py-space-sm rounded-xl shadow-xl flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+<span class="font-label-md text-label-md font-bold" id="toast-text">Firma registrada correctamente</span>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom Bar for Courier ergonomics -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md px-margin py-space-sm shadow-[0_-4px_20px_0_rgba(31,41,55,0.08)]">
+<div class="max-w-md mx-auto flex flex-col gap-space-xs">
+<button class="w-full h-12 bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg rounded-full flex items-center justify-center gap-space-xs font-bold active:scale-[0.98] transition-transform shadow-md" id="btn-complete" onclick="completeDelivery()" type="button">
+<span class="material-symbols-outlined text-[22px]">check_circle</span>
+        Finalizar Entrega y Enviar FEL
+      </button>
+<button class="w-full py-1 text-center font-label-sm text-label-sm text-error hover:underline flex items-center justify-center gap-1" onclick="reportIssue()" type="button">
+<span class="material-symbols-outlined text-[14px]">report_problem</span>
+        ¿Hubo algún inconveniente? Reportar novedad
+      </button>
+</div>
+</div>
+</div>
+<script>
+  let canvas, ctx;
+  let isDrawing = false;
+  let hasDrawn = false;
+  let recipientState = 0; // 0: Carlos Mendoza, 1: Don Chepe (Conserjería)
+
+  function initCanvas() {
+    canvas = document.getElementById('signature-pad');
+    if (!canvas) return;
+    const container = document.getElementById('canvas-container');
+    canvas.width = container.clientWidth;
+    canvas.height = container.clientHeight;
+
+    ctx = canvas.getContext('2d');
+    ctx.strokeStyle = '#002111'; // on-primary-fixed deep ink tone
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    loadSampleStroke();
+
+    // Touch events for mobile courier operation
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const rect = canvas.getBoundingClientRect();
+      isDrawing = true;
+      hasDrawn = true;
+      ctx.beginPath();
+      ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+      updateCanvasStatus();
+    }, { passive: false });
+
+    canvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      if (!isDrawing) return;
+      const touch = e.touches[0];
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+      ctx.stroke();
+    }, { passive: false });
+
+    canvas.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      isDrawing = false;
+    });
+
+    // Mouse events fallback
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      hasDrawn = true;
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+      updateCanvasStatus();
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (!isDrawing) return;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      isDrawing = false;
+    });
+  }
+
+  function clearCanvas() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hasDrawn = false;
+    const badge = document.getElementById('canvas-badge');
+    badge.textContent = 'En blanco';
+    badge.className = 'bg-surface-container-lowest/80 backdrop-blur-sm text-error font-label-sm text-label-sm px-2 py-0.5 rounded-full font-bold';
+    showToast('Lienzo limpiado para nueva firma');
+  }
+
+  function loadSampleStroke() {
+    if (!ctx || !canvas) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Draw realistic swift customer signature loop
+    ctx.beginPath();
+    ctx.moveTo(w * 0.18, h * 0.65);
+    ctx.bezierCurveTo(w * 0.22, h * 0.25, w * 0.28, h * 0.20, w * 0.32, h * 0.55);
+    ctx.bezierCurveTo(w * 0.36, h * 0.85, w * 0.40, h * 0.45, w * 0.45, h * 0.50);
+    ctx.bezierCurveTo(w * 0.48, h * 0.55, w * 0.50, h * 0.40, w * 0.55, h * 0.52);
+    ctx.bezierCurveTo(w * 0.60, h * 0.68, w * 0.68, h * 0.35, w * 0.72, h * 0.58);
+    ctx.bezierCurveTo(w * 0.75, h * 0.70, w * 0.80, h * 0.65, w * 0.85, h * 0.62);
+    ctx.stroke();
+
+    // Under-cross flourish
+    ctx.beginPath();
+    ctx.moveTo(w * 0.25, h * 0.75);
+    ctx.quadraticCurveTo(w * 0.55, h * 0.78, w * 0.82, h * 0.68);
+    ctx.stroke();
+
+    hasDrawn = true;
+    updateCanvasStatus();
+  }
+
+  function updateCanvasStatus() {
+    const badge = document.getElementById('canvas-badge');
+    if (badge) {
+      badge.textContent = 'Firma capturada';
+      badge.className = 'bg-surface-container-lowest/80 backdrop-blur-sm text-primary font-label-sm text-label-sm px-2 py-0.5 rounded-full font-bold';
+    }
+  }
+
+  function selectTab(mode) {
+    const btnSig = document.getElementById('tab-signature');
+    const btnPin = document.getElementById('tab-pin');
+    const btnPhoto = document.getElementById('tab-photo');
+    const pnlSig = document.getElementById('signature-panel');
+    const pnlPin = document.getElementById('pin-panel');
+
+    const defaultClass = 'flex-1 py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center justify-center gap-1 transition-all';
+    const activeClass = 'flex-1 py-2 rounded-lg bg-surface-container-lowest text-primary shadow-sm font-label-md text-label-md flex items-center justify-center gap-1 transition-all';
+
+    btnSig.className = defaultClass;
+    btnPin.className = defaultClass;
+    btnPhoto.className = defaultClass;
+
+    if (mode === 'signature') {
+      btnSig.className = activeClass;
+      pnlSig.classList.remove('hidden');
+      pnlPin.classList.add('hidden');
+      showToast('Modo: Firma digital de cliente');
+    } else if (mode === 'pin') {
+      btnPin.className = activeClass;
+      pnlSig.classList.add('hidden');
+      pnlPin.classList.remove('hidden');
+      showToast('Modo: Verificación por código PIN');
+    } else if (mode === 'photo') {
+      btnPhoto.className = activeClass;
+      pnlSig.classList.remove('hidden');
+      pnlPin.classList.add('hidden');
+      showToast('Modo: Evidencia de conserjería');
+    }
+  }
+
+  function toggleRecipient() {
+    recipientState = recipientState === 0 ? 1 : 0;
+    const nameEl = document.getElementById('recipient-name');
+    const btnEl = document.getElementById('toggle-recipient-btn');
+
+    if (recipientState === 1) {
+      nameEl.textContent = 'Don Chepe (Conserjería / Garita)';
+      btnEl.innerHTML = '<span class="material-symbols-outlined text-[14px]">person</span> Es el Titular';
+      showToast('Cambiado a: Recepción en Conserjería');
+    } else {
+      nameEl.textContent = 'Carlos Mendoza (Titular)';
+      btnEl.innerHTML = '<span class="material-symbols-outlined text-[14px]">swap_horiz</span> Conserjería';
+      showToast('Cambiado a: Entrega directa a Carlos');
+    }
+  }
+
+  function fullscreenTip() {
+    showToast('Pantalla lista para rotación horizontal');
+  }
+
+  function completeDelivery() {
+    const btn = document.getElementById('btn-complete');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">refresh</span> Transmitiendo a SAT & Supermercado...';
+    btn.classList.add('opacity-90');
+
+    setTimeout(() => {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[22px]">check_circle</span> ¡Entrega Finalizada con Éxito!';
+      btn.className = 'w-full h-12 bg-secondary text-on-secondary font-label-lg text-label-lg rounded-full flex items-center justify-center gap-space-xs font-bold shadow-md';
+      showToast('Pedido #MV-8492 completado. Huacal #04 liberado.');
+    }, 1200);
+  }
+
+  function reportIssue() {
+    showToast('Abriendo reporte de incidencia de ruta...');
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast-notif');
+    const toastText = document.getElementById('toast-text');
+    if (!toast || !toastText) return;
+    toastText.textContent = message;
+    toast.classList.remove('-translate-y-12', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.add('-translate-y-12', 'opacity-0', 'pointer-events-none');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 2500);
+  }
+
+  // Self initialisation on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCanvas);
+  } else {
+    initCanvas();
+  }
+  window.addEventListener('resize', initCanvas);
+</script></main></body></html>

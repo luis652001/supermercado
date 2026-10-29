@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-container-highest": "#d9e3f6", "primary-container": "#176b45", "surface-variant": "#d9e3f6", "on-error": "#ffffff", "error-container": "#ffdad6", "surface-container-high": "#dee9fc", "surface-container-lowest": "#ffffff", "tertiary-fixed": "#d9e6dd", "inverse-surface": "#27313f", "on-primary-container": "#99e9b9", "on-primary": "#ffffff", "on-secondary-fixed": "#002106", "tertiary-fixed-dim": "#bdcac1", "on-tertiary-fixed-variant": "#3e4943", "primary-fixed-dim": "#88d7a8", "surface-dim": "#d0dbed", "surface-bright": "#f8f9ff", "on-surface-variant": "#3f4942", "inverse-on-surface": "#eaf1ff", "surface-container-low": "#eff4ff", "surface-container": "#e6eeff", "on-tertiary-container": "#cfdbd3", "on-secondary-container": "#007327", "tertiary-container": "#55615a", "on-secondary": "#ffffff", "secondary-fixed-dim": "#66df75", "tertiary": "#3e4943", "on-primary-fixed-variant": "#005232", "secondary": "#006e25", "on-error-container": "#93000a", "surface": "#f8f9ff", "outline-variant": "#bfc9c0", "on-tertiary-fixed": "#131e19", "surface-tint": "#186c45", "inverse-primary": "#88d7a8", "outline": "#6f7a71", "primary-fixed": "a4f4c3", "secondary-fixed": "#83fc8e", "on-surface": "#121c2a", "on-tertiary": "#ffffff", "on-background": "#121c2a", "error": "#ba1a1a", "background": "#f8f9ff", "on-primary-fixed": "#002111", "secondary-container": "#80f98b", "on-secondary-fixed-variant": "#00531a", "primary": "#005131" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin-desktop": "3rem", "margin-tablet": "2rem", "gutter-desktop": "1.5rem", "space-lg": "1.5rem", "space-md": "1rem", "space-xl": "2.5rem", "margin": "1rem", "space-sm": "0.5rem", "gutter": "1rem", "space-xs": "0.25rem" }, fontFamily: { "headline-lg-mobile": ["Plus Jakarta Sans"], "price-lg": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "price-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"] }, fontSize: { "headline-lg-mobile": ["26px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "700" }], "price-lg": ["20px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "800" }], "display": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "800" }], "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }], "title-md": ["16px", { lineHeight: "22px", fontWeight: "600" }], "label-sm": ["10px", { lineHeight: "12px", letterSpacing: "0.04em", fontWeight: "700" }], "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.015em", fontWeight: "700" }], "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "price-md": ["16px", { lineHeight: "20px", fontWeight: "700" }], "headline-md": ["22px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-lg": ["14px", { lineHeight: "18px", letterSpacing: "0.01em", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-xs min-w-0"><button aria-label="Volver" class="w-11 h-11 -ml-space-xs flex items-center justify-center text-on-surface hover:text-primary transition-colors shrink-0" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><div class="flex flex-col min-w-0 justify-center"><div class="flex items-center gap-space-xs min-w-0"><span class="font-label-md text-label-md text-primary font-bold uppercase tracking-wider shrink-0">Terminal Hub</span><span class="text-outline-variant font-label-md shrink-0">•</span><span class="font-title-md text-title-md text-on-surface font-bold truncate">Mesa 02</span></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate -mt-0.5">Empaque Activo</span></div></div><div class="flex items-center gap-space-xs shrink-0"><div class="flex items-center gap-1.5 px-2 py-1 rounded-full bg-surface-container"><div class="relative flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[16px]">nfc</span><span class="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-secondary ring-1 ring-surface"></span></div><div class="relative flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[16px]">bluetooth_connected</span><span class="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-secondary ring-1 ring-surface"></span></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-20 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin pb-space-xl gap-space-md">
+<!-- Top Status Banner & Operational Metrics -->
+<div class="relative overflow-hidden bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="absolute -right-10 -bottom-10 w-36 h-36 bg-secondary-container/20 rounded-full blur-2xl pointer-events-none"></div>
+<!-- Status Pill Strip -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-space-sm">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-md text-label-md font-bold tracking-tight">¡Surtido Completo (4/4 ítems)!</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>100% Peso Verificado</span>
+</div>
+</div>
+<!-- Order & Customer Header -->
+<div class="flex flex-col mb-space-sm">
+<div class="flex items-baseline justify-between">
+<h1 class="font-headline-sm text-headline-sm text-on-surface font-extrabold tracking-tight">
+          #ORD-9421
+        </h1>
+<span class="font-label-md text-label-md text-primary font-bold bg-primary/10 px-2.5 py-0.5 rounded-full">
+          Entrega 17:30 hrs
+        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-outline">person_pin</span>
+<strong class="text-on-surface font-semibold">Carlos Mendoza</strong> • Zona 10, Ciudad de Guatemala
+      </p>
+</div>
+<!-- Thermal & Hardware Diagnostic Bar -->
+<div class="grid grid-cols-2 gap-2 p-2.5 rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Contenedor &amp; RFID</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[18px]">inventory_2</span>
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Huacal #01</span>
+<span class="font-label-sm text-label-sm text-outline-variant font-mono">#HCL-01-V</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Cadena de Frío</span>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">ac_unit</span>
+<span class="font-headline-sm text-headline-sm text-primary font-black">4.6°C</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold ml-1">Óptimo</span>
+</div>
+</div>
+</div>
+<!-- Weight Calibration Box -->
+<div class="flex items-center justify-between mt-space-sm pt-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-container/60 flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px]">scale</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold">
+            4.060 kg <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">(Meta: 4.020 kg)</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Tolerancia: <span class="text-secondary font-semibold">+1.0% (Aprobada)</span></p>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-secondary">check</span>
+<span>Báscula Toledo OK</span>
+</div>
+</div>
+</div>
+<!-- Item Verification Checklist (4/4 Completed) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">fact_check</span>
+<span class="font-title-md text-title-md text-on-surface font-bold">Lote de Hortalizas Frescas</span>
+</div>
+<span class="font-label-md text-label-md text-secondary font-bold bg-secondary-container/30 px-2 py-0.5 rounded-full">
+        4/4 Listos
+      </span>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Zanahorias Baby Orgánicas</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant truncate">Huertos de Almolonga • 1.240 kg</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-highest text-primary font-bold shrink-0">
+          Pesado
+        </span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Espinaca Tierna Hidropónica</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant truncate">Tecpán • 0.520 kg</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-highest text-primary font-bold shrink-0">
+          Pesado
+        </span>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Tomate Manzano Seleccionado</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant truncate">Almolonga • 1.500 kg</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-highest text-primary font-bold shrink-0">
+          Pesado
+        </span>
+</div>
+<!-- Item 4 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Cebollas Moradas con Tallo</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant truncate">Sololá • 0.800 kg</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-highest text-primary font-bold shrink-0">
+          Pesado
+        </span>
+</div>
+</div>
+</div>
+<!-- Precinto y Sello Inviolable Verde Hero Module -->
+<div class="relative bg-surface-container-lowest rounded-xl p-space-md shadow-md overflow-hidden">
+<!-- Visual Gradient Header Ribbon -->
+<div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-primary-fixed-dim"></div>
+<div class="flex items-start justify-between gap-2 pt-1 mb-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="font-label-md text-label-md uppercase tracking-wider font-extrabold">Inocuidad &amp; Seguridad</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-extrabold mt-0.5">
+          Sello Inviolable Verde
+        </h2>
+</div>
+<div class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+        CERTIFICADO
+      </div>
+</div>
+<!-- Security Seal Badge Display -->
+<div class="rounded-xl p-space-md bg-gradient-to-b from-surface-container-low to-surface-container flex flex-col items-center text-center relative overflow-hidden">
+<!-- Tamper-evident Ribbon Visual Graphic -->
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-md mb-2 relative">
+<span class="material-symbols-outlined text-[34px]">verified_user</span>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+</div>
+<span class="font-label-md text-label-md text-primary font-black uppercase tracking-wider">
+        Sello Térmico Inviolable
+      </span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-mono font-black tracking-wider mt-0.5">
+        PRE-Z4-9421-HCL01-SEC
+      </span>
+<!-- Barcode / Strip Graphic Representation -->
+<div class="w-full max-w-[240px] h-10 mt-3 px-3 py-1 bg-surface-container-lowest rounded flex items-center justify-between shadow-inner">
+<!-- Stylized Micro Barcode Pattern -->
+<div class="flex items-stretch h-full gap-1 w-full justify-center">
+<div class="w-1 bg-on-surface"></div>
+<div class="w-0.5 bg-on-surface"></div>
+<div class="w-1.5 bg-on-surface"></div>
+<div class="w-0.5 bg-on-surface"></div>
+<div class="w-2 bg-on-surface"></div>
+<div class="w-0.5 bg-on-surface"></div>
+<div class="w-1 bg-on-surface"></div>
+<div class="w-2.5 bg-on-surface"></div>
+<div class="w-0.5 bg-on-surface"></div>
+<div class="w-1.5 bg-on-surface"></div>
+<div class="w-0.5 bg-on-surface"></div>
+<div class="w-2 bg-on-surface"></div>
+<div class="w-1 bg-on-surface"></div>
+<div class="w-0.5 bg-on-surface"></div>
+<div class="w-1.5 bg-on-surface"></div>
+<div class="w-2 bg-on-surface"></div>
+</div>
+<div class="pl-2 border-l border-outline-variant shrink-0 text-primary">
+<span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+</div>
+</div>
+<!-- Audit Metadata Footer inside Badge -->
+<div class="flex items-center justify-center gap-2 mt-3 text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px] text-primary">shield</span>
+          RTCA &amp; HACCP Cumplido
+        </span>
+<span>•</span>
+<span class="font-mono text-outline">SHA256: 7f8c..b94a</span>
+</div>
+</div>
+<!-- Diagnostic Sensor Confirmations -->
+<div class="mt-space-sm flex flex-col gap-2">
+<div class="flex items-start gap-2.5 p-2 rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 mt-0.5">tune</span>
+<div class="min-w-0">
+<div class="font-label-md text-label-md text-on-surface font-bold">
+            Dispensador Térmico #02 aplicó precinto físico
+          </div>
+<div class="font-body-sm text-body-sm text-secondary font-semibold">
+            Estado: BLOQUEADO Y HERMÉTICO
+          </div>
+</div>
+</div>
+<div class="flex items-start gap-2.5 p-2 rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">door_front</span>
+<div class="min-w-0">
+<div class="font-label-md text-label-md text-on-surface font-bold">
+            Sensor de Cierre Térmico Activo
+          </div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+            Tapa hermética ajustada con doble pestaña de seguridad. 0 fugas de frío detectadas.
+          </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Associated Chilled Bottles Reminder Card -->
+<div class="bg-surface-container-high rounded-xl p-space-md flex items-center justify-between gap-3 shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">liquor</span>
+</div>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Carga Vinculada</span>
+<h3 class="font-label-lg text-label-lg text-on-surface font-bold truncate">
+          2x Botellas de Leche 1L
+        </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+          Canastilla lateral enfriada #L-04 acoplada con éxito
+        </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">link</span>
+</div>
+</div>
+<!-- Primary Operation Action Panel -->
+<div class="flex flex-col gap-2.5 mt-space-xs">
+<!-- Big Emerald Primary CTA -->
+<button class="w-full h-12 rounded-full bg-primary text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-lg hover:bg-primary-container active:scale-[0.98] transition-all" id="btn-dispatch" onclick="handleDispatch()">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+<span>Confirmar Precintado y Enviar a Bahía</span>
+</button>
+<!-- Secondary Print Action -->
+<button class="w-full h-11 rounded-full bg-surface-container-lowest text-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm hover:bg-surface-container active:scale-[0.98] transition-all" id="btn-print" onclick="handlePrint()">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Imprimir Marbete Térmico (Zebra ZD421)</span>
+</button>
+<!-- Audit / Supervision Link -->
+<div class="flex justify-center pt-1">
+<button class="inline-flex items-center gap-1.5 font-label-md text-label-md text-outline hover:text-on-surface underline decoration-outline-variant underline-offset-4 transition-colors py-1" onclick="handleAuditPrompt()">
+<span class="material-symbols-outlined text-[16px]">lock_reset</span>
+<span>Auditar peso o reabrir con autorización de supervisor</span>
+</button>
+</div>
+</div>
+<!-- Toast Notification Feedback Container -->
+<div class="fixed bottom-6 inset-x-margin max-w-sm mx-auto bg-inverse-surface text-inverse-on-surface p-3 rounded-xl shadow-xl flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none z-50" id="terminal-toast">
+<span class="material-symbols-outlined text-secondary text-[22px]" id="toast-icon">check_circle</span>
+<span class="font-body-md text-body-md font-medium" id="toast-text">Acción completada</span>
+</div>
+</div>
+<script>
+  function showTerminalToast(message, iconName = 'check_circle') {
+    const toast = document.getElementById('terminal-toast');
+    const toastText = document.getElementById('toast-text');
+    const toastIcon = document.getElementById('toast-icon');
+    
+    if (!toast || !toastText || !toastIcon) return;
+    
+    toastText.textContent = message;
+    toastIcon.textContent = iconName;
+    toast.classList.remove('opacity-0', 'pointer-events-none');
+    toast.classList.add('opacity-100');
+
+    setTimeout(() => {
+      toast.classList.remove('opacity-100');
+      toast.classList.add('opacity-0', 'pointer-events-none');
+    }, 2800);
+  }
+
+  function handleDispatch() {
+    const btn = document.getElementById('btn-dispatch');
+    if (btn) {
+      btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-[20px]">sync</span><span>Transfiriendo a Bahía 04...</span>`;
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = `<span class="material-symbols-outlined text-[20px]">done_all</span><span>¡Enviado a Despacho!</span>`;
+        btn.classList.remove('bg-primary');
+        btn.classList.add('bg-secondary');
+        showTerminalToast('Huacal #01 transferido a Bahía 04 con precinto inviolable verificado.', 'task_alt');
+      }, 1000);
+    }
+  }
+
+  function handlePrint() {
+    showTerminalToast('Imprimiendo marbete ZPL en Zebra ZD421 (Mesa 02)...', 'print');
+  }
+
+  function handleAuditPrompt() {
+    showTerminalToast('Solicitud de anulación enviada al Supervisor de Turno.', 'admin_panel_settings');
+  }
+</script></main></body></html>

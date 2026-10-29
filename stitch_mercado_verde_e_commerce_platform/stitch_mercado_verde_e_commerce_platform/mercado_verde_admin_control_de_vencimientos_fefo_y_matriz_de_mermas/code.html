@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "error-container": "#ffdad6", "surface-container-highest": "#d9e3f6", "surface-tint": "#186c45", "surface-variant": "#d9e3f6", "surface-bright": "#f8f9ff", "outline": "#6f7a71", "surface-container-high": "#dee9fc", "tertiary": "#3e4943", "on-primary-container": "#99e9b9", "on-tertiary-container": "#cfdbd3", "secondary-container": "#80f98b", "primary": "#005131", "on-secondary-fixed-variant": "#00531a", "primary-container": "#176b45", "on-tertiary-fixed-variant": "#3e4943", "tertiary-fixed": "#d9e6dd", "surface-container": "#e6eeff", "on-secondary": "#ffffff", "on-primary": "#ffffff", "surface-container-lowest": "#ffffff", "surface-container-low": "#eff4ff", "surface-dim": "#d0dbed", "inverse-surface": "#27313f", "secondary": "#006e25", "on-secondary-container": "#007327", "primary-fixed-dim": "#88d7a8", "on-primary-fixed-variant": "#005232", "on-error-container": "#93000a", "on-background": "#121c2a", "secondary-fixed-dim": "#66df75", "secondary-fixed": "#83fc8e", "on-tertiary": "#ffffff", "tertiary-fixed-dim": "#bdcac1", "inverse-on-surface": "#eaf1ff", "on-secondary-fixed": "#002106", "background": "#f8f9ff", "on-surface": "#121c2a", "tertiary-container": "#55615a", "inverse-primary": "#88d7a8", "on-surface-variant": "#3f4942", "outline-variant": "#bfc9c0", "on-error": "#ffffff", "on-tertiary-fixed": "#131e19", "primary-fixed": "#a4f4c3", "error": "#ba1a1a", "on-primary-fixed": "#002111", "surface": "#f8f9ff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter": "1rem", "gutter-desktop": "1.5rem", "margin-desktop": "3rem", "margin": "1rem", "space-lg": "1.5rem", "margin-tablet": "2rem", "space-sm": "0.5rem" }, "fontFamily": { "headline-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "price-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "price-md": ["Plus Jakarta Sans"] }, "fontSize": { "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "price-lg": ["20px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "price-md": ["16px", { "lineHeight": "20px", "fontWeight": "700" }] } } } };</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container-lowest"><div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[22px]">eco</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-primary font-bold tracking-tight leading-none">Mercado Verde</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Admin &amp; Ops GT</span></div></div><div class="px-space-md py-space-sm"><div class="bg-surface-container-low rounded-xl p-space-sm flex items-center gap-space-sm"><span class="material-symbols-outlined text-primary text-[20px]">warehouse</span><div class="flex-1 min-w-0"><p class="font-label-sm text-label-sm text-on-surface-variant uppercase truncate">Centro Operativo</p><p class="font-title-md text-body-sm font-bold text-on-surface truncate">Hub Central Zona 4</p></div><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span></div></div><nav class="flex-1 px-space-sm py-space-xs space-y-1 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary font-bold"><div class="px-space-sm pt-space-xs pb-1"><span class="font-label-sm text-label-sm text-outline uppercase font-bold tracking-wider">Operaciones Frescos</span></div><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-lg text-label-lg">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="inventario-y-lotes" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="font-label-lg text-label-lg">Inventario &amp; Lotes</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl transition-all bg-primary-container text-on-primary font-bold" data-path="control-fefo" href="#"><span class="material-symbols-outlined text-[20px]">hourglass_top</span><span class="font-label-lg text-label-lg">Control FEFO</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="mermas-y-madurez" href="#"><span class="material-symbols-outlined text-[20px]">nest_eco_leaf</span><span class="font-label-lg text-label-lg">Mermas &amp; Madurez</span></a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm text-outline uppercase font-bold tracking-wider">Cadena de Frío &amp; Logística</span></div><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="despacho" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span class="font-label-lg text-label-lg">Despacho</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="proveedores" href="#"><span class="material-symbols-outlined text-[20px]">handshake</span><span class="font-label-lg text-label-lg">Proveedores</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="ajustes" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-lg text-label-lg">Ajustes</span></a></nav><div class="p-space-md bg-surface-container-lowest mt-auto"><div class="bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-[18px]">verified</span><span class="font-label-sm text-label-sm text-on-surface font-semibold">FEFO Strict v2.4</span></div><span class="font-label-sm text-label-sm text-on-primary bg-primary px-1.5 py-0.5 rounded-full font-bold">GT</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md flex-1 max-w-xl"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span><input class="w-full pl-10 pr-4 py-2 bg-surface-container-low text-on-surface placeholder:text-on-surface-variant rounded-full text-body-sm font-body-md focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Buscar lote, SKU, fruta, verdura o proveedor local..." type="search"/></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-1.5 rounded-full"><span class="material-symbols-outlined text-primary text-[18px]">storefront</span><span class="font-label-md text-label-md text-on-surface font-semibold">Hub: Zona 4 Cuatro Grados</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">expand_more</span></div><button class="relative p-2 rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notification_important</span><span class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="text-right hidden sm:block"><p class="font-label-md text-label-md font-bold text-on-surface leading-tight">Ing. Brenda Solís</p><p class="font-label-sm text-label-sm text-on-surface-variant">Supervisora Calidad &amp; FEFO</p></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-background min-h-screen px-gutter-desktop py-space-lg"><div class="flex flex-col w-full space-y-space-lg pb-16">
+<!-- Top Operational Banner & Meta -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="space-y-1">
+<div class="flex items-center gap-space-xs text-primary font-label-md text-label-md uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span>Supervisión Calidad HACCP &amp; Trazabilidad Agrícola</span>
+<span class="text-outline-variant">•</span>
+<span class="font-bold text-on-surface-variant">Hub Central Zona 4 (Guatemala)</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Control de Vencimientos, Rotación FEFO y Prevención de Mermas</h1>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-space-sm pt-0.5">
+<span class="material-symbols-outlined text-[18px] text-primary">ac_unit</span>
+<span>4 Cámaras Frías Activas</span>
+<span class="text-outline-variant">•</span>
+<span class="font-semibold text-on-surface">Temp. Promedio: 3.8°C (±0.4°C)</span>
+<span class="text-outline-variant">•</span>
+<span class="bg-surface-container-high px-2 py-0.5 rounded-full text-label-sm font-label-sm text-primary font-bold">Algoritmo FEFO Dinámico v2.4</span>
+</p>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="inline-flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container-high font-label-lg text-label-lg transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>Historial de Mermas</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-primary text-on-primary hover:bg-primary-container font-label-lg text-label-lg shadow-sm transition-all active:scale-95" type="button">
+<span class="material-symbols-outlined text-[18px]">description</span>
+<span>Exportar Reporte HACCP</span>
+</button>
+</div>
+</div>
+<!-- KPI Metric Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-surface-container-low pointer-events-none transition-transform group-hover:scale-110"></div>
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Adherencia Operativa</span>
+<h3 class="font-title-md text-title-md text-on-surface">Índice de Rotación FEFO</h3>
+</div>
+<div class="w-10 h-10 rounded-xl bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">hourglass_top</span>
+</div>
+</div>
+<div class="mt-space-lg flex items-baseline justify-between">
+<div>
+<span class="font-display text-display text-primary font-extrabold tracking-tight">94.2%</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mt-0.5">Cumplimiento estricto de picking</span>
+</div>
+<span class="inline-flex items-center gap-0.5 font-label-md text-label-md text-secondary font-bold bg-secondary-container/30 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+          +3.1%
+        </span>
+</div>
+</div>
+<!-- KPI 2 (Critical Alert) -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-lowest via-surface-container-lowest to-error-container/20">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<div class="inline-flex items-center gap-1 font-label-sm text-label-sm uppercase tracking-wider text-error font-bold">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+            Ventana Crítica (&lt;48 hrs)
+          </div>
+<h3 class="font-title-md text-title-md text-on-surface">14 SKUs en Riesgo Alto</h3>
+</div>
+<div class="w-10 h-10 rounded-xl bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">crisis_alert</span>
+</div>
+</div>
+<div class="mt-space-md">
+<div class="flex items-baseline justify-between">
+<span class="font-price-lg text-headline-md text-on-surface font-black">Q 1,840.00</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Valor total costo</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center gap-space-xs">
+<button class="w-full py-2 px-space-sm rounded-lg bg-error text-on-error font-label-md text-label-md font-bold hover:bg-on-error-container transition-all flex items-center justify-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span>Activar Liquidación Flash (-35%)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Impacto Económico &amp; Social</span>
+<h3 class="font-title-md text-title-md text-on-surface">Mermas Evitadas (Mes)</h3>
+</div>
+<div class="w-10 h-10 rounded-xl bg-surface-container-low text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">nest_eco_leaf</span>
+</div>
+</div>
+<div class="mt-space-lg">
+<span class="font-display text-display text-on-surface font-extrabold tracking-tight">Q 28,450</span>
+<div class="flex items-center gap-space-xs mt-1 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-secondary text-[16px]">volunteer_activism</span>
+<span><strong>6.2 toneladas</strong> donadas a comedores y pulpas</span>
+</div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Cámara de Frío &amp; Silos</span>
+<h3 class="font-title-md text-title-md text-on-surface">Lotes Multimarca Auditados</h3>
+</div>
+<div class="w-10 h-10 rounded-xl bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">sensors</span>
+</div>
+</div>
+<div class="mt-space-lg flex items-baseline justify-between">
+<div>
+<span class="font-display text-display text-on-surface font-extrabold tracking-tight">86</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Etiquetas BLE activas transmitiendo</span>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-secondary font-bold flex items-center gap-0.5 justify-end">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 100% Online
+          </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Hub Z4 Frío</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Control & Filter Bar -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-md">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Search Input -->
+<div class="relative flex-1 max-w-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low text-on-surface placeholder:text-on-surface-variant rounded-lg font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="filter-search" placeholder="Buscar por SKU, Lote UID o nombre de producto..." type="text"/>
+</div>
+<!-- Quick Risk Level Filters -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 lg:pb-0" id="risk-filters">
+<button class="filter-pill-active px-3 py-1.5 rounded-full font-label-md text-label-md font-bold bg-primary text-on-primary transition-all" data-risk="all" type="button">
+          Todos (86 Lotes)
+        </button>
+<button class="px-3 py-1.5 rounded-full font-label-md text-label-md font-semibold bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-1.5" data-risk="critical" type="button">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+          Crítico (&lt;48h)
+          <span class="bg-error-container text-on-error-container text-[11px] px-1.5 py-0.2 rounded-full font-bold">14</span>
+</button>
+<button class="px-3 py-1.5 rounded-full font-label-md text-label-md font-semibold bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-1.5" data-risk="preventive" type="button">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+          Preventivo (3-6 días)
+          <span class="bg-surface-container-highest text-on-surface text-[11px] px-1.5 py-0.2 rounded-full font-bold">29</span>
+</button>
+<button class="px-3 py-1.5 rounded-full font-label-md text-label-md font-semibold bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-1.5" data-risk="stable" type="button">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+          Estable (&gt;7 días)
+          <span class="bg-surface-container-highest text-on-surface text-[11px] px-1.5 py-0.2 rounded-full font-bold">43</span>
+</button>
+</div>
+</div>
+<!-- Category Strip Filters -->
+<div class="flex items-center gap-space-sm pt-space-xs overflow-x-auto text-on-surface-variant font-label-sm text-label-sm border-t-0">
+<span class="font-bold text-outline uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">category</span> Categoría:
+      </span>
+<button class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface font-semibold hover:bg-primary hover:text-on-primary transition-colors" type="button">Todas</button>
+<button class="px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant font-semibold hover:bg-surface-container-high transition-colors" type="button">Lácteos y Derivados (24)</button>
+<button class="px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant font-semibold hover:bg-surface-container-high transition-colors" type="button">Frutas Climatéricas (19)</button>
+<button class="px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant font-semibold hover:bg-surface-container-high transition-colors" type="button">Hortalizas de Hoja (18)</button>
+<button class="px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant font-semibold hover:bg-surface-container-high transition-colors" type="button">Tubérculos &amp; Raíces (12)</button>
+<button class="px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant font-semibold hover:bg-surface-container-high transition-colors" type="button">Aves y Proteínas Frescas (13)</button>
+</div>
+</div>
+<!-- Master FEFO Batch Inventory Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="p-space-lg flex items-center justify-between bg-surface-container-lowest">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">inventory</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Matriz Dinámica de Despacho FEFO</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Lotes ordenados automáticamente por fecha de expiración ascendente y prioridad de empaque</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-[16px]">sync</span>
+<span>Sincronizado hace 2 min • WMS Cuatro Grados</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
+<th class="py-3 px-space-md">Semáforo &amp; Venc.</th>
+<th class="py-3 px-space-md">Producto &amp; Marca Local</th>
+<th class="py-3 px-space-md">SKU / Lote UID</th>
+<th class="py-3 px-space-md">Ubicación Física</th>
+<th class="py-3 px-space-md">Fechas &amp; Vida Útil</th>
+<th class="py-3 px-space-md">Inventario</th>
+<th class="py-3 px-space-md">Acción Algoritmo FEFO</th>
+<th class="py-3 px-space-md text-right">Gestión</th>
+</tr>
+</thead>
+<tbody class="divide-y-0" id="batch-table-body">
+<!-- Row 1: Crítico Lácteo -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error ring-4 ring-error-container"></span>
+<div>
+<span class="font-bold text-error font-label-md text-label-md block">1.5 días</span>
+<span class="text-on-surface-variant text-[11px] block">Crítico</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low overflow-hidden flex-shrink-0 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Glass bottle of whole milk with rustic farm brand label, cold condensation on glass surface, studio white and emerald green lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZt_04NicY1Icz4kReKE_KRotoiz_aVX2FmfQMaJ9iOEcOh7FpgXsBuo4921DOGWjyX40JacucWVekWWwSKwaoJWkm0f8LyQsvZzw54Rau9mvPkFJXF3FTVQ6SwF0kIzRiekljYLPyTLJHEuviiYjSOPma-xjEPCE-Q6xjHqIMYFwdNsL7Q_cnsIjjfHCT4w1UQ0lXPnKlCXCY4HgWNxBUJ8MmWVBdgH08qFJaPNHn89RQgSAPmS_7"/>
+</div>
+<div class="min-w-0">
+<p class="font-title-md text-title-md text-on-surface font-bold truncate">Leche Entera Pasteurizada 1L</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Lácteos Tecpán • Chimaltenango</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-mono text-on-surface">
+<span class="font-bold text-primary">LAC-TEC-04</span>
+<span class="block text-[11px] text-outline">UID: #9842-TC</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded text-on-surface font-medium font-label-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">grid_view</span>
+                Cám. B-02 • Est. 3
+              </span>
+<span class="block text-[11px] text-outline mt-0.5">Sensor Temp: 3.2°C</span>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="space-y-0.5">
+<span class="block text-on-surface font-semibold">Vence: Mañana 18:00</span>
+<div class="w-24 bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full w-[90%]"></div>
+</div>
+<span class="text-[11px] text-on-surface-variant">Ingreso: 22 Feb (85% consumida)</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-price-md text-price-md text-on-surface font-extrabold">45 botellas</span>
+<span class="block text-outline text-[11px]">3 cajas de 15 unids</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm font-label-sm font-bold bg-error-container text-on-error-container">
+<span class="material-symbols-outlined text-[14px]">local_fire_department</span>
+                Salva &amp; Ahorra -35%
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right space-x-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Ver Trazabilidad" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Ajustar Precio" type="button">
+<span class="material-symbols-outlined text-[18px]">sell</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Mover de Rack" type="button">
+<span class="material-symbols-outlined text-[18px]">move_up</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Prioridad Despacho Fruta Climatérica -->
+<tr class="hover:bg-surface-container-low/50 transition-colors bg-surface-container-lowest">
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-amber-500 ring-4 ring-amber-100"></span>
+<div>
+<span class="font-bold text-amber-700 font-label-md text-label-md block">3.0 días</span>
+<span class="text-on-surface-variant text-[11px] block">Preventivo</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low overflow-hidden flex-shrink-0 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Fresh dark green Hass avocados in wooden crate, soft morning light with drops of moisture, premium grocery photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD-NR7tkVTn66MhxFieMpUlqj8QIujJwi_y5uKfCFPdN-P-EjRyRnYvZtqc2rpoGrxlm0QX7Wv-W7N8FpN089DAcFm85RQxIoDFkxFyLVDBPvf3ABhd9Iqs_Xyga6PJiYVo6tA-n9rXJ6dAEihMxKWNUINHxqxdI64vcknOBWG4yg2SgyANi34GZHMHLtTDg-xa-YQDBjsI0J8tcjgpKpsn_kJuHun0Qk3ZqPkLRTs7JIjcbWnYvmG"/>
+</div>
+<div class="min-w-0">
+<p class="font-title-md text-title-md text-on-surface font-bold truncate">Aguacate Hass Calibre 18</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Finca San Lucas Sacatepéquez</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-mono text-on-surface">
+<span class="font-bold text-primary">FRU-AGU-22</span>
+<span class="block text-[11px] text-outline">UID: #7719-SL</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded text-on-surface font-medium font-label-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">grid_view</span>
+                Cám. A-01 • Tarima 4
+              </span>
+<span class="block text-[11px] text-outline mt-0.5">Madurez: Grado B Óptimo</span>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="space-y-0.5">
+<span class="block text-on-surface font-semibold">Vence: 28 Feb (72h)</span>
+<div class="w-24 bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full rounded-full w-[65%]"></div>
+</div>
+<span class="text-[11px] text-on-surface-variant">Ingreso: 20 Feb</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-price-md text-price-md text-on-surface font-extrabold">120 kg</span>
+<span class="block text-outline text-[11px]">24 huacales plásticos</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm font-label-sm font-bold bg-amber-100 text-amber-900">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+                Prioridad #1 Despacho Hoy
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right space-x-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Ver Trazabilidad" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Ajustar Precio" type="button">
+<span class="material-symbols-outlined text-[18px]">sell</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Mover de Rack" type="button">
+<span class="material-symbols-outlined text-[18px]">move_up</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Hortaliza Frágil / Pulpa -->
+<tr class="hover:bg-surface-container-low/50 transition-colors bg-surface-container-lowest">
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error ring-4 ring-error-container"></span>
+<div>
+<span class="font-bold text-error font-label-md text-label-md block">24 hrs</span>
+<span class="text-on-surface-variant text-[11px] block">Crítico</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low overflow-hidden flex-shrink-0 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Plump ripe red hydroponic strawberries in a protective container, high resolution fresh organic supermarket standard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeJjPxlbyNB412G_GAWhM-MctfvmOu51qsB-n009aJQleIztgIVUKUTUWtugy2K1QHR2S_Z94VX8Gd8zAySI_cVjAS2SIx2suiaL5pzbTMxdvtA0mBdB6GVZ7mvSmpCcHlMKhluzh3LlG3bKJUcqc7QOUjYfWN8AiI_lj-e6lSzVPOX7Ne9hgaDEsv-jIbOMkNbt-VF1zKRYN9fmr3PyWzh0bVR3el_l8ngZYzLwtOgHj07oEIBWUJ"/>
+</div>
+<div class="min-w-0">
+<p class="font-title-md text-title-md text-on-surface font-bold truncate">Fresas Hidropónicas Grado A</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cooperativa Agrícola Almolonga</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-mono text-on-surface">
+<span class="font-bold text-primary">FRU-FRE-91</span>
+<span class="block text-[11px] text-outline">UID: #3310-AL</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded text-on-surface font-medium font-label-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">grid_view</span>
+                Cám. C-01 • Zona Frágil
+              </span>
+<span class="block text-[11px] text-outline mt-0.5">Humedad: 92% HR</span>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="space-y-0.5">
+<span class="block text-error font-semibold">Vence: Hoy 23:59</span>
+<div class="w-24 bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full w-[95%]"></div>
+</div>
+<span class="text-[11px] text-on-surface-variant">Ingreso: 23 Feb</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-price-md text-price-md text-on-surface font-extrabold">38 clamshells</span>
+<span class="block text-outline text-[11px]">1 lb c/u (17.2 kg)</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm font-label-sm font-bold bg-purple-100 text-purple-900">
+<span class="material-symbols-outlined text-[14px]">blender</span>
+                Enviar a Pulpa / Batidos
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right space-x-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Ver Trazabilidad" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Ajustar Precio" type="button">
+<span class="material-symbols-outlined text-[18px]">sell</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Mover de Rack" type="button">
+<span class="material-symbols-outlined text-[18px]">move_up</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Estable Queso Artesanal -->
+<tr class="hover:bg-surface-container-low/50 transition-colors bg-surface-container-lowest">
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary ring-4 ring-secondary-container/40"></span>
+<div>
+<span class="font-bold text-secondary font-label-md text-label-md block">18 días</span>
+<span class="text-on-surface-variant text-[11px] block">Estable</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low overflow-hidden flex-shrink-0 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Traditional Guatemalan artisanal Chancol cheese wheel wrapped in rustic paper on slate surface, warm kitchen setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFnWkCBT30J_M8QDzMGqa3McVpARmC6wmzMIk1N3WsaVA5XOxDrHYs-sK2CW3x-QeqK58i_shxsGYx0bE8SN5WOH3CPbZ7gyvsMrHYzAtWTZkBwIk1u-WpDIi7UjqjyhcjydAZyX1EWJdX_O64vCqARUzAwACfaMJF6MusJw96VCsj8-5CoYvdJtGV5JZR-CUs4Zkk_fUCMKCE1mBSzVldZ6HG0Ap3IiLlmPXRIhQnLaFfqdcNfPwF"/>
+</div>
+<div class="min-w-0">
+<p class="font-title-md text-title-md text-on-surface font-bold truncate">Queso Chancol Madurado de Nebaj</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Lácteos Tradicionales Quiché</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-mono text-on-surface">
+<span class="font-bold text-primary">LAC-QSO-08</span>
+<span class="block text-[11px] text-outline">UID: #6104-NB</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded text-on-surface font-medium font-label-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">grid_view</span>
+                Cám. B-01 • Est. 1
+              </span>
+<span class="block text-[11px] text-outline mt-0.5">Maduración Óptima</span>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="space-y-0.5">
+<span class="block text-on-surface font-semibold">Vence: 14 Mar</span>
+<div class="w-24 bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full w-[25%]"></div>
+</div>
+<span class="text-[11px] text-on-surface-variant">Ingreso: 15 Feb</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-price-md text-price-md text-on-surface font-extrabold">26 piezas</span>
+<span class="block text-outline text-[11px]">Ruedas 2.5 lb</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm font-label-sm font-bold bg-secondary-container/30 text-secondary">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                En Rotación Normal
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right space-x-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Ver Trazabilidad" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Ajustar Precio" type="button">
+<span class="material-symbols-outlined text-[18px]">sell</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Mover de Rack" type="button">
+<span class="material-symbols-outlined text-[18px]">move_up</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Hortaliza de Hoja -->
+<tr class="hover:bg-surface-container-low/50 transition-colors bg-surface-container-lowest">
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-amber-500 ring-4 ring-amber-100"></span>
+<div>
+<span class="font-bold text-amber-700 font-label-md text-label-md block">2.8 días</span>
+<span class="text-on-surface-variant text-[11px] block">Preventivo</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low overflow-hidden flex-shrink-0 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Fresh crisp Romaine lettuce heads bundled with recycled paper tape, droplets of clean water, grocery inventory warehouse setup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTmewDhq97O_aZNdL7-Fnpcz9wywVqEMNVp756Rx4ru6gnOVMGD0Hs5KbKiUJzp-9AfeGVcEESFQfU5JRoArIXZUFrwMrfFY2k4jkZp1NlhnrBdbusoTJFZYSBL-Kutw3rfl3f5ww6X_prY8_2281dvKfq080m9kXQK6nYjjG3xCXC1C7MTH3R5ZbIvalvXtBj0fulRx4wNHx06HHxgf5F6bQgqTpW42uq6viFQEeWc9ZGVEjhNPaB"/>
+</div>
+<div class="min-w-0">
+<p class="font-title-md text-title-md text-on-surface font-bold truncate">Lechuga Romana Premium (Manojo)</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Huertos de Patzún • Chimaltenango</p>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-mono text-on-surface">
+<span class="font-bold text-primary">HOR-LEC-14</span>
+<span class="block text-[11px] text-outline">UID: #5512-PZ</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded text-on-surface font-medium font-label-sm">
+<span class="material-symbols-outlined text-[14px] text-primary">grid_view</span>
+                Cám. A-02 • Gaveta 11
+              </span>
+<span class="block text-[11px] text-outline mt-0.5">Temp: 4.1°C</span>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="space-y-0.5">
+<span class="block text-on-surface font-semibold">Vence: 27 Feb 12:00</span>
+<div class="w-24 bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full rounded-full w-[70%]"></div>
+</div>
+<span class="text-[11px] text-on-surface-variant">Ingreso: 22 Feb</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="font-price-md text-price-md text-on-surface font-extrabold">95 unidades</span>
+<span class="block text-outline text-[11px]">8 canastas ventiladas</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-label-sm font-label-sm font-bold bg-amber-100 text-amber-900">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+                Prioridad #1 Despacho Hoy
+              </span>
+</td>
+<td class="py-3.5 px-space-md text-right space-x-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Ver Trazabilidad" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Ajustar Precio" type="button">
+<span class="material-symbols-outlined text-[18px]">sell</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" title="Mover de Rack" type="button">
+<span class="material-symbols-outlined text-[18px]">move_up</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer with Pagination & Summary -->
+<div class="p-space-md bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-2">
+<span>Mostrando <strong>5</strong> de <strong>86</strong> lotes monitoreados</span>
+<span class="text-outline-variant">•</span>
+<span class="font-semibold text-primary">100% Trazables a origen GT</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="p-1.5 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high transition-colors disabled:opacity-40" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<span class="px-3 py-1 rounded-lg bg-primary text-on-primary font-bold text-label-sm">1</span>
+<button class="px-3 py-1 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high font-semibold text-label-sm" type="button">2</button>
+<button class="px-3 py-1 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high font-semibold text-label-sm" type="button">3</button>
+<button class="p-1.5 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom Analytics & IoT Temperature Sensors Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Ripeness Distribution Chart & Fruit Life-cycle (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<div class="space-y-0.5">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Curva de Madurez &amp; Clasificación en Cámara</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Distribución biométrica para predicción de mermas en frutas climatéricas</p>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-low text-primary px-2.5 py-1 rounded-full font-bold">Auditado por Espectrometría</span>
+</div>
+<!-- Inline Visual Breakdown Bars -->
+<div class="mt-space-lg space-y-space-md">
+<!-- Grade A -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-on-surface font-bold flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+                Grado A: Firme / Verde (Almacenamiento Seguro &gt;6 días)
+              </span>
+<span class="font-bold text-on-surface">54.8% (1,480 kg)</span>
+</div>
+<div class="w-full bg-surface-container-low h-3 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-500" style="width: 54.8%"></div>
+</div>
+</div>
+<!-- Grade B -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-on-surface font-bold flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                Grado B: Óptimo para Consumo Inmediato (Ventana 2-4 días)
+              </span>
+<span class="font-bold text-on-surface">32.6% (880 kg)</span>
+</div>
+<div class="w-full bg-surface-container-low h-3 rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full rounded-full transition-all duration-500" style="width: 32.6%"></div>
+</div>
+</div>
+<!-- Grade C -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-on-surface font-bold flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+                Grado C: Consumo Rápido / Salva y Ahorra (&lt;48 hrs)
+              </span>
+<span class="font-bold text-error">12.6% (340 kg)</span>
+</div>
+<div class="w-full bg-surface-container-low h-3 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full transition-all duration-500" style="width: 12.6%"></div>
+</div>
+</div>
+</div>
+<!-- Inline SVG Mini Donut / Sparkline Representation -->
+<div class="mt-space-lg pt-space-md grid grid-cols-3 gap-space-sm bg-surface-container-low p-space-md rounded-xl">
+<div class="text-center">
+<p class="font-label-sm text-label-sm text-outline uppercase font-bold">Tasa Rescate App</p>
+<p class="font-headline-sm text-headline-sm text-primary font-black mt-0.5">88.4%</p>
+<span class="text-[11px] text-on-surface-variant">Salva y Ahorra</span>
+</div>
+<div class="text-center">
+<p class="font-label-sm text-label-sm text-outline uppercase font-bold">Merma Neta Real</p>
+<p class="font-headline-sm text-headline-sm text-secondary font-black mt-0.5">1.4%</p>
+<span class="text-[11px] text-secondary font-semibold">Meta de Hub: &lt;2.0%</span>
+</div>
+<div class="text-center">
+<p class="font-label-sm text-label-sm text-outline uppercase font-bold">Desvío a Pulpa/Bio</p>
+<p class="font-headline-sm text-headline-sm text-on-surface font-black mt-0.5">10.2%</p>
+<span class="text-[11px] text-on-surface-variant">Cero Desperdicio</span>
+</div>
+</div>
+</div>
+<div class="pt-space-md flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-primary">eco</span> Modelo de Madurez entrenado con cosechas del altiplano guatemalteco
+        </span>
+<button class="text-primary font-bold hover:underline font-label-md text-label-md" type="button">Re-calibrar Sensores</button>
+</div>
+</div>
+<!-- Real-time IoT Cold-Chain Sensors & Alerts (5 Cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="space-y-0.5">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Telemetría de Cámaras Frías</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Sensores IoT BLE en Racks Centrales</p>
+</div>
+<span class="w-3 h-3 rounded-full bg-secondary animate-ping"></span>
+</div>
+<!-- Sensor Feeds -->
+<div class="space-y-space-sm">
+<!-- Sensor 1: Cámara A (Normal) -->
+<div class="p-space-sm bg-surface-container-low rounded-xl flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold font-mono text-body-sm">
+                C-A
+              </div>
+<div>
+<p class="font-title-md text-body-sm font-bold text-on-surface">Cámara A: Frutas &amp; Hortalizas</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Humedad: 89% • Flujo continuo</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-title-md text-title-md font-extrabold text-primary">4.2°C</span>
+<span class="block text-secondary text-[11px] font-bold">Rango Normal</span>
+</div>
+</div>
+<!-- Sensor 2: Cámara B (Normal Lácteos) -->
+<div class="p-space-sm bg-surface-container-low rounded-xl flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold font-mono text-body-sm">
+                C-B
+              </div>
+<div>
+<p class="font-title-md text-body-sm font-bold text-on-surface">Cámara B: Lácteos &amp; Derivados</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Humedad: 75% • Compresor Inverter</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-title-md text-title-md font-extrabold text-primary">3.1°C</span>
+<span class="block text-secondary text-[11px] font-bold">Rango Normal</span>
+</div>
+</div>
+<!-- Sensor 3: Cámara C (Alerta Leve) -->
+<div class="p-space-sm bg-surface-container-low rounded-xl flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-900 flex items-center justify-center font-bold font-mono text-body-sm">
+                C-C
+              </div>
+<div>
+<p class="font-title-md text-body-sm font-bold text-on-surface">Cámara C: Fresas &amp; Frágiles</p>
+<p class="font-label-sm text-label-sm text-amber-800 font-medium">Puerta abierta detectada (4 min)</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-title-md text-title-md font-extrabold text-amber-600">5.8°C</span>
+<span class="block text-amber-700 text-[11px] font-bold">Desviación +1.8°</span>
+</div>
+</div>
+<!-- Sensor 4: Congelados -->
+<div class="p-space-sm bg-surface-container-low rounded-xl flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold font-mono text-body-sm">
+                C-D
+              </div>
+<div>
+<p class="font-title-md text-body-sm font-bold text-on-surface">Cámara D: Pulpa &amp; Ultracongelado</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Humedad: 60% • Ciclo Desescarche OK</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-title-md text-title-md font-extrabold text-primary">-18.4°C</span>
+<span class="block text-secondary text-[11px] font-bold">Estable</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Card IoT -->
+<div class="mt-space-md pt-space-xs flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-outline">Protocolo Cadena Frío GT-HACCP-2025</span>
+<button class="font-label-md text-label-md text-primary font-bold hover:underline flex items-center gap-0.5" type="button">
+<span>Ver Gráficas 24h</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Interactive Client-side Script for Filtering -->
+<script>
+    (function initFEFOControls() {
+      const searchInput = document.getElementById('filter-search');
+      const filterPills = document.querySelectorAll('#risk-filters button');
+      const tableRows = document.querySelectorAll('#batch-table-body tr');
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+          const query = e.target.value.toLowerCase().trim();
+          tableRows.forEach(row => {
+            const text = row.innerText.toLowerCase();
+            row.style.display = text.includes(query) ? '' : 'none';
+          });
+        });
+      }
+
+      filterPills.forEach(pill => {
+        pill.addEventListener('click', function() {
+          filterPills.forEach(p => {
+            p.classList.remove('bg-primary', 'text-on-primary');
+            p.classList.add('bg-surface-container-low', 'text-on-surface');
+          });
+          this.classList.remove('bg-surface-container-low', 'text-on-surface');
+          this.classList.add('bg-primary', 'text-on-primary');
+
+          const risk = this.getAttribute('data-risk');
+          tableRows.forEach(row => {
+            if (risk === 'all') {
+              row.style.display = '';
+            } else if (risk === 'critical') {
+              const hasCritical = row.innerText.includes('Crítico') || row.innerText.includes('24 hrs') || row.innerText.includes('1.5 días');
+              row.style.display = hasCritical ? '' : 'none';
+            } else if (risk === 'preventive') {
+              const hasPreventive = row.innerText.includes('Preventivo') || row.innerText.includes('3.0 días') || row.innerText.includes('2.8 días');
+              row.style.display = hasPreventive ? '' : 'none';
+            } else if (risk === 'stable') {
+              const hasStable = row.innerText.includes('Estable') || row.innerText.includes('18 días');
+              row.style.display = hasStable ? '' : 'none';
+            }
+          });
+        });
+      });
+    })();
+  </script>
+</div></main></div></body></html>

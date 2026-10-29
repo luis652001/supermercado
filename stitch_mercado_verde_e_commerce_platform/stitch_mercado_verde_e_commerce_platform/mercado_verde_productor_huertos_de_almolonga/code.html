@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-tertiary-container": "#cfdbd3", "surface-container-low": "#eff4ff", "outline": "#6f7a71", "tertiary-fixed-dim": "#bdcac1", "inverse-primary": "#88d7a8", "background": "#f8f9ff", "secondary-fixed": "#83fc8e", "surface-container-high": "#dee9fc", "on-primary": "#ffffff", "on-error-container": "#93000a", "secondary-fixed-dim": "#66df75", "surface-container-highest": "#d9e3f6", "primary-container": "#176b45", "on-primary-fixed": "#002111", "on-surface": "#121c2a", "surface-tint": "#186c45", "secondary-container": "#80f98b", "on-secondary-fixed": "#002106", "error": "#ba1a1a", "on-secondary-container": "#007327", "on-secondary": "#ffffff", "on-primary-container": "#99e9b9", "surface-container": "#e6eeff", "surface-bright": "#f8f9ff", "on-secondary-fixed-variant": "#00531a", "surface-container-lowest": "#ffffff", "inverse-on-surface": "#eaf1ff", "on-error": "#ffffff", "tertiary-fixed": "#d9e6dd", "on-tertiary-fixed-variant": "#3e4943", "surface-variant": "#d9e3f6", "tertiary": "#3e4943", "tertiary-container": "#55615a", "on-tertiary": "#ffffff", "on-primary-fixed-variant": "#005232", "on-tertiary-fixed": "#131e19", "error-container": "#ffdad6", "secondary": "#006e25", "surface": "#f8f9ff", "primary-fixed": "#a4f4c3", "primary": "#005131", "primary-fixed-dim": "#88d7a8", "on-surface-variant": "#3f4942", "on-background": "#121c2a", "inverse-surface": "#27313f", "surface-dim": "#d0dbed", "outline-variant": "#bfc9c0" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xs": "0.25rem", "gutter-desktop": "1.5rem", "margin": "1rem", "gutter": "1rem", "space-xl": "2.5rem", "space-md": "1rem", "space-lg": "1.5rem", "margin-desktop": "3rem", "margin-tablet": "2rem", "space-sm": "0.5rem" }, fontFamily: { "price-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "price-md": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"] }, fontSize: { "price-lg": ["20px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" }], "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "price-md": ["16px", { "lineHeight": "20px", "fontWeight": "700" }], "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between"><button aria-label="Cerrar" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[24px]">close</span></button><h1 class="font-headline-sm text-headline-sm text-on-surface text-center flex-1 truncate px-space-sm">Calificar Pedido</h1><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 bg-surface pb-safe"><div class="flex flex-col w-full pb-24">
+<!-- 1. Cabecera Hero con Foto Panorámica -->
+<div class="relative w-full h-72 overflow-hidden shadow-sm">
+<img alt="Terrazas de hortalizas en Almolonga Quetzaltenango" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGMEgLVDbCacAQY8Y_G1emfs3ID9VYJePRxfWOmkur9JcGRAW0jEtzuvzKsMu8bfdCEvthIiXkhtcJEZI5oJSu7BOBl9q_1hbEdOpovMZP2-iBJPpaT7knPiq4IgRuUJiKX6XZ8MP5yRYivMKX47Okv9EyGRB9sZSm29M56v_Rxl7-gmWXmLymQh-t1T0yBRhT7kQoNwhcd_VvwIPqQ909A0MEJr24Juem7G6xcGC5aJFktnS03TsB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent"></div>
+<!-- Acciones flotantes superiores -->
+<div class="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+<button aria-label="Volver" class="w-10 h-10 rounded-full bg-surface-container-lowest/90 backdrop-blur-md flex items-center justify-center text-on-surface shadow-md active:scale-95 transition-transform" onclick="history.back()" type="button">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</button>
+<div class="flex items-center gap-2">
+<button aria-label="Compartir productor" class="w-10 h-10 rounded-full bg-surface-container-lowest/90 backdrop-blur-md flex items-center justify-center text-on-surface shadow-md active:scale-95 transition-transform" id="share-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button aria-label="Guardar favorito" class="w-10 h-10 rounded-full bg-surface-container-lowest/90 backdrop-blur-md flex items-center justify-center text-on-surface shadow-md active:scale-95 transition-transform" id="fav-btn" onclick="this.classList.toggle('text-error');" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+</div>
+<!-- Badges flotantes en la imagen -->
+<div class="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container text-on-primary font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+        Cooperativa Agrícola Certificada
+      </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px]">handshake</span>
+        Comercio Justo Chapín
+      </span>
+</div>
+</div>
+<div class="px-margin flex flex-col gap-5 -mt-3 relative z-10">
+<!-- 2. Ficha Principal de la Cooperativa -->
+<section class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col gap-3">
+<div class="flex items-start justify-between gap-2">
+<div class="flex flex-col">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight">Huertos de Almolonga</h2>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-primary">location_on</span>
+            Valle de las Hortalizas, Quetzaltenango
+          </p>
+</div>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm whitespace-nowrap">
+          2,200 msnm
+        </span>
+</div>
+<div class="inline-flex items-center gap-2 p-2.5 rounded-lg bg-surface-container-low text-primary">
+<span class="material-symbols-outlined text-[20px] text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-md text-label-md text-primary font-semibold">Proveedor Oficial Mercado Verde desde 2022</span>
+</div>
+<div class="flex items-center justify-between pt-1 text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-title-md text-title-md text-on-surface font-bold">4.9</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(1,240 valoraciones)</span>
+</div>
+<div class="flex items-center gap-1 text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">eco</span>
+<span>99.4% Frescura</span>
+</div>
+</div>
+</section>
+<!-- 3. Tarjeta del Agricultor Líder / Historia Humana -->
+<section class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col gap-4">
+<div class="flex items-center gap-3.5">
+<div class="relative w-16 h-16 rounded-full overflow-hidden shadow-inner flex-shrink-0">
+<img alt="Don Mateo Xicay, maestro agricultor en Almolonga" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTDRnkJF1MM7uAhGgTt4He36Lx-ez36fM2iDiNt1jDftAJ99eSSgfXNU0Bk8rIDd8H3lR10uXLXZD9JTH573xGhbxuEqWg_JCwr6rs3iESo_nmoOhqniqgNLe3kxdVEFtewAXcjlsfwr8c7Usf-IMxoO6Rz2fHDX3MI0dTaEV0qwAIG-ddptufk767lSmuQ1rWXVrSGUpdh4UvaEZ6YR2PxeEQj8DC6N_6qiSeO_7liKpP_t06dCaK"/>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Don Mateo Xicay &amp; Familia</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Maestro agricultor de 3ª generación</p>
+<span class="font-label-sm text-label-sm text-secondary font-semibold mt-0.5">Almolonga, Los Altos</span>
+</div>
+</div>
+<!-- Testimonio con micro acento cálido -->
+<div class="p-3.5 rounded-xl bg-surface-container-low relative">
+<span class="material-symbols-outlined text-primary/20 text-[32px] absolute right-3 top-2 pointer-events-none select-none">format_quote</span>
+<p class="font-body-md text-body-md text-on-surface italic relative z-10 leading-relaxed">
+          “Sembrar en tierra volcánica con agua de manantial nos da las fresas y hortalizas más dulces de Guatemala. Con Mercado Verde cobramos el precio justo sin coyotes ni intermediarios.”
+        </p>
+</div>
+<!-- Sellos de certificación de buenas prácticas -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<div class="flex items-center gap-2 p-2.5 rounded-lg bg-surface-container">
+<span class="material-symbols-outlined text-primary text-[20px]">water_drop</span>
+<span class="font-label-md text-label-md text-on-surface">Agua de Manantial</span>
+</div>
+<div class="flex items-center gap-2 p-2.5 rounded-lg bg-surface-container">
+<span class="material-symbols-outlined text-primary text-[20px]">pest_control</span>
+<span class="font-label-md text-label-md text-on-surface">Cero Pesticidas</span>
+</div>
+<div class="flex items-center gap-2 p-2.5 rounded-lg bg-surface-container">
+<span class="material-symbols-outlined text-primary text-[20px]">wb_twilight</span>
+<span class="font-label-md text-label-md text-on-surface">Cosecha 05:00 AM</span>
+</div>
+<div class="flex items-center gap-2 p-2.5 rounded-lg bg-surface-container">
+<span class="material-symbols-outlined text-primary text-[20px]">mode_fan</span>
+<span class="font-label-md text-label-md text-on-surface">Cadena Frío &lt; 4 hrs</span>
+</div>
+</div>
+</section>
+<!-- 4. Impacto Comunitario y Trazabilidad -->
+<section class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Impacto en la Comunidad</h3>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Trazabilidad Total</span>
+</div>
+<div class="grid grid-cols-2 gap-2.5">
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex flex-col justify-between">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container mb-2">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+</div>
+<span class="font-price-lg text-price-lg text-on-surface">100%</span>
+<span class="font-label-md text-label-md text-on-surface-variant mt-0.5">Pago Directo sin intermediarios</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex flex-col justify-between">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-[18px]">groups</span>
+</div>
+<span class="font-price-lg text-price-lg text-on-surface">38</span>
+<span class="font-label-md text-label-md text-on-surface-variant mt-0.5">Familias beneficiadas en el valle</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex flex-col justify-between">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed mb-2">
+<span class="material-symbols-outlined text-[18px]">price_check</span>
+</div>
+<span class="font-price-lg text-price-lg text-primary">Q 185k+</span>
+<span class="font-label-md text-label-md text-on-surface-variant mt-0.5">En compras justas este año</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex flex-col justify-between">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface mb-2">
+<span class="material-symbols-outlined text-[18px]">volcano</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface font-bold">Volcán Santa María</span>
+<span class="font-label-md text-label-md text-on-surface-variant mt-0.5">Suelos minerales fértiles</span>
+</div>
+</div>
+</section>
+<!-- 5. Catálogo de Cosecha Activa Disponible Hoy -->
+<section class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Cosecha Activa de Hoy</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Llegada directa desde Quetzaltenango a Hub Z.12</p>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+          EN VIVO
+        </span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1: Fresa -->
+<article class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3">
+<div class="w-20 h-20 rounded-lg bg-surface-container flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+<span class="material-symbols-outlined text-primary text-[36px]">nutrition</span>
+<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-[9px] font-bold">
+              05:30 am
+            </span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low text-primary font-label-sm text-[10px] font-semibold">Grado Exportación</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface font-semibold truncate mt-1">Fresa de Almolonga</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Caja 500g • Dulce natural</p>
+<div class="flex items-center justify-between mt-2">
+<span class="font-price-md text-price-md text-primary font-bold">Q 18.50</span>
+<button class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm active:scale-95 transition-all flex items-center gap-1" onclick="incrementCart(this, 'Fresa de Almolonga')" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                Agregar
+              </button>
+</div>
+</div>
+</article>
+<!-- Item 2: Zanahoria Baby -->
+<article class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3">
+<div class="w-20 h-20 rounded-lg bg-surface-container flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+<span class="material-symbols-outlined text-primary text-[36px]">energy_savings_leaf</span>
+<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded-full bg-surface-container-high text-primary font-label-sm text-[9px] font-bold">
+              Manantial
+            </span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low text-primary font-label-sm text-[10px] font-semibold">Lavada con agua pura</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface font-semibold truncate mt-1">Zanahoria Baby Dulce</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Manojo 1 lb • Textura crocante</p>
+<div class="flex items-center justify-between mt-2">
+<span class="font-price-md text-price-md text-primary font-bold">Q 8.00</span>
+<button class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm active:scale-95 transition-all flex items-center gap-1" onclick="incrementCart(this, 'Zanahoria Baby')" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                Agregar
+              </button>
+</div>
+</div>
+</article>
+<!-- Item 3: Brócoli Corona Criollo -->
+<article class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3">
+<div class="w-20 h-20 rounded-lg bg-surface-container flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+<span class="material-symbols-outlined text-primary text-[36px]">park</span>
+<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-[9px] font-bold">
+              Cosecha hoy
+            </span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low text-primary font-label-sm text-[10px] font-semibold">Firme y verde intenso</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface font-semibold truncate mt-1">Brócoli Corona Criollo</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Unidad aprox. 1.2 lbs</p>
+<div class="flex items-center justify-between mt-2">
+<span class="font-price-md text-price-md text-primary font-bold">Q 9.50</span>
+<button class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm active:scale-95 transition-all flex items-center gap-1" onclick="incrementCart(this, 'Brócoli Corona Criollo')" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                Agregar
+              </button>
+</div>
+</div>
+</article>
+<!-- Item 4: Lechuga Escarola Hidratada -->
+<article class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm flex items-center gap-3">
+<div class="w-20 h-20 rounded-lg bg-surface-container flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+<span class="material-symbols-outlined text-primary text-[36px]">spa</span>
+<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded-full bg-surface-container-high text-primary font-label-sm text-[9px] font-bold">
+              Raíz viva
+            </span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low text-primary font-label-sm text-[10px] font-semibold">Corte de raíz fresca</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface font-semibold truncate mt-1">Lechuga Escarola Hidratada</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Unidad • Hojas crujientes</p>
+<div class="flex items-center justify-between mt-2">
+<span class="font-price-md text-price-md text-primary font-bold">Q 6.50</span>
+<button class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm active:scale-95 transition-all flex items-center gap-1" onclick="incrementCart(this, 'Lechuga Escarola')" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                Agregar
+              </button>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- 6. Calendario de Cosecha & Próximos Lotes -->
+<section class="bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">calendar_month</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Temporada &amp; Próximos Lotes</h3>
+</div>
+<div class="p-3 rounded-lg bg-secondary-container/30 flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">En pico de producción</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Temporada alta de fresa dulce y zanahoria baby.</span>
+</div>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low flex items-center justify-between gap-3">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-label-sm text-label-sm font-bold uppercase">Lunes Próximo</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface font-semibold mt-0.5 truncate">Remolacha dorada y coliflor morada</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lote exclusivo de 40 canastas</span>
+</div>
+<button class="px-3 py-2 rounded-full bg-surface-container text-primary font-label-md text-label-md font-semibold shadow-sm active:scale-95 transition-all whitespace-nowrap flex items-center gap-1" id="notify-btn" onclick="toggleNotify(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">notifications</span>
+<span>Avisarme</span>
+</button>
+</div>
+</section>
+<!-- 7. Garantía y Compromiso Mercado Verde -->
+<section class="bg-primary-container text-on-primary rounded-xl p-4 shadow-md flex items-start gap-3.5">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<div class="flex flex-col">
+<h4 class="font-title-md text-title-md font-bold text-on-primary">Garantía Cero Mermas &amp; Frescura</h4>
+<p class="font-body-sm text-body-sm text-on-primary-container mt-1 leading-relaxed">
+          Si cualquier producto de Don Mateo no llega en su punto óptimo de madurez, te lo reponemos en menos de 10 minutos o se acredita a tu billetera Mercado Verde. Sin preguntas.
+        </p>
+</div>
+</section>
+</div>
+<!-- 8. Barra Inferior Pinned Elevación 3 -->
+<aside class="fixed bottom-0 left-0 right-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_-4px_20px_0_rgba(31,41,55,0.08)] px-margin py-3 pb-safe">
+<div class="max-w-md mx-auto flex items-center justify-between gap-3">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Cosecha de Almolonga</span>
+<div class="flex items-center gap-1.5">
+<span class="font-price-md text-price-md text-on-surface font-extrabold" id="cart-counter">0 agregados</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">• Desde Q 6.50</span>
+</div>
+</div>
+<button class="h-12 px-5 rounded-full bg-primary text-on-primary font-label-lg text-label-lg font-bold shadow-md active:scale-98 flex items-center gap-2 transition-transform" type="button">
+<span>Ver los 8 productos</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</aside>
+</div>
+<script>
+  let totalCount = 0;
+  function incrementCart(button, productName) {
+    totalCount++;
+    const counterElement = document.getElementById('cart-counter');
+    if (counterElement) {
+      counterElement.textContent = totalCount + (totalCount === 1 ? ' agregado' : ' agregados');
+    }
+    
+    // Feedback táctil visual
+    const originalText = button.innerHTML;
+    button.classList.add('bg-secondary-container', 'text-on-secondary-container');
+    button.classList.remove('bg-primary', 'text-on-primary');
+    button.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span> Listo';
+    
+    setTimeout(() => {
+      button.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+      button.classList.add('bg-primary', 'text-on-primary');
+      button.innerHTML = originalText;
+    }, 1200);
+  }
+
+  function toggleNotify(btn) {
+    const isNotified = btn.dataset.active === 'true';
+    if (!isNotified) {
+      btn.dataset.active = 'true';
+      btn.classList.add('bg-primary', 'text-on-primary');
+      btn.classList.remove('bg-surface-container', 'text-primary');
+      btn.innerHTML = '<span class="material-symbols-outlined text-[16px]">notifications_active</span> ¡Anotado!';
+    } else {
+      btn.dataset.active = 'false';
+      btn.classList.remove('bg-primary', 'text-on-primary');
+      btn.classList.add('bg-surface-container', 'text-primary');
+      btn.innerHTML = '<span class="material-symbols-outlined text-[16px]">notifications</span> Avisarme';
+    }
+  }
+
+  document.getElementById('share-btn')?.addEventListener('click', () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Huertos de Almolonga en Mercado Verde',
+        text: 'Mira las fresas y hortalizas frescas de Don Mateo Xicay traídas directo desde Quetzaltenango.',
+        url: window.location.href,
+      }).catch(() => {});
+    }
+  });
+</script></main></body></html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary": "#006e25", "on-secondary-container": "#007327", "on-primary-fixed-variant": "#005232", "on-surface-variant": "#3f4942", "on-background": "#121c2a", "secondary-container": "#80f98b", "on-surface": "#121c2a", "on-tertiary-fixed-variant": "#3e4943", "outline": "#6f7a71", "on-secondary-fixed": "#002106", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#00531a", "surface": "#f8f9ff", "inverse-primary": "#88d7a8", "error": "#ba1a1a", "tertiary-fixed": "#d9e6dd", "on-tertiary-container": "#cfdbd3", "surface-variant": "#d9e3f6", "surface-dim": "#d0dbed", "tertiary-fixed-dim": "#bdcac1", "inverse-on-surface": "#eaf1ff", "surface-container-low": "#eff4ff", "surface-container-high": "#dee9fc", "primary": "#005131", "on-tertiary": "#ffffff", "tertiary-container": "#55615a", "on-primary": "#ffffff", "surface-bright": "#f8f9ff", "primary-fixed-dim": "#88d7a8", "secondary-fixed-dim": "#66df75", "error-container": "#ffdad6", "on-tertiary-fixed": "#131e19", "outline-variant": "#bfc9c0", "on-error": "#ffffff", "surface-tint": "#186c45", "primary-container": "#176b45", "secondary-fixed": "#83fc8e", "surface-container-lowest": "#ffffff", "on-primary-fixed": "#002111", "on-primary-container": "#99e9b9", "inverse-surface": "#27313f", "tertiary": "#3e4943", "surface-container": "#e6eeff", "surface-container-highest": "#d9e3f6", "background": "#f8f9ff", "primary-fixed": "a4f4c3", "on-secondary": "#ffffff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-lg": "1.5rem", "gutter": "1rem", "margin-desktop": "3rem", "space-md": "1rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "margin-tablet": "2rem", "margin": "1rem", "gutter-desktop": "1.5rem", "space-xl": "2.5rem" }, "fontFamily": { "label-md": ["Plus Jakarta Sans"], "price-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "price-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"] }, "fontSize": { "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "price-md": ["16px", { "lineHeight": "20px", "fontWeight": "700" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "price-lg": ["20px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_12px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-sm flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs min-w-0 flex-1"><button aria-label="Volver" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-container-high transition-colors shrink-0" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="Mercado Verde Logo" class="h-7 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UvaduwHXb9qIUyhOO5Efl1OaH3zmQ0rCmDnDU_N-Ozfwk4fxyPXXyat_WxQxESlVtvw_GgYmjxZfO66Z9wekYL0M6SPobs6ov05lD9lvnZsoMHwEuVAH9inVuwcuWOblimn9iMdVqt554OUQEjULu4t3HdvnXhMXAg1v5hmNot_-ddzKzuDPR91IfhgJbr5r2kJUQ8CJfZPKq0Q14_szJwfj8LyJcTfZJa4L2F_8ZxVqzOlRZOlwNY9go"/><h1 class="font-headline-sm text-headline-sm font-bold text-on-surface truncate">Tracking En Vivo</h1></div><div class="flex items-center shrink-0 pr-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWNQt4-qInH-2COWUfAh9mo63ZUlnKLIowmAVsnJReNMyQd-UsZAEZXyF7atcslBp_tbPlAlSJ9qHMiR-it3GuFVOXyE497rSDNlVo4yT4CbW110_-NZvFupW5OsBZAX-rKJ5SaS1M4pl4A8SUA1AsPXsCMqxff1ilp92spgGkXWGCOmN41scdYLY4fwGFF-vXYxdSswF6Dfs_IBxBMxt6MhzK6RH-mXZGCvbxVhKtmUq-wKV9jWW_"/></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe bg-surface"><div class="flex flex-col w-full pb-20">
+<!-- Status Feedback Banner / Delight Celebration -->
+<section class="px-gutter pt-space-md pb-space-sm flex flex-col items-center text-center relative overflow-hidden">
+<div class="w-16 h-16 rounded-full bg-secondary-container/40 flex items-center justify-center text-secondary mb-space-sm shadow-sm relative">
+<span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="absolute -top-1 -right-1 flex h-4 w-4">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-4 w-4 bg-secondary"></span>
+</span>
+</div>
+<div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider mb-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+      Pedido #MV-2024-8942 confirmado
+    </div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-surface">¡Gracias por tu compra, Carlos!</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-xs">Tus alimentos fueron cosechados y empacados hoy. Ya estamos en marcha.</p>
+</section>
+<!-- ETA Highlight Card -->
+<div class="px-gutter my-space-sm">
+<div class="bg-primary text-on-primary rounded-xl p-space-md shadow-md flex items-center justify-between relative overflow-hidden">
+<div class="relative z-10 flex flex-col">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm tracking-wide uppercase text-primary-fixed-dim">En Ruta de Entrega</span>
+</div>
+<div class="font-headline-md text-headline-md font-bold">15:42 hrs</div>
+<div class="font-body-sm text-body-sm text-primary-fixed-dim mt-0.5">Llegada estimada (en <span id="eta-counter">18</span> mins)</div>
+</div>
+<div class="relative z-10 w-14 h-14 rounded-full bg-on-primary/10 flex items-center justify-center backdrop-blur-md">
+<span class="material-symbols-outlined text-[32px] text-primary-fixed-dim">electric_moped</span>
+</div>
+<div class="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-primary-container/60 pointer-events-none"></div>
+</div>
+</div>
+<!-- Realtime Visual Map Tracking with Schematic Route -->
+<section class="px-gutter my-space-sm">
+<div class="rounded-xl overflow-hidden shadow-sm bg-surface-container-lowest relative">
+<div class="w-full h-52 bg-cover bg-center relative" data-location="Avenida Las Americas, Zona 13, Guatemala City" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAt8qc3q6Lip5i9p0oZea4QnoQ5p3nYTsyDIto0s22rcuJzNXPRDsZ1ziFumYi-uHIvglfknKWwVplIcIlUkG4B4-_psOrl-jUqcMfHNrSJ5No6w_KboyYlmWLduUYUTeXlINASbflE9WlPTILavOrAPyPW8hESTXn-FHR_zWLv_OzfaWSWKRWqOgPwzRNGBu2xrKXyVdRfSxJckGbmaDbhMDvZCehuAgCwRPiEzf7NKY0vYg5TlDQQ')">
+<!-- Map Glass Overlay HUD -->
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/70 via-transparent to-transparent flex flex-col justify-between p-space-sm pointer-events-none">
+<div class="flex justify-between items-start pointer-events-auto">
+<span class="bg-surface/95 backdrop-blur-md text-primary font-label-md text-label-md px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">near_me</span>
+              Ruta en vivo: Zona 12 → Zona 13
+            </span>
+<button class="w-8 h-8 rounded-full bg-surface/95 backdrop-blur-md text-on-surface flex items-center justify-center shadow-sm" id="recenter-btn">
+<span class="material-symbols-outlined text-[18px]">my_location</span>
+</button>
+</div>
+<div class="text-on-primary">
+<div class="font-label-sm text-label-sm opacity-80 uppercase tracking-wider">Destino registrado</div>
+<div class="font-title-md text-title-md font-semibold truncate">7a Avenida &amp; 12 Calle, Edificio Las Terrazas</div>
+</div>
+</div>
+</div>
+<!-- Driver Micro-Card Attached to Map base -->
+<div class="p-space-md flex items-center justify-between gap-space-sm bg-surface-container-lowest">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative shrink-0">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="A smiling, warm portrait of an experienced friendly Guatemalan delivery driver named Erick wearing a neat green Mercado Verde polo shirt and cap under gentle natural daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChG035dftIDmFCAWrs-yV4gfuCUzPy1sqcePo7J907EoWG6LhVb4Se2vmO9MF-lzz52FJDxbmELfN21ZZCw5H-XYYxu8KwIKjBUTG2nNJEDMDMbvDxXx3tWHcIpRDo7TrXM6uPd-F5dpNVwnOxUERJa80YmBlPZmh-1V-T3bqdv1-XbMxOBP33k47qonMrqhgXQrOuyrP4QrT_a_cFtpvTZoVPgendygCY8PtAdxM9X8XSoAuxUNNF"/>
+<div class="absolute -bottom-1 -right-1 bg-surface rounded-full p-0.5 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+</div>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1">
+<h3 class="font-title-md text-title-md font-bold text-on-surface truncate">Erick Morales</h3>
+<span class="flex items-center text-secondary font-label-md text-label-md shrink-0">
+<span class="material-symbols-outlined text-[14px] text-amber-500" style="font-variation-settings: 'FILL' 1;">star</span>
+                4.9
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Motocicleta térmica • <span class="font-semibold text-on-surface">M-482DFG</span></p>
+</div>
+</div>
+<div class="flex items-center gap-1.5 shrink-0">
+<button aria-label="Llamar al repartidor" class="w-10 h-10 rounded-full bg-surface-container-high text-primary flex items-center justify-center active:scale-95 transition-transform" onclick="alert('Conectando por llamada con Erick...')">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</button>
+<button aria-label="Mensaje directo" class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-sm active:scale-95 transition-transform" onclick="alert('Abriendo chat encriptado con Erick...')">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Vertical Interactive Timeline -->
+<section class="px-gutter my-space-sm">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="font-title-md text-title-md font-bold text-on-surface">Seguimiento del Pedido</h3>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/40 px-2.5 py-0.5 rounded-full font-semibold">Servidor en Línea</span>
+</div>
+<div class="relative pl-6 space-y-6">
+<!-- Connecting Line -->
+<div class="absolute left-2.5 top-2 bottom-3 w-0.5 bg-surface-container-high"></div>
+<!-- 1. Pedido Recibido -->
+<div class="relative flex items-start gap-space-sm">
+<div class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="font-title-md text-title-md font-semibold text-on-surface">Pedido Recibido</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">14:30 hrs</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Orden sincronizada y validada con bodega central.</p>
+</div>
+</div>
+<!-- 2. Selección y Pesaje -->
+<div class="relative flex items-start gap-space-sm">
+<div class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="font-title-md text-title-md font-semibold text-on-surface">Selección y Pesaje</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">14:55 hrs</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Bodega Zona 12. Frescos seleccionados con esmero.</p>
+<div class="mt-1.5 inline-flex items-center gap-1 bg-surface-container-high text-on-surface-variant text-label-sm font-label-sm px-2 py-0.5 rounded-md">
+<span class="material-symbols-outlined text-[13px] text-secondary">task_alt</span>
+              2 sustituciones aprobadas por ti
+            </div>
+</div>
+</div>
+<!-- 3. Empaque Refrigerado -->
+<div class="relative flex items-start gap-space-sm">
+<div class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="font-title-md text-title-md font-semibold text-on-surface">En Empaque Refrigerado</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">15:10 hrs</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Cadena de frío resguardada en bolsas térmicas biodegradables.</p>
+</div>
+</div>
+<!-- 4. En Camino (Active Pulse) -->
+<div class="relative flex items-start gap-space-sm">
+<div class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-md">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary-container"></span>
+</span>
+</div>
+<div class="flex-1 min-w-0 bg-surface-container-low p-2.5 rounded-lg">
+<div class="flex items-center justify-between">
+<h4 class="font-title-md text-title-md font-bold text-primary">En Camino con Repartidor</h4>
+<span class="font-label-sm text-label-sm text-primary font-bold">15:25 hrs</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Erick avanza por Calzada Atanasio Tzul hacia Zona 13.</p>
+</div>
+</div>
+<!-- 5. Entregado (Pending) -->
+<div class="relative flex items-start gap-space-sm opacity-50">
+<div class="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[13px]">schedule</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<h4 class="font-title-md text-title-md font-semibold text-on-surface">Entregado</h4>
+<span class="font-label-sm text-label-sm">Pendiente</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Recepción segura en puerta sin contacto.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contactless Safe QR Delivery Code Section -->
+<section class="px-gutter my-space-sm">
+<div class="bg-surface-container-high rounded-xl p-space-md flex flex-col items-center text-center shadow-sm">
+<div class="flex items-center gap-1.5 text-primary font-label-md text-label-md mb-1">
+<span class="material-symbols-outlined text-[18px]">qr_code_scanner</span>
+        Código de Entrega Seguro
+      </div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-space-sm">Muestra este código al recibir</h3>
+<!-- Tactile QR Container -->
+<div class="p-3 bg-surface-container-lowest rounded-xl shadow-sm flex flex-col items-center">
+<!-- SVG Generated QR Code Pattern -->
+<svg class="w-36 h-36" fill="none" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ffffff" height="100" width="100"></rect>
+<!-- Corner Marks -->
+<rect fill="#005131" height="24" rx="3" width="24" x="10" y="10"></rect>
+<rect fill="#ffffff" height="14" width="14" x="15" y="15"></rect>
+<rect fill="#005131" height="8" width="8" x="18" y="18"></rect>
+<rect fill="#005131" height="24" rx="3" width="24" x="66" y="10"></rect>
+<rect fill="#ffffff" height="14" width="14" x="71" y="15"></rect>
+<rect fill="#005131" height="8" width="8" x="74" y="18"></rect>
+<rect fill="#005131" height="24" rx="3" width="24" x="10" y="66"></rect>
+<rect fill="#ffffff" height="14" width="14" x="15" y="71"></rect>
+<rect fill="#005131" height="8" width="8" x="18" y="74"></rect>
+<!-- Abstract Data bits -->
+<circle cx="42" cy="18" fill="#005131" r="3"></circle>
+<circle cx="52" cy="18" fill="#006e25" r="2"></circle>
+<circle cx="48" cy="28" fill="#005131" r="3"></circle>
+<circle cx="40" cy="40" fill="#006e25" r="3"></circle>
+<circle cx="50" cy="45" fill="#005131" r="3.5"></circle>
+<circle cx="60" cy="40" fill="#005131" r="2"></circle>
+<circle cx="22" cy="48" fill="#005131" r="3"></circle>
+<circle cx="78" cy="48" fill="#006e25" r="3"></circle>
+<circle cx="45" cy="62" fill="#005131" r="3"></circle>
+<circle cx="55" cy="62" fill="#006e25" r="2.5"></circle>
+<circle cx="68" cy="72" fill="#005131" r="3"></circle>
+<circle cx="82" cy="72" fill="#005131" r="3"></circle>
+<circle cx="75" cy="85" fill="#006e25" r="3"></circle>
+<circle cx="45" cy="80" fill="#005131" r="3"></circle>
+</svg>
+<span class="mt-2 font-mono text-label-md font-bold tracking-widest text-primary">MV-8942-SEC</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-sm max-w-xs">Garantiza tu entrega sin contacto directo con el dispositivo del repartidor.</p>
+</div>
+</section>
+<!-- Collapsible Order Breakdown & Guatemala SAT FEL Invoice -->
+<section class="px-gutter my-space-sm">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Accordion Header -->
+<button class="w-full p-space-md flex items-center justify-between text-left active:bg-surface-container-low transition-colors" id="toggle-items-btn">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">shopping_basket</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md font-bold text-on-surface">5 Artículos de Mercado</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Frescos de temporada y despensa</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-price-md text-price-md font-bold text-primary">Q 195.25</span>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200" id="accordion-arrow">expand_more</span>
+</div>
+</button>
+<!-- Expandable Item List -->
+<div class="px-space-md pb-space-md space-y-space-sm" id="items-content">
+<div class="pt-space-xs border-t-0 space-y-3">
+<!-- Item 1 -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-space-sm min-w-0">
+<img class="w-10 h-10 rounded-lg object-cover shrink-0 bg-surface-container" data-alt="Fresh vibrant red organic tomatoes on a rustic wood board under sunny morning illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3G0a54GGe96FI-8xWkvI5Q1xhqW2SFEBHlvV0zxn6b3wxhU_M0nzel-F2EpPuub5zm13SWABBdChrLKvF7LXKxFd2-rJ47ilVVZ1KBGmb7681_gRv-ewDA6TzpKSgl7v9nAQ8qeG7w78clcTavmHqa4z9rcAbqR-HL-VCzTaC9f3yKvEEQSvGfldn9wZUllac7_sukFUVeN-AlNM2Kl1hj5ykQHiJoNO1T_FZlWjqFrYMZWUFhcMh"/>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Tomate Manzano Fresco</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">2.5 lb (Q 7.50/lb)</div>
+</div>
+</div>
+<span class="font-price-md text-price-md text-on-surface shrink-0">Q 18.75</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-space-sm min-w-0">
+<img class="w-10 h-10 rounded-lg object-cover shrink-0 bg-surface-container" data-alt="Ripe buttery avocados Hass freshly picked in Guatemala highlands, halved with rich green creamy texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK7ebL-GA2qMNPv8sF46Cf2DfikgmdkiukPxO6xSy1tomQ_4uVoN32tHbgdlMu49i2C-KTFWDYb-JN_mdDh-yrZyQxcvhl_Nyjm0wfN6iS6bleJv-um24sjPiTYNbu3HOigk9zGlwzOfeYyMojA3H7v1jqc43VfMK-BY73Y-eLgl7fFPceqRZxkd_44ciNsK76nKMOyl3M26DgX-ItcdfxBX_y1G8gqC6aY17KD4umuWwx-6TLfuqr"/>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Aguacate Hass Nacional</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Malla 4 unidades</div>
+</div>
+</div>
+<span class="font-price-md text-price-md text-on-surface shrink-0">Q 32.00</span>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-space-sm min-w-0">
+<img class="w-10 h-10 rounded-lg object-cover shrink-0 bg-surface-container" data-alt="Bundle of vibrant sweet yellow bananas from the south coast of Guatemala, fresh organic market style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkgMRwvqZ18bJnEdyI-JERS7PmLWnV6Z3S0uIaCY5di9oFUfM9SRIB8RdY-NQdIxmOv3PpqE_2sVeDmq4PRRA4MeDutEoq5z9eMm_pvB9L2xzUGTQ-eiZsXolbWsrP8FblscCSvAW-GQN0LGKWzCrB2l-i3RvwyPBhv8KQSw5CMFufd1hxRxJL8DwSSoT8iCmiJfq18NhJPqwOuK_aQavX_nE6mac9pFuq7VXfWAsO7jYGdIqKDDq5"/>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Banano Criollo Maduro</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Mano de 6 unidades</div>
+</div>
+</div>
+<span class="font-price-md text-price-md text-on-surface shrink-0">Q 12.50</span>
+</div>
+<!-- Item 4 -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-space-sm min-w-0">
+<img class="w-10 h-10 rounded-lg object-cover shrink-0 bg-surface-container" data-alt="Glass bottle of farm fresh whole milk with condensation, farm dairy freshness aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr2mu1zKBeGqPhWYFlwp_dWGApffzCIaldCui3HTF1mlpAxh8VA2--40q-np7PDebRnZy-Sturl6iakgtXvt4yrxno_Q_jIYllC31vMPSefxGjKN2dJkApPZIuUSsi5OOfG1_oADaqwv0UQTFJoBUylQkjK1pIy-L_AJl39EgJqQYnJAa5MjIL4CbTvz5zznYi4NxjmGibb6XZwsM0b14bQ3anK3gs8MguDIal415EBjokFI7fYdzE"/>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Leche Entera de Granja</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Envase de vidrio 1L</div>
+</div>
+</div>
+<span class="font-price-md text-price-md text-on-surface shrink-0">Q 22.00</span>
+</div>
+<!-- Item 5 -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-space-sm min-w-0">
+<img class="w-10 h-10 rounded-lg object-cover shrink-0 bg-surface-container" data-alt="Artisanal Guatemalan whole bean coffee bag from Antigua Guatemala on clean table setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaJoPGqDmhrN8wdrEWxDXf1yPFjhzq-BUTsyLD9f9ijiV43_HXrso_IyUSrho8JS8aORh-ZrZ_NaM5K-dR7o-UU2A_bNsm1ToNrDEVe6GLCwzhZRIOlO8z33xHxl46hgPsC--4cnZCPj_9OPZl2NXjidnLCmtXYoY8YqQPllGqBOIzJITq4WKdvoBpajaEeLPWbA682TfBbFhe5hQEVO4HvDTsr9-kxnbpZPOnvfOfjGh-MuE9dE3e"/>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Café de Altura Antigua 400g</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Tueste medio artesanal</div>
+</div>
+</div>
+<span class="font-price-md text-price-md text-on-surface shrink-0">Q 85.00</span>
+</div>
+</div>
+<!-- Totals summary table -->
+<div class="p-space-sm bg-surface-container-low rounded-lg space-y-1.5 mt-space-sm">
+<div class="flex justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>Subtotal</span>
+<span>Q 170.25</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>Tarifa de Entrega Refrigerada</span>
+<span>Q 25.00</span>
+</div>
+<div class="flex justify-between font-title-md text-title-md font-bold text-on-surface pt-1">
+<span>Total Pagado</span>
+<span class="text-primary font-price-lg text-price-lg">Q 195.25</span>
+</div>
+</div>
+</div>
+<!-- Electronic Invoice FEL SAT Guatemala Button -->
+<div class="p-space-md bg-surface-container-low/50">
+<button class="w-full h-12 rounded-full bg-surface-container-lowest text-primary font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-sm hover:bg-surface-container-high transition-colors active:scale-[0.99]" onclick="downloadFEL()">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+          Descargar Factura Electrónica FEL (SAT)
+        </button>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant mt-2">DTE Serie: 79B321 • Autorización SAT Guatemala</p>
+</div>
+</div>
+</section>
+<!-- Help & Support Touchpoint -->
+<section class="px-gutter mt-space-sm text-center">
+<div class="inline-flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+      ¿Tienes algún cambio de último momento? 
+      <a class="font-semibold text-primary underline" href="javascript:void(0)" onclick="alert('Atención al cliente Mercado Verde: Conectando vía WhatsApp...')">Soporte WhatsApp</a>
+</div>
+</section>
+</div>
+<script>
+  // Simple collapsible interaction for order items
+  const toggleBtn = document.getElementById('toggle-items-btn');
+  const itemsContent = document.getElementById('items-content');
+  const arrow = document.getElementById('accordion-arrow');
+
+  if (toggleBtn && itemsContent && arrow) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = itemsContent.classList.contains('hidden');
+      if (isHidden) {
+        itemsContent.classList.remove('hidden');
+        arrow.style.transform = 'rotate(0deg)';
+      } else {
+        itemsContent.classList.add('hidden');
+        arrow.style.transform = 'rotate(-90deg)';
+      }
+    });
+  }
+
+  // Simulated live counter countdown
+  let minutesLeft = 18;
+  const etaEl = document.getElementById('eta-counter');
+  setInterval(() => {
+    if (minutesLeft > 3) {
+      minutesLeft -= 1;
+      if (etaEl) etaEl.textContent = minutesLeft;
+    }
+  }, 45000);
+
+  // Recenter map button feedback
+  const recenterBtn = document.getElementById('recenter-btn');
+  if (recenterBtn) {
+    recenterBtn.addEventListener('click', () => {
+      recenterBtn.classList.add('scale-90');
+      setTimeout(() => recenterBtn.classList.remove('scale-90'), 200);
+    });
+  }
+
+  // Download FEL invoice action
+  function downloadFEL() {
+    alert('Descargando Factura Electrónica DTE-FEL (PDF certificado por SAT Guatemala)...');
+  }
+</script></main></body></html>

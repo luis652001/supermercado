@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary": "#006e25", "on-secondary-container": "#007327", "on-primary-fixed-variant": "#005232", "on-surface-variant": "#3f4942", "on-background": "#121c2a", "secondary-container": "#80f98b", "on-surface": "#121c2a", "on-tertiary-fixed-variant": "#3e4943", "outline": "#6f7a71", "on-secondary-fixed": "#002106", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#00531a", "surface": "#f8f9ff", "inverse-primary": "#88d7a8", "error": "#ba1a1a", "tertiary-fixed": "#d9e6dd", "on-tertiary-container": "#cfdbd3", "surface-variant": "#d9e3f6", "surface-dim": "#d0dbed", "tertiary-fixed-dim": "#bdcac1", "inverse-on-surface": "#eaf1ff", "surface-container-low": "#eff4ff", "surface-container-high": "#dee9fc", "primary": "#005131", "on-tertiary": "#ffffff", "tertiary-container": "#55615a", "on-primary": "#ffffff", "surface-bright": "#f8f9ff", "primary-fixed-dim": "#88d7a8", "secondary-fixed-dim": "#66df75", "error-container": "#ffdad6", "on-tertiary-fixed": "#131e19", "outline-variant": "#bfc9c0", "on-error": "#ffffff", "surface-tint": "#186c45", "primary-container": "#176b45", "secondary-fixed": "#83fc8e", "surface-container-lowest": "#ffffff", "on-primary-fixed": "#002111", "on-primary-container": "#99e9b9", "inverse-surface": "#27313f", "tertiary": "#3e4943", "surface-container": "#e6eeff", "surface-container-highest": "#d9e3f6", "background": "#f8f9ff", "primary-fixed": "#a4f4c3", "on-secondary": "#ffffff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-lg": "1.5rem", "gutter": "1rem", "margin-desktop": "3rem", "space-md": "1rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "margin-tablet": "2rem", "margin": "1rem", "gutter-desktop": "1.5rem", "space-xl": "2.5rem" }, "fontFamily": { "label-md": ["Plus Jakarta Sans"], "price-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "price-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"] }, "fontSize": { "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "price-md": ["16px", { "lineHeight": "20px", "fontWeight": "700" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "price-lg": ["20px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_12px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0 flex-1"><img alt="Mercado Verde Logo" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UvaduwHXb9qIUyhOO5Efl1OaH3zmQ0rCmDnDU_N-Ozfwk4fxyPXXyat_WxQxESlVtvw_GgYmjxZfO66Z9wekYL0M6SPobs6ov05lD9lvnZsoMHwEuVAH9inVuwcuWOblimn9iMdVqt554OUQEjULu4t3HdvnXhMXAg1v5hmNot_-ddzKzuDPR91IfhgJbr5r2kJUQ8CJfZPKq0Q14_szJwfj8LyJcTfZJa4L2F_8ZxVqzOlRZOlwNY9go"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-1"><span class="font-label-lg text-label-lg font-bold text-primary truncate leading-none">Mercado Verde</span><span class="font-label-sm text-label-sm text-on-surface-variant font-normal leading-none hidden sm:inline">• Panel Operativo</span></div><div class="flex items-center gap-1 mt-0.5 text-on-surface-variant"><span class="material-symbols-outlined text-[15px] text-primary shrink-0">location_on</span><span class="font-label-sm text-label-sm truncate font-medium">Zona 10, Ciudad de Guatemala</span></div></div></div><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Notificaciones" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors relative"><span class="material-symbols-outlined text-[24px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface"></span></button><div class="w-11 h-11 flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWNQt4-qInH-2COWUfAh9mo63ZUlnKLIowmAVsnJReNMyQd-UsZAEZXyF7atcslBp_tbPlAlSJ9qHMiR-it3GuFVOXyE497rSDNlVo4yT4CbW110_-NZvFupW5OsBZAX-rKJ5SaS1M4pl4A8SUA1AsPXsCMqxff1ilp92spgGkXWGCOmN41scdYLY4fwGFF-vXYxdSswF6Dfs_IBxBMxt6MhzK6RH-mXZGCvbxVhKtmUq-wKV9jWW_"/></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full pb-safe">
+<!-- Top Admin Context Banner -->
+<div class="px-gutter pt-space-sm pb-space-sm bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse shrink-0"></span>
+<p class="font-headline-sm text-headline-sm text-primary font-bold truncate">Panel Operativo en Vivo</p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+        Supervisor (Min. Privilegio)
+      </span>
+</div>
+<!-- Live Window Picker & Refresh Action -->
+<div class="flex items-center justify-between gap-space-sm mt-1 bg-surface-container-lowest p-2 rounded-xl shadow-sm">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Franja Horaria Actual</span>
+<span class="font-label-lg text-label-lg text-on-surface font-bold truncate">Hoy • 14:00 - 18:00 hrs</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 shrink-0">
+<button aria-label="Sincronizar datos" class="h-8 px-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary flex items-center gap-1 transition-all active:scale-95" id="btn-sync" onclick="simulateSync()">
+<span class="material-symbols-outlined text-[16px]" id="sync-icon">sync</span>
+<span class="font-label-sm text-label-sm hidden sm:inline">Refrescar</span>
+</button>
+<button class="h-8 px-2.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm flex items-center gap-1 shadow-sm active:scale-95 transition-all" onclick="triggerExportModal()">
+<span class="material-symbols-outlined text-[16px]">ios_share</span>
+<span class="hidden xs:inline">Exportar</span>
+</button>
+</div>
+</div>
+</div>
+<div class="px-gutter flex flex-col gap-space-md mt-space-sm">
+<!-- KPI Grid (Mobile-friendly 2x2 Bento) -->
+<section class="grid grid-cols-2 gap-space-sm">
+<!-- Metric 1: Ventas del Día -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Ventas del Día</span>
+<span class="w-6 h-6 rounded-full bg-secondary/10 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[15px]">payments</span>
+</span>
+</div>
+<div class="mt-2">
+<p class="font-price-lg text-price-lg text-primary tracking-tight">Q 28,450.00</p>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-secondary text-[14px]">trending_up</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">+14.2%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">vs ayer</span>
+</div>
+</div>
+</div>
+<!-- Metric 2: Pedidos Activos -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Pedidos Activos</span>
+<span class="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[15px]">local_mall</span>
+</span>
+</div>
+<div class="mt-2">
+<div class="flex items-baseline gap-1">
+<p class="font-price-lg text-price-lg text-on-surface font-extrabold">48</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant">órdenes</span>
+</div>
+<!-- Mini distribution bar -->
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden flex mt-1.5">
+<div class="bg-primary h-full" style="width: 25%" title="12 en picking"></div>
+<div class="bg-secondary h-full" style="width: 17%" title="8 en ruta"></div>
+<div class="bg-inverse-primary h-full" style="width: 58%" title="28 entregados"></div>
+</div>
+<p class="font-label-sm text-[10px] text-on-surface-variant mt-1 truncate">12 pick • 8 ruta • 28 listos</p>
+</div>
+</div>
+<!-- Metric 3: Cumplimiento de Franja -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Cumpl. Franja</span>
+<span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[15px]">timer</span>
+</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<div>
+<p class="font-price-lg text-price-lg text-on-surface font-extrabold">96.8%</p>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Meta &gt;95% OK</span>
+</div>
+<svg class="w-9 h-9 shrink-0 -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="96.8, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+</div>
+</div>
+<!-- Metric 4: Sustitución Aceptada -->
+<div class="bg-surface-container-lowest p-3.5 rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Tasa Sustitución</span>
+<span class="w-6 h-6 rounded-full bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[15px]">swap_horiz</span>
+</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<div>
+<p class="font-price-lg text-price-lg text-on-surface font-extrabold">94.0%</p>
+<span class="font-label-sm text-label-sm text-primary font-bold">Frescura avalada</span>
+</div>
+<svg class="w-9 h-9 shrink-0 -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="94, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+</div>
+</div>
+</section>
+<!-- Operational Filter Rail -->
+<section class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Cola de Pedidos</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Despacho en tiempo real</span>
+</div>
+<!-- Filter Badges Rail -->
+<div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none text-nowrap">
+<button class="filter-btn px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-bold shadow-sm transition-all" id="filter-todos" onclick="filterQueue('todos')">
+          Todos (48)
+        </button>
+<button class="filter-btn px-3.5 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md font-medium hover:bg-surface-container shadow-sm transition-all flex items-center gap-1.5" id="filter-por-preparar" onclick="filterQueue('por-preparar')">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+          Por Preparar (6)
+        </button>
+<button class="filter-btn px-3.5 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md font-medium hover:bg-surface-container shadow-sm transition-all flex items-center gap-1.5" id="filter-en-picking" onclick="filterQueue('en-picking')">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+          En Picking (6)
+        </button>
+<button class="filter-btn px-3.5 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md font-medium hover:bg-surface-container shadow-sm transition-all" id="filter-listos" onclick="filterQueue('listos')">
+          Listos para Ruta (4)
+        </button>
+<button class="filter-btn px-3.5 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md font-medium hover:bg-surface-container shadow-sm transition-all flex items-center gap-1.5" id="filter-en-transito" onclick="filterQueue('en-transito')">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+          En Tránsito (8)
+        </button>
+</div>
+</section>
+<!-- Real-time Order Cards Queue -->
+<div class="flex flex-col gap-space-sm" id="order-list">
+<!-- Item 1: Pedido #MV-8942 (En Ruta) -->
+<article class="order-card bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3 relative overflow-hidden transition-all" data-status="en-transito">
+<div class="flex items-start justify-between gap-2">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md font-bold text-primary">#MV-8942</span>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary/15 text-secondary font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+                En Ruta
+              </span>
+</div>
+<div class="flex items-center gap-2 mt-1 text-on-surface-variant font-label-md text-label-md">
+<span class="flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[15px] text-primary">pin_drop</span>
+                Zona 13
+              </span>
+<span>•</span>
+<span class="flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+                15:00 - 17:00
+              </span>
+</div>
+</div>
+<span class="font-price-md text-price-md font-bold text-on-surface">Q 195.25</span>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-[11px] font-bold">EM</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Repartidor asignado</span>
+<span class="font-body-md text-body-md font-semibold text-on-surface truncate">Erick Morales • Moto 04</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px]">two_wheeler</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Estimado entrega: 16:15 hrs</span>
+<button class="px-3 py-1.5 rounded-full bg-surface-container-high hover:bg-surface-container text-primary font-label-md text-label-md font-bold flex items-center gap-1 transition-colors" onclick="toggleDetails('detail-8942')">
+<span>Ver detalles</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+<!-- Collapsible detail pane -->
+<div class="hidden mt-2 pt-2 bg-surface-container-low/60 -mx-4 -mb-4 p-4 rounded-b-xl flex flex-col gap-2" id="detail-8942">
+<p class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Contenido del carrito (4 productos):</p>
+<p class="font-body-sm text-body-sm text-on-surface">• 1x Mano Plátano Maduro de Escuintla (Q 18.00)<br/>• 2x Bolsa Espinaca Orgánica 500g (Q 32.00)<br/>• 1x Leche Entera Pasturizada 1L (Q 19.50)<br/>• 1x Abarrotes Varios (Q 125.75)</p>
+<div class="flex justify-end gap-2 mt-1">
+<button class="px-3 py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm font-semibold">Contactar Repartidor</button>
+</div>
+</div>
+</article>
+<!-- Item 2: Pedido #MV-8943 (En Picking + Alerta de sustitución) -->
+<article class="order-card bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3 relative overflow-hidden transition-all" data-status="en-picking">
+<div class="flex items-start justify-between gap-2">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md font-bold text-primary">#MV-8943</span>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed/50 text-on-secondary-fixed-variant font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">shopping_cart_checkout</span>
+                En Picking
+              </span>
+</div>
+<div class="flex items-center gap-2 mt-1 text-on-surface-variant font-label-md text-label-md">
+<span class="flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[15px] text-primary">pin_drop</span>
+                Zona 10
+              </span>
+<span>•</span>
+<span class="flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+                15:00 - 17:00
+              </span>
+</div>
+</div>
+<span class="font-price-md text-price-md font-bold text-on-surface">Q 412.00</span>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-sm text-[11px] font-bold">SR</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Picker en piso</span>
+<span class="font-body-md text-body-md font-semibold text-on-surface truncate">Sofía Ramos • Pasillo Frescos</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Progreso: 8/9</span>
+</div>
+<!-- Operational Action Alert: Sustitución -->
+<div class="p-3 rounded-xl bg-error-container/40 flex flex-col gap-2 transition-all" id="alert-substitution">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[18px]">crisis_alert</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-error font-bold">Requiere sustitución de Aguacate Hass</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Existencia agotada. Sustituto sugerido: Aguacate Booth Selección (+Q 2.50 sin recargo al cliente)</span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-2 mt-1">
+<button class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold" onclick="rejectSubstitution()">
+              Rechazar
+            </button>
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-bold shadow-sm active:scale-95 transition-transform flex items-center gap-1" onclick="approveSubstitution()">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+              Aprobar Sustitución
+            </button>
+</div>
+</div>
+</article>
+<!-- Item 3: Pedido #MV-8944 (Por Preparar) -->
+<article class="order-card bg-surface-container-lowest rounded-xl p-4 shadow-sm flex flex-col gap-3 relative overflow-hidden transition-all" data-status="por-preparar">
+<div class="flex items-start justify-between gap-2">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md font-bold text-primary">#MV-8944</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                Por Preparar
+              </span>
+</div>
+<div class="flex items-center gap-2 mt-1 text-on-surface-variant font-label-md text-label-md">
+<span class="flex items-center gap-0.5 truncate">
+<span class="material-symbols-outlined text-[15px] text-primary">pin_drop</span>
+                Carretera a El Salvador
+              </span>
+<span>•</span>
+<span class="flex items-center gap-0.5 shrink-0">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+                17:00 - 19:00
+              </span>
+</div>
+</div>
+<span class="font-price-md text-price-md font-bold text-on-surface">Q 680.50</span>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-7 h-7 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[15px]">person_add</span>
+</span>
+<span class="font-label-md text-label-md text-on-surface-variant italic">Sin picker asignado</span>
+</div>
+<span class="font-label-sm text-label-sm text-error font-bold">14 ítems (Cadena Fría)</span>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Llegada al hub: hace 8 min</span>
+<button class="px-4 py-1.5 rounded-full bg-secondary text-on-secondary font-label-md text-label-md font-bold shadow-sm active:scale-95 transition-all flex items-center gap-1" id="btn-assign-8944" onclick="assignPicker('8944')">
+<span class="material-symbols-outlined text-[16px]">how_to_reg</span>
+<span>Asignar Picker</span>
+</button>
+</div>
+</article>
+</div>
+<!-- Export Action Banner -->
+<section class="bg-gradient-to-r from-primary to-primary-container p-4 rounded-xl text-on-primary flex items-center justify-between shadow-md">
+<div class="flex flex-col min-w-0 pr-2">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-primary truncate">Cierre y Auditoría</h3>
+<p class="font-body-sm text-body-sm text-on-primary-container truncate">Descarga consolidada para contabilidad y logística</p>
+</div>
+<button class="px-3.5 py-2 rounded-full bg-surface-container-lowest text-primary font-label-md text-label-md font-bold shrink-0 shadow-sm active:scale-95 transition-all flex items-center gap-1.5" onclick="triggerExportModal()">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+        Reporte (PDF/Excel)
+      </button>
+</section>
+<!-- Technical Ops Status Ticker -->
+<footer class="mt-2 p-3 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-wider">Telemetría de Infraestructura</span>
+</div>
+<span class="font-label-sm text-[10px] text-on-surface-variant">Cluster GUA-01</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 font-label-sm text-label-sm">
+<div class="p-2 rounded-lg bg-surface-container-low flex flex-col">
+<span class="text-on-surface-variant text-[10px]">Microservicios</span>
+<span class="font-bold text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> 100% OK
+          </span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-low flex flex-col">
+<span class="text-on-surface-variant text-[10px]">Redis Cache</span>
+<span class="font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">speed</span> 2ms Latencia
+          </span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-low flex flex-col">
+<span class="text-on-surface-variant text-[10px]">MariaDB Cluster</span>
+<span class="font-bold text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">sync_alt</span> Sincronizado
+          </span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-low flex flex-col">
+<span class="text-on-surface-variant text-[10px]">WAF / OWASP</span>
+<span class="font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">shield</span> Bloqueo Activo
+          </span>
+</div>
+</div>
+</footer>
+</div>
+<!-- Interactive Export Toast / Modal Mock -->
+<div class="fixed bottom-20 left-4 right-4 bg-inverse-surface text-inverse-on-surface p-4 rounded-xl shadow-xl flex items-center justify-between gap-3 transform translate-y-32 transition-transform duration-300 z-50" id="export-toast">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-secondary-fixed text-[22px]">download_done</span>
+<div class="flex flex-col min-w-0">
+<p class="font-label-md text-label-md font-bold truncate">Reporte Generado con Éxito</p>
+<p class="font-body-sm text-[11px] text-inverse-on-surface/80 truncate">Corte_Operativo_14-18hrs.xlsx (48 registros)</p>
+</div>
+</div>
+<button class="px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold shrink-0" onclick="dismissExportToast()">
+      Abrir
+    </button>
+</div>
+</div>
+<script>
+  function toggleDetails(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.toggle('hidden');
+    }
+  }
+
+  function filterQueue(status) {
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+      btn.classList.remove('bg-primary', 'text-on-primary');
+      btn.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+    });
+
+    const activeBtn = document.getElementById('filter-' + status);
+    if (activeBtn) {
+      activeBtn.classList.add('bg-primary', 'text-on-primary');
+      activeBtn.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+    }
+
+    const cards = document.querySelectorAll('.order-card');
+    cards.forEach(card => {
+      if (status === 'todos' || card.getAttribute('data-status') === status) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function approveSubstitution() {
+    const alertBox = document.getElementById('alert-substitution');
+    if (alertBox) {
+      alertBox.className = 'p-3 rounded-xl bg-secondary-container/40 flex items-center justify-between transition-all';
+      alertBox.innerHTML = `
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+          <span class="font-label-md text-label-md text-on-surface font-bold">Sustitución de Aguacate Aprobada por Supervisor</span>
+        </div>
+        <span class="font-label-sm text-label-sm text-secondary font-bold">Notificado a Sofía R.</span>
+      `;
+    }
+  }
+
+  function rejectSubstitution() {
+    const alertBox = document.getElementById('alert-substitution');
+    if (alertBox) {
+      alertBox.className = 'p-3 rounded-xl bg-surface-container-high flex items-center justify-between transition-all';
+      alertBox.innerHTML = `
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">remove_shopping_cart</span>
+          <span class="font-label-md text-label-md text-on-surface-variant font-bold">Ítem descartado sin reemplazo</span>
+        </div>
+      `;
+    }
+  }
+
+  function assignPicker(orderId) {
+    const btn = document.getElementById('btn-assign-' + orderId);
+    if (btn) {
+      btn.innerHTML = `<span class="material-symbols-outlined text-[16px]">check</span> Asignado a Carlos T.`;
+      btn.className = "px-3.5 py-1.5 rounded-full bg-surface-container-high text-primary font-label-md text-label-md font-bold shadow-none cursor-default";
+      btn.onclick = null;
+    }
+  }
+
+  function simulateSync() {
+    const icon = document.getElementById('sync-icon');
+    if (icon) {
+      icon.classList.add('animate-spin');
+      setTimeout(() => {
+        icon.classList.remove('animate-spin');
+      }, 700);
+    }
+  }
+
+  function triggerExportModal() {
+    const toast = document.getElementById('export-toast');
+    if (toast) {
+      toast.classList.remove('translate-y-32');
+      setTimeout(() => {
+        dismissExportToast();
+      }, 4000);
+    }
+  }
+
+  function dismissExportToast() {
+    const toast = document.getElementById('export-toast');
+    if (toast) {
+      toast.classList.add('translate-y-32');
+    }
+  }
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(31,41,55,0.08)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="inicio" href="#"><span class="material-symbols-outlined text-[24px]">storefront</span><span class="font-label-sm text-label-sm mt-0.5">Inicio</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="categorias" href="#"><span class="material-symbols-outlined text-[24px]">grid_view</span><span class="font-label-sm text-label-sm mt-0.5">Categorías</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors relative" data-path="carrito" href="#"><div class="relative flex items-center justify-center"><span class="material-symbols-outlined text-[24px]">shopping_bag</span><span class="absolute -top-1 -right-2 min-w-[18px] h-[18px] px-1 bg-secondary text-on-secondary font-label-sm text-[10px] rounded-full flex items-center justify-center font-bold">3</span></div><span class="font-label-sm text-label-sm mt-0.5">Carrito</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="pedidos-y-tracking" href="#"><span class="material-symbols-outlined text-[24px]">local_shipping</span><span class="font-label-sm text-label-sm mt-0.5">Pedidos</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-12 transition-colors text-primary font-bold" data-path="panel-operativo" href="#"><span class="material-symbols-outlined text-[24px]">query_stats</span><span class="font-label-sm text-label-sm mt-0.5">Operaciones</span></a></div></nav></body></html>

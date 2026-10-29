@@ -1,0 +1,327 @@
+# Plataforma E-Commerce distribuida — Supermercado en línea (Opción B)
+# Uso: php scripts/generar-env.php  y luego  docker compose up --build -d
+#
+# Ninguna base de datos ni Redis publica puertos al host (sin "ports:"):
+# solo el API Gateway es accesible desde fuera.
+
+name: supermercado
+
+x-php-service: &php-service
+  restart: unless-stopped
+  security_opt:
+    - no-new-privileges:true
+  mem_limit: 256m
+  cpu_shares: 512
+  networks:
+    - backend
+
+x-jwt-env: &jwt-env
+  REDIS_HOST: redis
+  REDIS_PASSWORD: ${REDIS_PASSWORD:?Falta REDIS_PASSWORD en .env}
+  JWT_SECRET: ${JWT_SECRET:?Falta JWT_SECRET en .env}
+  JWT_SERVICE_SECRET: ${JWT_SERVICE_SECRET:?Falta JWT_SERVICE_SECRET en .env}
+  AUDIT_SERVICE_URL: http://security-audit-service:8086
+
+x-mariadb-healthcheck: &mariadb-healthcheck
+  test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+  interval: 10s
+  timeout: 5s
+  retries: 10
+  start_period: 30s
+
+services:
+  gateway:
+    image: nginx:1.27-alpine
+    container_name: gateway
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./gateway/proxy.conf:/etc/nginx/proxy.conf:ro
+      - ./gateway/html:/usr/share/nginx/html:ro
+    depends_on:
+      - auth-service
+      - catalogo-service
+      - pedidos-service
+      - pagos-service
+      - notificaciones-service
+      - security-audit-service
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 128m
+    cpu_shares: 512
+    networks:
+      - frontend
+      - backend
+
+  auth-service:
+    <<: *php-service
+    container_name: auth-service
+    build:
+      context: ./services
+      dockerfile: php-service.Dockerfile
+      args:
+        SERVICE: auth-service
+        PORT: "8081"
+    environment:
+      <<: *jwt-env
+      SERVICE_NAME: auth-service
+      DB_HOST: mariadb-master
+      DB_NAME: auth_db
+      DB_USER: ${AUTH_DB_USER:?Falta AUTH_DB_USER en .env}
+      DB_PASSWORD: ${AUTH_DB_PASSWORD:?Falta AUTH_DB_PASSWORD en .env}
+      ADMIN_NOMBRE: ${ADMIN_NOMBRE:-Administrador}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?Falta ADMIN_EMAIL en .env}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Falta ADMIN_PASSWORD en .env}
+    depends_on:
+      mariadb-master:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  catalogo-service:
+    <<: *php-service
+    container_name: catalogo-service
+    build:
+      context: ./services
+      dockerfile: php-service.Dockerfile
+      args:
+        SERVICE: catalogo-service
+        PORT: "8082"
+    environment:
+      <<: *jwt-env
+      SERVICE_NAME: catalogo-service
+      DB_HOST: mariadb-master
+      DB_READ_HOST: mariadb-slave
+      DB_NAME: catalogo_db
+      DB_USER: ${CATALOGO_DB_USER:?Falta CATALOGO_DB_USER en .env}
+      DB_PASSWORD: ${CATALOGO_DB_PASSWORD:?Falta CATALOGO_DB_PASSWORD en .env}
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-}
+      PAGOS_SERVICE_URL: http://pagos-service:8084
+    depends_on:
+      mariadb-master:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  pedidos-service:
+    <<: *php-service
+    container_name: pedidos-service
+    build:
+      context: ./services
+      dockerfile: php-service.Dockerfile
+      args:
+        SERVICE: pedidos-service
+        PORT: "8083"
+    environment:
+      <<: *jwt-env
+      SERVICE_NAME: pedidos-service
+      DB_HOST: mariadb-master
+      DB_NAME: pedidos_db
+      DB_USER: ${PEDIDOS_DB_USER:?Falta PEDIDOS_DB_USER en .env}
+      DB_PASSWORD: ${PEDIDOS_DB_PASSWORD:?Falta PEDIDOS_DB_PASSWORD en .env}
+      CATALOGO_SERVICE_URL: http://catalogo-service:8082
+      PAGOS_SERVICE_URL: http://pagos-service:8084
+    depends_on:
+      mariadb-master:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Sale a Internet (Stripe) por la red frontend; la backend es interna.
+  pagos-service:
+    <<: *php-service
+    container_name: pagos-service
+    build:
+      context: ./services
+      dockerfile: php-service.Dockerfile
+      args:
+        SERVICE: pagos-service
+        PORT: "8084"
+    environment:
+      <<: *jwt-env
+      SERVICE_NAME: pagos-service
+      DB_HOST: mariadb-master
+      DB_NAME: pagos_db
+      DB_USER: ${PAGOS_DB_USER:?Falta PAGOS_DB_USER en .env}
+      DB_PASSWORD: ${PAGOS_DB_PASSWORD:?Falta PAGOS_DB_PASSWORD en .env}
+      PEDIDOS_SERVICE_URL: http://pedidos-service:8083
+      NOTIFICACIONES_SERVICE_URL: http://notificaciones-service:8085
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost}
+    depends_on:
+      mariadb-master:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      pedidos-service:
+        condition: service_started
+      notificaciones-service:
+        condition: service_started
+    networks:
+      - frontend
+      - backend
+
+  notificaciones-service:
+    <<: *php-service
+    container_name: notificaciones-service
+    build:
+      context: ./services
+      dockerfile: php-service.Dockerfile
+      args:
+        SERVICE: notificaciones-service
+        PORT: "8085"
+    environment:
+      <<: *jwt-env
+      SERVICE_NAME: notificaciones-service
+      EMAILJS_SERVICE_ID: ${EMAILJS_SERVICE_ID:-}
+      EMAILJS_TEMPLATE_ID: ${EMAILJS_TEMPLATE_ID:-}
+      EMAILJS_PUBLIC_KEY: ${EMAILJS_PUBLIC_KEY:-}
+      EMAILJS_PRIVATE_KEY: ${EMAILJS_PRIVATE_KEY:-}
+      OPENWEATHER_API_KEY: ${OPENWEATHER_API_KEY:-}
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - frontend
+      - backend
+
+  security-audit-service:
+    <<: *php-service
+    container_name: security-audit-service
+    build:
+      context: ./services
+      dockerfile: php-service.Dockerfile
+      args:
+        SERVICE: security-audit-service
+        PORT: "8086"
+    environment:
+      <<: *jwt-env
+      SERVICE_NAME: security-audit-service
+      DB_HOST: mariadb-audit
+      DB_NAME: audit_db
+      DB_USER: ${AUDIT_DB_USER:?Falta AUDIT_DB_USER en .env}
+      DB_PASSWORD: ${AUDIT_DB_PASSWORD:?Falta AUDIT_DB_PASSWORD en .env}
+    depends_on:
+      mariadb-audit:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  mariadb-master:
+    build: ./db/master
+    container_name: mariadb-master
+    restart: unless-stopped
+    command:
+      - --server-id=1
+      - --log-bin=mysql-bin
+      - --binlog-format=ROW
+      - --log-slave-updates=ON
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Falta DB_ROOT_PASSWORD en .env}
+      MARIADB_REPLICATION_USER: ${REPLICATION_USER:?Falta REPLICATION_USER en .env}
+      MARIADB_REPLICATION_PASSWORD: ${REPLICATION_PASSWORD:?Falta REPLICATION_PASSWORD en .env}
+      AUTH_DB_USER: ${AUTH_DB_USER}
+      AUTH_DB_PASSWORD: ${AUTH_DB_PASSWORD}
+      CATALOGO_DB_USER: ${CATALOGO_DB_USER}
+      CATALOGO_DB_PASSWORD: ${CATALOGO_DB_PASSWORD}
+      PEDIDOS_DB_USER: ${PEDIDOS_DB_USER}
+      PEDIDOS_DB_PASSWORD: ${PEDIDOS_DB_PASSWORD}
+      PAGOS_DB_USER: ${PAGOS_DB_USER}
+      PAGOS_DB_PASSWORD: ${PAGOS_DB_PASSWORD}
+    volumes:
+      - master_data:/var/lib/mysql
+    healthcheck: *mariadb-healthcheck
+    mem_limit: 512m
+    cpu_shares: 1024
+    networks:
+      - backend
+
+  # Réplica de solo lectura: recibe todos los cambios del Master por binlog (GTID).
+  mariadb-slave:
+    image: mariadb:10.6
+    container_name: mariadb-slave
+    restart: unless-stopped
+    command:
+      - --server-id=2
+      - --read-only=ON
+      - --relay-log=relay-bin
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_SLAVE_ROOT_PASSWORD:?Falta DB_SLAVE_ROOT_PASSWORD en .env}
+      MARIADB_MASTER_HOST: mariadb-master
+      MARIADB_REPLICATION_USER: ${REPLICATION_USER}
+      MARIADB_REPLICATION_PASSWORD: ${REPLICATION_PASSWORD}
+      MARIADB_HEALTHCHECK_GRANTS: REPLICA MONITOR
+    volumes:
+      - slave_data:/var/lib/mysql
+    healthcheck:
+      <<: *mariadb-healthcheck
+      test: ["CMD", "healthcheck.sh", "--connect", "--replication"]
+    depends_on:
+      mariadb-master:
+        condition: service_healthy
+    mem_limit: 384m
+    cpu_shares: 512
+    networks:
+      - backend
+
+  mariadb-audit:
+    build: ./db/audit
+    container_name: mariadb-audit
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${AUDIT_DB_ROOT_PASSWORD:?Falta AUDIT_DB_ROOT_PASSWORD en .env}
+      AUDIT_DB_USER: ${AUDIT_DB_USER}
+      AUDIT_DB_PASSWORD: ${AUDIT_DB_PASSWORD}
+    volumes:
+      - audit_data:/var/lib/mysql
+    healthcheck: *mariadb-healthcheck
+    mem_limit: 384m
+    cpu_shares: 512
+    networks:
+      - backend
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --requirepass
+      - ${REDIS_PASSWORD}
+      - --maxmemory
+      - 128mb
+      - --maxmemory-policy
+      - noeviction
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" --no-auth-warning ping | grep -q PONG"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    mem_limit: 192m
+    cpu_shares: 512
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
+    internal: true
+
+volumes:
+  master_data:
+  slave_data:
+  audit_data:
+  redis_data:

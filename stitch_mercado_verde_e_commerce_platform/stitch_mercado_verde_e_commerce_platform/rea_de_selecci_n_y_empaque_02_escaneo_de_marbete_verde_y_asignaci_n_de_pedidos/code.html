@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;min-height:100%;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-surface-variant": "#3f4942", "on-secondary-fixed": "#002106", "surface-container-high": "#dee9fc", "surface-variant": "#d9e3f6", "on-primary-fixed": "#002111", "inverse-on-surface": "#eaf1ff", "on-primary-container": "#99e9b9", "on-tertiary-container": "#cfdbd3", "inverse-primary": "#88d7a8", "outline": "#6f7a71", "error-container": "#ffdad6", "surface-tint": "#186c45", "tertiary": "#3e4943", "background": "#f8f9ff", "tertiary-fixed": "#d9e6dd", "on-secondary": "#ffffff", "on-tertiary": "#ffffff", "secondary-container": "#80f98b", "on-primary-fixed-variant": "#005232", "surface-dim": "#d0dbed", "surface-bright": "#f8f9ff", "primary-container": "#176b45", "tertiary-container": "#55615a", "on-surface": "#121c2a", "on-primary": "#ffffff", "on-tertiary-fixed-variant": "#3e4943", "on-error-container": "#93000a", "surface-container-low": "#eff4ff", "on-tertiary-fixed": "#131e19", "outline-variant": "#bfc9c0", "on-error": "#ffffff", "primary-fixed-dim": "#88d7a8", "surface-container": "#e6eeff", "inverse-surface": "#27313f", "primary": "#005131", "secondary-fixed-dim": "#66df75", "tertiary-fixed-dim": "#bdcac1", "primary-fixed": "#a4f4c3", "surface": "#f8f9ff", "on-secondary-container": "#007327", "error": "#ba1a1a", "secondary-fixed": "#83fc8e", "on-background": "#121c2a", "on-secondary-fixed-variant": "#00531a", "secondary": "#006e25", "surface-container-highest": "#d9e3f6", "surface-container-lowest": "#ffffff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "2.5rem", "margin-desktop": "3rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "margin": "1rem", "margin-tablet": "2rem", "space-md": "1rem", "gutter": "1rem", "space-xs": "0.25rem", "gutter-desktop": "1.5rem" }, "fontFamily": { "headline-md": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "price-lg": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "price-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"] }, "fontSize": { "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "price-lg": ["20px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "price-md": ["16px", { "lineHeight": "20px", "fontWeight": "700" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Volver" class="min-w-[44px] min-h-[44px] -ml-space-xs flex items-center justify-center rounded-full text-on-surface hover:text-primary active:scale-95 transition-all" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><h1 class="font-title-md text-title-md text-on-surface truncate">Área De Selección Y Empaque #02   Escaneo De Marbete Verde Y Asignación De Pedidos</h1><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm shrink-0"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>Activo</span></div><span class="font-body-sm text-body-sm text-on-surface-variant truncate">Micro-Hub Mercado Verde • Sandra Colop</span></div></div><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Notificaciones operativas" class="min-w-[44px] min-h-[44px] flex items-center justify-center text-on-surface hover:text-primary active:scale-95 transition-all rounded-full relative" type="button"><span class="material-symbols-outlined text-[22px]">qr_code_scanner</span></button><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shadow-sm" title="Operaria de Empaque: Sandra Colop"><span class="material-symbols-outlined text-on-primary text-[20px]">person</span></div></div></div></header><main class="flex flex-col relative w-full px-margin pt-16 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full pb-28 space-y-4">
+<!-- Sub-Header Operativo & Contexto de Puesto -->
+<div class="bg-surface-container-low rounded-xl p-3 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]">conveyor_belt</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-title-md text-title-md text-on-surface truncate">Mesa de Empaque 03</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm shrink-0">
+            Fase 2: Asignación
+          </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">
+          Operario: Carlos Cuxil • Turno Vespertino (14:00 - 22:00)
+        </span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0 pl-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Ambiente</span>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">thermostat</span>
+<span class="font-title-md text-title-md font-bold">18.2°C</span>
+</div>
+</div>
+</div>
+<!-- HUD Industrial: Reconocimiento Óptico de Marbete Verde -->
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm space-y-3">
+<!-- Header HUD -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">document_scanner</span>
+<span class="font-label-lg text-label-lg text-on-surface font-bold uppercase tracking-tight">Escáner Óptico de Lote</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-bold shadow-xs">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+        100% MATCH
+      </span>
+</div>
+<!-- Visor de Escáner HUD Visual -->
+<div class="relative w-full h-36 rounded-lg bg-on-surface overflow-hidden flex items-center justify-center">
+<!-- Retícula / Scan lines animadas simuladas -->
+<div class="absolute inset-0 bg-gradient-to-b from-primary/10 via-secondary/15 to-transparent pointer-events-none"></div>
+<div class="absolute inset-x-3 h-[2px] bg-secondary shadow-[0_0_12px_#80f98b] animate-pulse top-1/2 -translate-y-1/2"></div>
+<!-- Guías de Enfoque Esmeralda -->
+<div class="absolute inset-4 pointer-events-none flex flex-col justify-between">
+<div class="flex justify-between">
+<div class="w-5 h-5 border-t-2 border-l-2 border-secondary-container"></div>
+<div class="w-5 h-5 border-t-2 border-r-2 border-secondary-container"></div>
+</div>
+<div class="flex justify-between">
+<div class="w-5 h-5 border-b-2 border-l-2 border-secondary-container"></div>
+<div class="w-5 h-5 border-b-2 border-r-2 border-secondary-container"></div>
+</div>
+</div>
+<!-- Tarjeta Simulación Marbete Enfocado -->
+<div class="relative bg-surface-container-lowest/95 backdrop-blur-sm rounded-lg px-3.5 py-2 flex items-center gap-3 shadow-md max-w-[88%]">
+<div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary text-[32px]">qr_code_2</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md text-primary font-bold">MARBETE VERDE RECONOCIDO</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface font-mono font-bold tracking-tight truncate">
+            QR-LIB-Z4-884-LOT4
+          </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">
+            Tarima: TRM-Z4-231024-884-LOT4
+          </span>
+</div>
+</div>
+</div>
+<!-- Telemetría & Certificaciones del Lote -->
+<div class="grid grid-cols-2 gap-2 pt-0.5">
+<div class="bg-surface-container-low rounded-lg p-2.5 flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Inocuidad Certificada</span>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">HACCP &amp; RTCA Validada</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2.5 flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Vigencia Estéril de Tarima</span>
+<div class="flex items-center gap-1 mt-1 text-primary">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+<span class="font-label-md text-label-md font-bold truncate">47h 52m restantes</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Manifiesto de Carga en Mesa (Inventario Físico) -->
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm space-y-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">inventory_2</span>
+<h2 class="font-title-md text-title-md text-on-surface">Carga Estéril en Mesa</h2>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">18 piezas recibidas</span>
+</div>
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Huacales -->
+<div class="bg-surface-container-low rounded-xl p-3 flex items-start gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">shelves</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-baseline gap-1">
+<span class="font-price-lg text-price-lg text-on-surface font-extrabold">4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">unidades</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Huacales Térmicos</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Hortalizas Almolonga</span>
+</div>
+</div>
+<!-- Envases Retornables -->
+<div class="bg-surface-container-low rounded-xl p-3 flex items-start gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">recycling</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-baseline gap-1">
+<span class="font-price-lg text-price-lg text-on-surface font-extrabold">14</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">envases</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Vidrio Retornable</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">8 Leche 1L + 6 Frascos</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Módulo de Asignación Automática a Rutas & Pedidos -->
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<h2 class="font-title-md text-title-md text-on-surface">Asignación Inmediata de Pedidos</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Rutas de Despacho Vespertino</span>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-bold">
+        Lote Completo
+      </span>
+</div>
+<!-- Barra de Progreso de Asignación -->
+<div class="space-y-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant font-semibold">Recipientes enlazados a rutas</span>
+<span class="text-primary font-bold">18 de 18 vinculados (100%)</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full w-full transition-all duration-500"></div>
+</div>
+</div>
+<!-- Lista de Matching de Órdenes -->
+<div class="space-y-2 pt-1">
+<!-- Orden 1 -->
+<div class="bg-surface-container-low rounded-xl p-3 transition-colors">
+<div class="flex items-center justify-between pb-1.5">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px]">shopping_bag</span>
+<span class="font-title-md text-title-md text-on-surface font-mono font-bold">#ORD-9421</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">• Carlos Mendoza</span>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-high text-on-surface px-2 py-0.5 rounded-md font-semibold shrink-0">
+            Zona 10
+          </span>
+</div>
+<div class="flex flex-wrap gap-1.5 mt-1 text-on-surface">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-xs">
+<span class="material-symbols-outlined text-secondary text-[14px]">in_home_mode</span>
+            1x Huacal #01 (Verduras Frescas)
+          </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-xs">
+<span class="material-symbols-outlined text-primary text-[14px]">water_bottle</span>
+            2x Botella Leche 1L Retornable
+          </span>
+</div>
+</div>
+<!-- Orden 2 -->
+<div class="bg-surface-container-low rounded-xl p-3 transition-colors">
+<div class="flex items-center justify-between pb-1.5">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px]">shopping_bag</span>
+<span class="font-title-md text-title-md text-on-surface font-mono font-bold">#ORD-9425</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">• Mariana S.</span>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-high text-on-surface px-2 py-0.5 rounded-md font-semibold shrink-0">
+            Carr. al Salvador
+          </span>
+</div>
+<div class="flex flex-wrap gap-1.5 mt-1 text-on-surface">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-xs">
+<span class="material-symbols-outlined text-secondary text-[14px]">in_home_mode</span>
+            1x Huacal #02 (Tomates &amp; Hojas)
+          </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-xs">
+<span class="material-symbols-outlined text-primary text-[14px]">nutrition</span>
+            1x Frasco Miel Orgánica 500g
+          </span>
+</div>
+</div>
+<!-- Orden 3 (Hostelería) -->
+<div class="bg-surface-container-low rounded-xl p-3 transition-colors">
+<div class="flex items-center justify-between pb-1.5">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px]">storefront</span>
+<span class="font-title-md text-title-md text-on-surface font-mono font-bold">#ORD-9428</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">• Rest. Flor de Café</span>
+</div>
+<span class="font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-md font-bold shrink-0">
+            Zona 4 • Horeca
+          </span>
+</div>
+<div class="flex flex-wrap gap-1.5 mt-1 text-on-surface">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-xs">
+<span class="material-symbols-outlined text-secondary text-[14px]">in_home_mode</span>
+            2x Huacales #03 y #04 (Mix Hortalizas)
+          </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-xs">
+<span class="material-symbols-outlined text-primary text-[14px]">water_bottle</span>
+            6x Botella Leche 1L Retornable
+          </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-xs">
+<span class="material-symbols-outlined text-primary text-[14px]">nutrition</span>
+            5x Frascos Conservas y Miel
+          </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Auditoría y Seguridad del Empaque -->
+<div class="bg-surface-container-lowest rounded-xl p-3.5 shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">health_and_safety</span>
+<span class="font-title-md text-title-md text-on-surface">Control de Inocuidad &amp; Sellado</span>
+</div>
+</div>
+<!-- Toggle Sello Verde Inviolable -->
+<div class="flex items-center justify-between bg-surface-container-low rounded-lg p-2.5">
+<div class="flex flex-col pr-2">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Precintado con Sello Inviolable Verde</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dispensador térmico listo en mesa para cada huacal</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="seal-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface peer-checked:bg-primary after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-surface-container-lowest after:border-surface-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant px-1 font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
+<span>Cámara de sanitización UVC calibrada antes del cargue.</span>
+</div>
+</div>
+<!-- Botones de Acción Operativa (Flujo Primario y Contingencias) -->
+<div class="space-y-2.5 pt-2">
+<!-- Botón Primario: Confirmar Asignación -->
+<button class="w-full min-h-[48px] py-3 px-4 rounded-full bg-primary text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-md hover:bg-primary-container active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+<span>Confirmar Asignación y Comenzar Surtido</span>
+</button>
+<!-- Botón Secundario: Imprimir Hojas de Picking -->
+<button class="w-full min-h-[44px] py-2.5 px-4 rounded-full bg-surface-container-lowest text-primary font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 shadow-xs hover:bg-surface-container-low active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Imprimir Hojas de Picking (3 Pedidos)</span>
+</button>
+<!-- Contingencia o Reporte -->
+<div class="flex justify-center pt-1">
+<button class="inline-flex items-center gap-1.5 py-1 px-3 text-error font-label-md text-label-md font-semibold hover:underline active:opacity-75 transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+<span>Reportar Contaminación o Merma en Mesa</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Micro-interacción: Feedback táctil y visual al conmutar el sello inviolable
+  const sealToggle = document.getElementById('seal-toggle');
+  if (sealToggle) {
+    sealToggle.addEventListener('change', (e) => {
+      const isChecked = e.target.checked;
+      if (window.navigator && window.navigator.vibrate) {
+        window.navigator.vibrate(isChecked ? 25 : [15, 50, 15]);
+      }
+    });
+  }
+</script></main></body></html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"error-container":"#ffdad6","surface-container-highest":"#d9e3f6","surface-tint":"#186c45","surface-variant":"#d9e3f6","surface-bright":"#f8f9ff","outline":"#6f7a71","surface-container-high":"#dee9fc","tertiary":"#3e4943","on-primary-container":"#99e9b9","on-tertiary-container":"#cfdbd3","secondary-container":"#80f98b","primary":"#005131","on-secondary-fixed-variant":"#00531a","primary-container":"#176b45","on-tertiary-fixed-variant":"#3e4943","tertiary-fixed":"#d9e6dd","surface-container":"#e6eeff","on-secondary":"#ffffff","on-primary":"#ffffff","surface-container-lowest":"#ffffff","surface-container-low":"#eff4ff","surface-dim":"#d0dbed","inverse-surface":"#27313f","secondary":"#006e25","on-secondary-container":"#007327","primary-fixed-dim":"#88d7a8","on-primary-fixed-variant":"#005232","on-error-container":"#93000a","on-background":"#121c2a","secondary-fixed-dim":"#66df75","secondary-fixed":"#83fc8e","on-tertiary":"#ffffff","tertiary-fixed-dim":"#bdcac1","inverse-on-surface":"#eaf1ff","on-secondary-fixed":"#002106","background":"#f8f9ff","on-surface":"#121c2a","tertiary-container":"#55615a","inverse-primary":"#88d7a8","on-surface-variant":"#3f4942","outline-variant":"#bfc9c0","on-error":"#ffffff","on-tertiary-fixed":"#131e19","primary-fixed":"#a4f4c3","error":"#ba1a1a","on-primary-fixed":"#002111","surface":"#f8f9ff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-xs":"0.25rem","space-xl":"2.5rem","gutter":"1rem","gutter-desktop":"1.5rem","margin-desktop":"3rem","margin":"1rem","space-lg":"1.5rem","margin-tablet":"2rem","space-sm":"0.5rem"},"fontFamily":{"headline-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"price-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"title-md":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"display":["Plus Jakarta Sans"],"price-md":["Plus Jakarta Sans"]},"fontSize":{"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"price-lg":["20px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"800"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"title-md":["16px",{"lineHeight":"22px","fontWeight":"600"}],"headline-lg-mobile":["26px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-md":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"700"}],"label-lg":["14px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"12px","letterSpacing":"0.04em","fontWeight":"700"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"display":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"800"}],"price-md":["16px",{"lineHeight":"20px","fontWeight":"700"}]}}}};</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;min-height:100vh;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-space-sm flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-xs min-w-0 flex-1"><button aria-label="Regresar" class="w-11 h-11 flex items-center justify-center rounded-full hover:bg-surface-container-high active:scale-95 transition text-on-surface shrink-0" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><div class="flex flex-col truncate"><h1 class="font-title-md text-title-md text-on-surface truncate leading-tight">Mercado Verde   Detalle Con Presentaciones Por Volumen Y Escala De Precios</h1><span class="font-label-sm text-label-sm text-primary flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse inline-block"></span>En línea · Guatemala</span></div></div><div class="flex items-center gap-1 shrink-0"><button aria-label="Compartir o acción secundaria" class="w-11 h-11 flex items-center justify-center rounded-full hover:bg-surface-container-high transition text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">share</span></button><a aria-label="Ver carrito" class="w-11 h-11 flex items-center justify-center rounded-full hover:bg-surface-container-high transition text-on-surface-variant relative" data-path="carrito" href="#"><span class="material-symbols-outlined text-[22px]">shopping_bag</span><span class="absolute top-2 right-2 bg-primary text-on-primary font-label-sm text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-1"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-28">
+<!-- Galería de Producto & Sellos de Origen -->
+<div class="relative w-full aspect-square bg-surface-container-low overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up macro shot of freshly harvested ripe Hass avocados on a rustic wooden surface with moist droplets, showcasing rich bumpy dark green skin and one cut open showing creamy vibrant yellow-green texture. Warm morning daylight, organic farm setting with green foliage hints in the soft-focus background, premium agricultural photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhFeljH6z_40YpcLHjuidyQFfhnMu6uyVr7vDgiIW2boA6tVcDM1cExuli_1AEXAjH3ZxoNvUlG_ThWp4SmDGoausV4tyc_v_6eZMYWbayEkGhFzmNu1q9Y7VwgwYU8-qG3UWse6cmJ573Bdf7pZezJzan0DxpqG91iIo8h7uFN_xUOecDdBWQRtVakUpm7uJNw7TF662drhkRv4YdPI_OWbGLNJ7mG8QB78y-QYdoqaD85H28pwBl"/>
+<!-- Badges flotantes superiores -->
+<div class="absolute top-3 left-3 right-3 flex items-start justify-between pointer-events-none">
+<div class="flex flex-col gap-1.5 items-start">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm shadow-md">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+          100% Agroecológico
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm shadow-md">
+<span class="material-symbols-outlined text-[14px]">trending_down</span>
+          Ahorro por Volumen
+        </span>
+</div>
+<!-- Sello Cosecha Local Certificada -->
+<div class="bg-surface/95 backdrop-blur-md px-2.5 py-1.5 rounded-xl shadow-lg flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<div class="flex flex-col leading-none">
+<span class="font-label-sm text-[9px] uppercase tracking-wider text-outline font-bold">Cosecha Local</span>
+<span class="font-label-sm text-[11px] text-primary font-bold">Certificada GT</span>
+</div>
+</div>
+</div>
+<!-- Indicador de frescura en vivo sobre la foto -->
+<div class="absolute bottom-3 left-3 bg-inverse-surface/80 backdrop-blur-md text-inverse-on-surface px-3 py-1 rounded-full flex items-center gap-2 font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-ping"></span>
+<span>Recolectado hace 14 hrs • Huerto activo</span>
+</div>
+</div>
+<!-- Sección: Información del Producto y Productor -->
+<div class="px-gutter pt-4 pb-2 flex flex-col gap-3">
+<div class="flex flex-col">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary font-bold uppercase tracking-wider">Frutas &amp; Vegetales de Altura</span>
+<div class="flex items-center gap-1 bg-surface-container-high px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-amber-500 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">4.9</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(184)</span>
+</div>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-extrabold mt-1">Aguacate Hass de Altura</h2>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[18px] text-primary">location_on</span>
+        Finca Los Manantiales, San Lucas Sacatepéquez
+      </p>
+<span class="font-label-sm text-label-sm text-outline ml-5">Altitud: 2,100 msnm • Riego con agua de manantial</span>
+</div>
+<!-- Barra de beneficio rápido -->
+<div class="grid grid-cols-3 gap-2 p-2.5 rounded-xl bg-surface-container-low">
+<div class="flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary text-[20px]">nutrition</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface mt-1">Aceites Sanos</span>
+<span class="font-body-sm text-[10px] text-outline">Omega 3 y 9</span>
+</div>
+<div class="flex flex-col items-center text-center border-l-0">
+<span class="material-symbols-outlined text-primary text-[20px]">local_shipping</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface mt-1">Cadena Fría</span>
+<span class="font-body-sm text-[10px] text-outline">Garantía a 12°C</span>
+</div>
+<div class="flex flex-col items-center text-center border-l-0">
+<span class="material-symbols-outlined text-primary text-[20px]">handshake</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface mt-1">Comercio Justo</span>
+<span class="font-body-sm text-[10px] text-outline">Directo de Finca</span>
+</div>
+</div>
+</div>
+<!-- SELECTOR DE PRESENTACIONES POR VOLUMEN (Escala de Precios) -->
+<div class="px-gutter mt-3 flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface font-bold">Selecciona tu Presentación</h3>
+<span class="font-label-sm text-label-sm text-outline">A mayor volumen, menor costo por unidad</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-secondary bg-secondary-container/40 px-2.5 py-1 rounded-full">
+        Escala Mayorista Activa
+      </span>
+</div>
+<div class="flex flex-col gap-2.5" id="tier-container">
+<!-- Opción 1: Por Unidad -->
+<div class="tier-card relative rounded-xl p-3.5 bg-surface-container-lowest shadow-sm transition-all duration-200 cursor-pointer overflow-hidden flex flex-col gap-1.5" data-name="1 Aguacate Individual" data-price="6.50" onclick="selectTier(this, 'Unidad (~200g)', 6.50, 'Q 6.50 por aguacate')">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center tier-radio">
+<span class="w-2.5 h-2.5 rounded-full bg-transparent radio-dot"></span>
+</div>
+<div>
+<p class="font-title-md text-title-md font-bold text-on-surface">Por Unidad <span class="font-body-sm text-body-sm text-outline font-normal">(~200g)</span></p>
+<span class="font-label-sm text-label-sm text-outline">Equivalente a Q 32.50 / kg</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-price-md text-price-md text-on-surface font-extrabold">Q 6.50</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant ml-7">Ideal para 1 ensalada o guacamole rápido del día.</p>
+</div>
+<!-- Opción 2: Malla Familiar (PRESELECCIONADA) -->
+<div class="tier-card active-tier relative rounded-xl p-3.5 bg-surface-container-low shadow-md transition-all duration-200 cursor-pointer overflow-hidden flex flex-col gap-1.5" data-name="Malla Familiar (1 kg)" data-price="26.00" onclick="selectTier(this, 'Malla Familiar (1 kg / 5 uds)', 26.00, 'Q 5.20 por aguacate')">
+<!-- Tag más popular -->
+<div class="absolute top-0 right-0 bg-primary text-on-primary font-label-sm text-[10px] font-bold px-3 py-0.5 rounded-bl-lg tracking-wider uppercase shadow-sm">
+          Más Popular
+        </div>
+<div class="flex items-start justify-between pr-20">
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center tier-radio">
+<span class="w-2.5 h-2.5 rounded-full bg-on-primary radio-dot"></span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<p class="font-title-md text-title-md font-bold text-primary">Malla Familiar <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">(1 kg / 5 uds)</span></p>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-secondary">Q 5.20 por aguacate</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between ml-7 mt-0.5">
+<div class="flex items-center gap-2">
+<span class="font-price-lg text-price-lg text-primary font-extrabold">Q 26.00</span>
+<span class="font-body-sm text-body-sm text-outline line-through">Q 32.50</span>
+</div>
+<span class="font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-md font-bold">
+            Ahorras 20% (-Q 6.50)
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant ml-7">Frescura y ahorro semanal calculado para familias.</p>
+</div>
+<!-- Opción 3: Huacal Mayorista -->
+<div class="tier-card relative rounded-xl p-3.5 bg-surface-container-lowest shadow-sm transition-all duration-200 cursor-pointer overflow-hidden flex flex-col gap-1.5" data-name="Huacal Mayorista (5 kg)" data-price="110.00" onclick="selectTier(this, 'Huacal Mayorista (5 kg / ~25 uds)', 110.00, 'Q 4.40 por aguacate')">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center tier-radio">
+<span class="w-2.5 h-2.5 rounded-full bg-transparent radio-dot"></span>
+</div>
+<div>
+<p class="font-title-md text-title-md font-bold text-on-surface">Huacal Mayorista <span class="font-body-sm text-body-sm text-outline font-normal">(5 kg / ~25 uds)</span></p>
+<span class="font-label-sm text-label-sm font-bold text-secondary">Q 4.40 por aguacate (Mejor valor)</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm bg-primary text-on-primary font-bold px-2 py-0.5 rounded-md">
+            -32% OFF
+          </span>
+</div>
+<div class="flex items-center justify-between ml-7 mt-0.5">
+<div class="flex items-center gap-2">
+<span class="font-price-lg text-price-lg text-on-surface font-extrabold">Q 110.00</span>
+<span class="font-body-sm text-body-sm text-outline line-through">Q 162.50</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold">
+            Ahorras Q 52.50
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant ml-7">Para restaurantes, parrilladas o consumo de alta demanda.</p>
+</div>
+</div>
+</div>
+<!-- Selector de Madurez Inteligente (Ventana de Vida Útil) -->
+<div class="px-gutter mt-5 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<h3 class="font-title-md text-title-md text-on-surface font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">av_timer</span>
+        Punto de Maduración Deseado
+      </h3>
+<span class="font-label-sm text-label-sm text-primary font-bold">Personalizable</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Nuestro equipo selecciona cada fruto a mano según la fecha en que piensas consumirlo:</p>
+<!-- Chips interactivos de madurez -->
+<div class="grid grid-cols-3 gap-2 mt-1" id="ripeness-selector">
+<!-- Chip 1 -->
+<button class="ripeness-chip flex flex-col p-2.5 rounded-xl bg-surface-container text-left transition-all hover:bg-surface-container-high" onclick="setRipeness(this, 'Listo para hoy')" type="button">
+<span class="w-3 h-3 rounded-full bg-amber-800 mb-1.5"></span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface leading-snug">Listo para hoy</span>
+<span class="font-body-sm text-[11px] text-outline mt-0.5">Piel oscura y cremoso</span>
+</button>
+<!-- Chip 2 (Activo por defecto) -->
+<button class="ripeness-chip active-chip flex flex-col p-2.5 rounded-xl bg-primary text-on-primary text-left transition-all shadow-sm" onclick="setRipeness(this, '2-3 días')" type="button">
+<span class="w-3 h-3 rounded-full bg-secondary-fixed mb-1.5"></span>
+<span class="font-label-sm text-label-sm font-bold text-on-primary leading-snug">En 2-3 días</span>
+<span class="font-body-sm text-[11px] text-on-primary-container mt-0.5">Ideal para la semana</span>
+</button>
+<!-- Chip 3 -->
+<button class="ripeness-chip flex flex-col p-2.5 rounded-xl bg-surface-container text-left transition-all hover:bg-surface-container-high" onclick="setRipeness(this, 'Firme (4-6 días)')" type="button">
+<span class="w-3 h-3 rounded-full bg-secondary mb-1.5"></span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface leading-snug">Verde / Firme</span>
+<span class="font-body-sm text-[11px] text-outline mt-0.5">Dura 4-6 días</span>
+</button>
+</div>
+</div>
+<!-- Tarjeta de Transparencia de Cadena Corta e Impacto -->
+<div class="px-gutter mt-5 mb-2">
+<div class="rounded-2xl p-4 bg-surface-container-low flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[28px]">agriculture</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md font-bold text-on-surface">Trazabilidad Directa</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Del árbol a tu puerta en &lt; 18 horas</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-1">
+<div class="bg-surface-container-lowest p-2.5 rounded-xl flex flex-col">
+<span class="font-headline-sm text-headline-sm font-extrabold text-primary">78%</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant leading-tight mt-0.5">Del valor final va directo a la familia agricultora.</span>
+</div>
+<div class="bg-surface-container-lowest p-2.5 rounded-xl flex flex-col">
+<span class="font-headline-sm text-headline-sm font-extrabold text-secondary">0 km</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant leading-tight mt-0.5">Intermediarios mayoristas tradicionales eliminados.</span>
+</div>
+</div>
+<!-- Envase ecológico -->
+<div class="flex items-start gap-2.5 bg-surface-container-lowest/80 p-2.5 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 mt-0.5">nest_eco_leaf</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Empaque Circular en Yute Biodegradable</span>
+<p class="font-body-sm text-[11px] text-on-surface-variant">Entregado en malla retornable de fibra natural. Si la devuelves en tu próximo pedido, recibes Q 2.00 de crédito ambiental.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Microcopy de Cadena de Frío Garantizada -->
+<div class="px-gutter flex items-center justify-center gap-1.5 text-center mt-1">
+<span class="material-symbols-outlined text-[16px] text-outline">ac_unit</span>
+<span class="font-body-sm text-body-sm text-outline">
+      Envío refrigerado a 12°C para preservar nutrientes y textura.
+    </span>
+</div>
+<!-- BARRA FIJA INFERIOR DE COMPRA -->
+<div class="fixed bottom-0 inset-x-0 z-40 bg-surface/95 backdrop-blur-xl shadow-[0_-4px_20px_0_rgba(18,28,42,0.08)] px-gutter py-3 pb-safe flex flex-col gap-2">
+<!-- Selector de Cantidad + Resumen Dinámico -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline" id="selected-tier-label">1 Malla Familiar (1 kg)</span>
+<div class="flex items-baseline gap-1">
+<span class="font-price-lg text-price-lg text-on-surface font-extrabold" id="total-display">Q 26.00</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold" id="unit-equivalent-display">(Q 5.20/ud)</span>
+</div>
+</div>
+<!-- Stepper Táctil -->
+<div class="flex items-center bg-surface-container rounded-full p-1 shadow-inner">
+<button aria-label="Disminuir cantidad" class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center text-on-surface active:scale-90 transition font-bold shadow-sm" onclick="adjustQty(-1)" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="w-8 text-center font-title-md text-title-md font-bold text-on-surface" id="qty-count">1</span>
+<button aria-label="Aumentar cantidad" class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition font-bold shadow-sm" onclick="adjustQty(1)" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<!-- Botón Principal Agregar al Carrito -->
+<button class="w-full h-12 bg-primary text-on-primary rounded-full flex items-center justify-center gap-2 font-label-lg text-label-lg font-bold shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform" id="add-to-cart-btn" onclick="handleAddToCart()" type="button">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+<span id="btn-text">Agregar al Carrito • Q 26.00</span>
+</button>
+</div>
+</div>
+<script>
+  let currentBasePrice = 26.00;
+  let currentTierName = "Malla Familiar (1 kg / 5 uds)";
+  let currentUnitEq = "Q 5.20 por aguacate";
+  let quantity = 1;
+  let selectedRipeness = "En 2-3 días";
+
+  function selectTier(element, tierName, price, unitEq) {
+    currentBasePrice = price;
+    currentTierName = tierName;
+    currentUnitEq = unitEq;
+
+    // Reset visual state of all cards
+    document.querySelectorAll('.tier-card').forEach(card => {
+      card.classList.remove('active-tier', 'bg-surface-container-low');
+      card.classList.add('bg-surface-container-lowest');
+      
+      const radio = card.querySelector('.tier-radio');
+      const dot = card.querySelector('.radio-dot');
+      if (radio && dot) {
+        radio.classList.remove('bg-primary');
+        radio.classList.add('bg-surface-container');
+        dot.classList.remove('bg-on-primary');
+        dot.classList.add('bg-transparent');
+      }
+      
+      const title = card.querySelector('.font-title-md');
+      if (title) {
+        title.classList.remove('text-primary');
+        title.classList.add('text-on-surface');
+      }
+    });
+
+    // Activate selected card
+    element.classList.add('active-tier', 'bg-surface-container-low');
+    element.classList.remove('bg-surface-container-lowest');
+
+    const activeRadio = element.querySelector('.tier-radio');
+    const activeDot = element.querySelector('.radio-dot');
+    if (activeRadio && activeDot) {
+      activeRadio.classList.add('bg-primary');
+      activeRadio.classList.remove('bg-surface-container');
+      activeDot.classList.add('bg-on-primary');
+      activeDot.classList.remove('bg-transparent');
+    }
+
+    const activeTitle = element.querySelector('.font-title-md');
+    if (activeTitle) {
+      activeTitle.classList.add('text-primary');
+      activeTitle.classList.remove('text-on-surface');
+    }
+
+    updateBottomBar();
+  }
+
+  function setRipeness(chip, ripenessLabel) {
+    selectedRipeness = ripenessLabel;
+    document.querySelectorAll('.ripeness-chip').forEach(c => {
+      c.classList.remove('bg-primary', 'text-on-primary', 'active-chip');
+      c.classList.add('bg-surface-container', 'text-on-surface');
+      
+      const sub = c.querySelector('.font-body-sm');
+      if (sub) {
+        sub.classList.remove('text-on-primary-container');
+        sub.classList.add('text-outline');
+      }
+    });
+
+    chip.classList.add('bg-primary', 'text-on-primary', 'active-chip');
+    chip.classList.remove('bg-surface-container', 'text-on-surface');
+    
+    const activeSub = chip.querySelector('.font-body-sm');
+    if (activeSub) {
+      activeSub.classList.add('text-on-primary-container');
+      activeSub.classList.remove('text-outline');
+    }
+  }
+
+  function adjustQty(delta) {
+    const newQty = quantity + delta;
+    if (newQty >= 1 && newQty <= 10) {
+      quantity = newQty;
+      document.getElementById('qty-count').textContent = quantity;
+      updateBottomBar();
+    }
+  }
+
+  function updateBottomBar() {
+    const total = (currentBasePrice * quantity).toFixed(2);
+    document.getElementById('selected-tier-label').textContent = `${quantity} × ${currentTierName}`;
+    document.getElementById('total-display').textContent = `Q ${total}`;
+    document.getElementById('unit-equivalent-display').textContent = `(${currentUnitEq})`;
+    document.getElementById('btn-text').textContent = `Agregar al Carrito • Q ${total}`;
+  }
+
+  function handleAddToCart() {
+    const btn = document.getElementById('add-to-cart-btn');
+    const btnText = document.getElementById('btn-text');
+    
+    btn.classList.add('bg-secondary');
+    btn.classList.remove('bg-primary');
+    btnText.textContent = `¡Agregado con éxito!`;
+
+    setTimeout(() => {
+      btn.classList.add('bg-primary');
+      btn.classList.remove('bg-secondary');
+      updateBottomBar();
+    }, 1600);
+  }
+</script></main></body></html>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Verde — Supermercado en línea</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,0,0&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="cabecera">
+            <div class="franja">
+                <span>Cosecha del día garantizada · Transporte refrigerado a 4°C · Envíos en Ciudad de Guatemala, Mixco y Carretera a El Salvador</span>
+                <span class="franja-tel"><span class="material-symbols-outlined">call</span> +502 2345-6789</span>
+            </div>
+            <div class="cabecera-fila">
+                <button type="button" id="btn-menu" class="btn-menu" aria-label="Abrir menú"><span class="material-symbols-outlined">menu</span></button>
+                <a class="brand" href="#catalogo">
+                    <span class="brand-mark">MV</span>
+                    <span class="brand-text">
+                        <strong>Mercado Verde</strong>
+                        <small>Supermercado online · GT</small>
+                    </span>
+                </a>
+                <div class="entregar">
+                    <span class="material-symbols-outlined">location_on</span>
+                    <span><small>Entregar en</small><strong>Zona 10, GT</strong></span>
+                </div>
+                <form id="form-busqueda" class="busqueda" role="search">
+                    <span class="material-symbols-outlined busqueda-ico">search</span>
+                    <input id="campo-busqueda" type="search" placeholder="Buscar frutas, verduras, abarrotes…" maxlength="60">
+                    <button type="submit">Buscar</button>
+                </form>
+                <div class="sesion">
+                    <a href="#cuenta" id="btn-cuenta" class="enlace-cabecera"><span class="material-symbols-outlined">person</span><span>Ingresar</span></a>
+                    <button id="btn-logout" type="button" class="boton-claro" hidden>Salir</button>
+                </div>
+                <a href="#carrito" class="pastilla-carrito" data-nav="carrito" data-menu="tienda">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span class="pastilla-texto">Canasta</span>
+                    <span id="contador-carrito" class="badge">0</span>
+                </a>
+            </div>
+        </header>
+
+        <div class="overlay" id="sidebar-overlay" hidden></div>
+
+        <aside class="sidebar" id="sidebar">
+            <nav class="menu" id="menu-principal">
+                <a href="#catalogo" data-nav="catalogo" data-menu="tienda"><span class="material-symbols-outlined">storefront</span> Catálogo de frescos</a>
+                <a href="#productores" data-nav="productores" data-menu="tienda"><span class="material-symbols-outlined">psychiatry</span> Productores locales</a>
+                <a href="#carrito" data-nav="carrito" data-menu="tienda"><span class="material-symbols-outlined">shopping_basket</span> Canasta</a>
+                <a href="#pedidos" data-nav="pedidos" data-menu="tienda" data-requiere="sesion" hidden><span class="material-symbols-outlined">receipt_long</span> Mis pedidos</a>
+                <a href="#envases" data-nav="envases" data-menu="tienda" data-requiere="sesion" hidden><span class="material-symbols-outlined">recycling</span> Envases</a>
+
+                <a href="#admin-dashboard" class="menu-label" id="btn-gestion" data-requiere="admin" hidden><span class="material-symbols-outlined">tune</span> Gestión</a>
+                <p id="menu-rol" class="menu-rol" hidden></p>
+                <a href="#admin-dashboard" data-nav="admin-dashboard" data-admin-tab="admin-dashboard" data-permiso="dashboard.ver" data-requiere="admin" hidden><span class="material-symbols-outlined">dashboard</span> Resumen</a>
+                <a href="#admin-productos" data-nav="admin-productos" data-admin-tab="admin-productos" data-permiso="catalogo.gestionar" data-requiere="admin" hidden><span class="material-symbols-outlined">inventory_2</span> Productos</a>
+                <a href="#admin-clasificacion" data-nav="admin-clasificacion" data-admin-tab="admin-clasificacion" data-permiso="catalogo.gestionar" data-requiere="admin" hidden><span class="material-symbols-outlined">category</span> Categorías y marcas</a>
+                <a href="#admin-fefo" data-nav="admin-fefo" data-admin-tab="admin-fefo" data-permiso="catalogo.gestionar" data-requiere="admin" hidden><span class="material-symbols-outlined">ac_unit</span> Frescura</a>
+                <a href="#admin-pedidos" data-nav="admin-pedidos" data-admin-tab="admin-pedidos" data-permiso="pedidos.gestionar" data-requiere="admin" hidden><span class="material-symbols-outlined">local_shipping</span> Pedidos</a>
+                <a href="#admin-pagos" data-nav="admin-pagos" data-admin-tab="admin-pagos" data-permiso="pagos.ver" data-requiere="admin" hidden><span class="material-symbols-outlined">payments</span> Pagos</a>
+                <a href="#admin-capital" data-nav="admin-capital" data-admin-tab="admin-capital" data-permiso="pagos.ver" data-requiere="admin" hidden><span class="material-symbols-outlined">savings</span> Capital</a>
+                <a href="#admin-reportes" data-nav="admin-reportes" data-admin-tab="admin-reportes" data-permiso-alguno="pagos.ver,pedidos.gestionar" data-requiere="admin" hidden><span class="material-symbols-outlined">bar_chart</span> Reportería</a>
+                <a href="#admin-usuarios" data-nav="admin-usuarios" data-admin-tab="admin-usuarios" data-permiso="usuarios.gestionar" data-requiere="admin" hidden><span class="material-symbols-outlined">group</span> Usuarios</a>
+                <a href="#admin-roles" data-nav="admin-roles" data-admin-tab="admin-roles" data-permiso="roles.ver" data-requiere="admin" hidden><span class="material-symbols-outlined">admin_panel_settings</span> Roles</a>
+                <a href="#admin-clientes" data-nav="admin-clientes" data-admin-tab="admin-clientes" data-permiso="clientes.exportar" data-requiere="admin" hidden><span class="material-symbols-outlined">contacts</span> Clientes</a>
+                <a href="#admin-bitacora" data-nav="admin-bitacora" data-admin-tab="admin-bitacora" data-permiso="bitacora.ver" data-requiere="admin" hidden><span class="material-symbols-outlined">shield</span> Bitácora</a>
+            </nav>
+        </aside>
+
+        <div class="contenido">
+            <div id="aviso" class="aviso" hidden></div>
+
+            <main>
+        <!-- ===================== Catálogo ===================== -->
+        <section data-vista="catalogo" class="vista">
+            <div class="hero">
+                <div class="hero-texto">
+                    <p class="hero-marca"><span class="material-symbols-outlined">verified</span> Directo de huertos chapines</p>
+                    <h1>Cosecha fresca de temporada</h1>
+                    <p>Recolectado en el altiplano y los valles. El precio lo confirma el catálogo en el servidor, nunca el navegador.</p>
+                </div>
+                <div class="hero-frio">
+                    <span class="material-symbols-outlined">ac_unit</span>
+                    <span><small>Monitoreo térmico</small><strong>Cámara a 4°C</strong></span>
+                </div>
+            </div>
+            <div id="categorias" class="chips"></div>
+            <p id="info-catalogo" class="info-tecnica"></p>
+            <div id="productos" class="grid-productos"></div>
+        </section>
+
+        <!-- ===================== Carrito y checkout ===================== -->
+        <section data-vista="carrito" class="vista" hidden>
+            <ol class="pasos-compra">
+                <li class="hecho"><span>1</span> Canasta</li>
+                <li class="actual"><span>2</span> Entrega</li>
+                <li><span>3</span> Pago seguro</li>
+            </ol>
+            <div class="meta-envio" id="meta-envio"></div>
+            <h1>Mi canasta</h1>
+            <div class="dos-columnas">
+                <div class="tarjeta">
+                    <div id="lineas-carrito"></div>
+                    <div class="total">Total: <strong id="total-carrito">Q0.00</strong></div>
+                    <button id="btn-vaciar" type="button" class="secundario">Vaciar carrito</button>
+                </div>
+                <div class="tarjeta">
+                    <h2>Datos de entrega</h2>
+                    <form id="form-checkout">
+                        <label>Dirección <input name="direccion" required minlength="5" maxlength="200" placeholder="6a avenida 10-25"></label>
+                        <div class="fila">
+                            <label>Zona <input name="zona" maxlength="30" placeholder="Zona 10"></label>
+                            <label>Municipio <input name="municipio" required minlength="2" maxlength="60" value="Guatemala"></label>
+                        </div>
+                        <label>Teléfono <input name="telefono" required placeholder="5555-1234" maxlength="15"></label>
+                        <label>Referencias <input name="referencias" maxlength="200" placeholder="Edificio, color de casa…"></label>
+                        <input type="hidden" name="destino_lat">
+                        <input type="hidden" name="destino_lng">
+                        <p id="estado-gps" class="nota-seguridad">Escribe la dirección. Si quieres el punto exacto, el GPS lo pone: no hace falta escribir coordenadas.</p>
+                        <button id="btn-gps" type="button" class="secundario">Usar mi GPS</button>
+                        <label>Notas para el pedido <textarea name="notas" maxlength="300" rows="2"></textarea></label>
+                        <p id="saldo-envases" class="nota-seguridad">Saldo de envases: Q0.00</p>
+                        <label class="check-linea"><input id="usar-saldo-envases" name="usar_saldo_envases" type="checkbox"> Usar saldo de envases en este pedido (el servidor calcula el descuento)</label>
+                        <fieldset class="pago-opciones">
+                            <legend>Cómo vas a pagar</legend>
+                            <label><input type="radio" name="forma_pago" value="tarjeta" required> Pagar con tarjeta</label>
+                            <label><input type="radio" name="forma_pago" value="efectivo" required> Pago contra entrega, en efectivo al recibir</label>
+                        </fieldset>
+                        <p class="nota-seguridad">El precio lo calcula el servidor. La tarjeta se cobra en línea. El efectivo se cobra cuando el pedido llega a tu puerta. El número de tarjeta no se guarda.</p>
+                        <div id="clima-entrega" class="clima-caja">Consultando clima en Guatemala…</div>
+                        <button type="submit">Confirmar pedido</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== Detalle de producto ===================== -->
+        <section data-vista="producto" class="vista" hidden>
+            <p><a href="#catalogo">← Volver al catálogo</a></p>
+            <div id="detalle-producto"></div>
+        </section>
+
+        <!-- ===================== Productores ===================== -->
+        <section data-vista="productores" class="vista" hidden>
+            <div class="hero">
+                <div class="hero-texto">
+                    <p class="hero-marca">Origen chapín</p>
+                    <h1>Productores locales</h1>
+                    <p>Fruta, café y lácteos con nombre y región. El precio de la tienda no lo pone el productor en el navegador: lo confirma el catálogo.</p>
+                </div>
+            </div>
+            <div id="lista-productores" class="grid-productos"></div>
+        </section>
+
+        <!-- ===================== Envases ===================== -->
+        <section data-vista="envases" class="vista" hidden>
+            <h1>Billetera de envases</h1>
+            <div id="envases-resumen" class="impacto-grid"></div>
+            <div class="dos-columnas">
+                <div class="tarjeta">
+                    <h2>Saldo a favor</h2>
+                    <p class="precio-grande" id="envases-saldo">Q0.00</p>
+                    <p>Cuando un pedido entregado trae envase retornable, el detalle muestra un pase de 8 caracteres. Al devolver el envase, ese pase acredita el depósito. El monto lo calcula el servidor.</p>
+                    <form id="form-pase">
+                        <label>Pase de devolución
+                            <input name="pase" required minlength="8" maxlength="8" placeholder="a1b2c3d4" autocomplete="off">
+                        </label>
+                        <button type="submit">Acreditar envases</button>
+                    </form>
+                </div>
+                <div class="tarjeta">
+                    <h2>Movimientos</h2>
+                    <div id="envases-movimientos"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== Mis pedidos ===================== -->
+        <section data-vista="pedidos" class="vista" hidden>
+            <h1>Mis pedidos</h1>
+            <div class="dos-columnas">
+                <div class="tarjeta"><div id="lista-pedidos"></div></div>
+                <div class="tarjeta"><div id="detalle-pedido"><p class="vacio">Selecciona un pedido para ver el detalle.</p></div></div>
+            </div>
+        </section>
+
+        <!-- ===================== Cuenta ===================== -->
+        <section data-vista="cuenta" class="vista vista-cuenta" hidden>
+            <div class="cuenta-escena">
+                <div class="cuenta-atmosfera" aria-hidden="true">
+                    <span class="cuenta-orb cuenta-orb-a"></span>
+                    <span class="cuenta-orb cuenta-orb-b"></span>
+                    <span class="cuenta-hoja"></span>
+                </div>
+
+                <div class="cuenta-layout">
+                    <header class="cuenta-hero">
+                        <p class="cuenta-brand">Mercado Verde</p>
+                        <h1 class="cuenta-headline">Fresco, cerca y a tu puerta</h1>
+                        <p class="cuenta-sub">Entrá a tu cuenta para armar el carrito y pedir con entrega en la Ciudad de Guatemala.</p>
+                    </header>
+
+                    <div class="cuenta-panel">
+                        <div id="panel-perfil" hidden>
+                            <div class="perfil-cabecera">
+                                <div class="perfil-avatar" id="perfil-avatar">?</div>
+                                <div>
+                                    <h2 id="perfil-nombre">Tu cuenta</h2>
+                                    <p id="perfil-email" class="perfil-email"></p>
+                                    <span id="perfil-rol" class="rol-badge"></span>
+                                </div>
+                            </div>
+                            <div id="impacto-perfil" class="impacto-grid"></div>
+                            <form id="form-perfil" class="form-cuenta">
+                                <h3>Tus datos</h3>
+                                <label>Nombre <input name="nombre" required maxlength="100" autocomplete="name"></label>
+                                <label>Teléfono <input name="telefono" maxlength="15" placeholder="5555-1234" autocomplete="tel"></label>
+                                <p class="nota-seguridad">El correo es el de tu cuenta y no se cambia aquí.</p>
+                                <label>Contraseña actual <input name="password_actual" type="password" autocomplete="current-password" maxlength="72"></label>
+                                <label>Nueva contraseña <input name="password_nueva" type="password" autocomplete="new-password" maxlength="72" placeholder="Solo si quieres cambiarla"></label>
+                                <button type="submit">Guardar datos</button>
+                            </form>
+                            <form id="form-ubicacion" class="form-cuenta">
+                                <h3>Tu ubicación</h3>
+                                <p class="ayuda-campo">La dirección es la que lee el repartidor. El botón de GPS marca el punto del mapa.</p>
+                                <label>Dirección <input name="direccion" required minlength="5" maxlength="200" placeholder="6a avenida 10-25"></label>
+                                <div class="fila">
+                                    <label>Zona <input name="zona" maxlength="30" placeholder="Zona 10"></label>
+                                    <label>Municipio <input name="municipio" required minlength="2" maxlength="60" value="Guatemala"></label>
+                                </div>
+                                <label>Teléfono <input name="telefono" required maxlength="15" placeholder="5555-1234"></label>
+                                <label>Referencias <input name="referencias" maxlength="200" placeholder="Edificio, color de casa…"></label>
+                                <input type="hidden" name="destino_lat">
+                                <input type="hidden" name="destino_lng">
+                                <p id="estado-gps-perfil" class="nota-seguridad">Todavía sin punto GPS.</p>
+                                <button id="btn-gps-perfil" type="button" class="secundario">Usar mi GPS</button>
+                                <button type="submit">Guardar ubicación</button>
+                            </form>
+                            <div class="perfil-bloque">
+                                <h3>Tus tarjetas</h3>
+                                <p class="nota-seguridad">La normal guarda la marca y los últimos 4. El número completo y el CVV no se guardan. La de regalo es un saldo: el contador emite el código y tú lo canjeas para la próxima compra.</p>
+                                <div id="lista-tarjetas"></div>
+                                <form id="form-tarjeta-normal" class="form-cuenta">
+                                    <label>Nombre <input name="alias" required maxlength="40" placeholder="Visa personal"></label>
+                                    <label>Marca
+                                        <select name="marca">
+                                            <option value="visa">Visa</option>
+                                            <option value="mastercard">Mastercard</option>
+                                            <option value="otra">Otra</option>
+                                        </select>
+                                    </label>
+                                    <label>Últimos 4 <input name="ultimos4" required maxlength="4" minlength="4" inputmode="numeric" pattern="[0-9]{4}" placeholder="4242"></label>
+                                    <button type="submit">Guardar tarjeta</button>
+                                </form>
+                                <form id="form-tarjeta-regalo" class="form-cuenta">
+                                    <label>Código de regalo <input name="codigo" required minlength="8" maxlength="8" placeholder="a1b2c3d4" autocomplete="off"></label>
+                                    <button type="submit" class="secundario">Canjear tarjeta de regalo</button>
+                                </form>
+                            </div>
+                            <ul class="perfil-lista">
+                                <li><strong>Qué puedes hacer</strong><span id="perfil-permisos"></span></li>
+                            </ul>
+                            <div class="perfil-acciones">
+                                <a href="#catalogo" class="enlace-boton">Ir al catálogo</a>
+                                <a href="#pedidos" class="enlace-boton secundario" data-requiere="sesion">Mis pedidos</a>
+                                <a href="#admin-dashboard" class="enlace-boton secundario" data-requiere="admin" hidden>Ir al panel</a>
+                                <button id="btn-logout-perfil" type="button" class="peligro">Cerrar sesión</button>
+                            </div>
+                        </div>
+
+                        <div id="panel-auth">
+                            <h2 id="cuenta-titulo">Bienvenido de nuevo</h2>
+                            <p class="cuenta-intro" id="cuenta-intro">Usá tu correo para continuar con tu pedido.</p>
+                            <div class="cuenta-tabs" role="tablist">
+                                <button type="button" id="tab-login" class="activo" data-auth="login">Iniciar sesión</button>
+                                <button type="button" id="tab-registro" data-auth="registro">Crear cuenta</button>
+                            </div>
+                            <form id="form-login" class="form-cuenta">
+                                <label>Correo electrónico
+                                    <input name="email" type="email" required maxlength="120" placeholder="tu@correo.com" autocomplete="username">
+                                </label>
+                                <label>Contraseña
+                                    <input name="password" type="password" required maxlength="72" placeholder="••••••••" autocomplete="current-password">
+                                </label>
+                                <button type="submit">Entrar</button>
+                            </form>
+                            <form id="form-registro" class="form-cuenta" autocomplete="off" hidden>
+                                <label>Nombre completo
+                                    <input name="nombre" required maxlength="100" placeholder="Ana López" autocomplete="name">
+                                </label>
+                                <label>Correo electrónico
+                                    <input name="email" type="email" required maxlength="120" placeholder="tu@correo.com" autocomplete="email">
+                                </label>
+                                <label>Contraseña
+                                    <input name="password" type="password" required minlength="8" maxlength="72" placeholder="Mínimo 8 caracteres" autocomplete="new-password">
+                                </label>
+                                <small class="hint-pass">Debe incluir mayúscula, minúscula y un número.</small>
+                                <button type="submit">Crear mi cuenta</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== Administración ===================== -->
+        <section data-vista="admin" class="vista" hidden>
+            <h1 id="titulo-admin">Resumen</h1>
+            <p id="rol-activo" class="nota-seguridad" hidden></p>
+
+            <div id="admin-dashboard" class="tab-panel">
+                <div id="kpi-admin" class="kpi-grid"></div>
+                <div class="graficos-grid">
+                    <div class="tarjeta">
+                        <h2>Pedidos por estado</h2>
+                        <canvas id="chart-pedidos" height="220"></canvas>
+                    </div>
+                    <div class="tarjeta">
+                        <h2>Eventos de seguridad</h2>
+                        <canvas id="chart-seguridad" height="220"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div id="admin-productos" class="tab-panel tarjeta" hidden>
+                <div class="barra">
+                    <h2>Catálogo</h2>
+                    <div>
+                        <input id="buscar-producto-admin" type="search" placeholder="Buscar producto…" maxlength="60">
+                        <a class="secundario enlace-boton" href="#admin-clasificacion">Categorías y marcas</a>
+                        <button id="btn-nuevo-producto" type="button">+ Nuevo producto</button>
+                    </div>
+                </div>
+                <dialog id="modal-producto" class="modal">
+                    <form id="form-producto" class="form-modal">
+                        <div class="modal-cabecera">
+                            <h2 id="titulo-modal-producto">Nuevo producto</h2>
+                            <button type="button" id="cerrar-modal-producto" class="boton-texto" aria-label="Cerrar">Cerrar</button>
+                        </div>
+                        <label>Nombre <input name="nombre" placeholder="Banano" required maxlength="120"></label>
+                        <label>Categoría <select name="categoria_id" required></select></label>
+                        <p class="ayuda-campo">El producto queda amarrado a esta categoría. Si no está en la lista, créala en Categorías y marcas.</p>
+                        <label id="bloque-categoria-nueva">Categoría nueva <input name="categoria_nueva" maxlength="60" placeholder="O escríbela aquí y se crea con este producto"></label>
+                        <div class="fila">
+                            <label>Precio de venta (Q) <input name="precio" type="number" step="0.01" min="0.01" placeholder="3.50" required></label>
+                            <label>Precio de compra (Q) <input name="precio_compra" type="number" step="0.01" min="0" placeholder="2.00"></label>
+                        </div>
+                        <div class="fila">
+                            <label>Stock <input name="stock" type="number" min="0" placeholder="0" required></label>
+                            <label>Conservación
+                            <select name="conservacion">
+                                <option value="ambiente">Fresco o seco, sin refrigerar</option>
+                                <option value="refrigerado">Refrigerado</option>
+                            </select>
+                        </label>
+                        <label>Se vende por
+                                <select name="unidad">
+                                    <option value="lb">libra</option>
+                                    <option value="unidad">unidad</option>
+                                    <option value="kg">kilogramo</option>
+                                    <option value="docena">docena</option>
+                                    <option value="paquete">paquete</option>
+                                    <option value="litro">litro</option>
+                                    <option value="galon">galón</option>
+                                </select>
+                            </label>
+                        </div>
+                        <p id="bloque-presentacion-ayuda" class="ayuda-campo">Otra forma de venderlo, por ejemplo banano por libra y también una red de 5 lb. El factor es cuántas unidades base incluye.</p>
+                        <div id="bloque-presentacion" class="fila">
+                            <label>Presentación <input name="presentacion_nombre" maxlength="80" placeholder="Red de 5 lb"></label>
+                            <label>Incluye <input name="presentacion_factor" type="number" min="1" placeholder="5"></label>
+                            <label>Precio de esa presentación <input name="presentacion_precio" type="number" step="0.01" min="0.01" placeholder="16.00"></label>
+                        </div>
+                        <label>Marca <select name="productor_id"><option value="">Elige la marca</option></select></label>
+                        <p class="ayuda-campo">Si eliges una marca, el producto queda amarrado a ese origen. Las marcas se registran en Categorías y marcas.</p>
+                        <div id="bloque-marca-nueva" class="fila">
+                            <label>Marca nueva <input name="marca_nombre" maxlength="120" placeholder="Huertos de Almolonga"></label>
+                            <label>Región <input name="marca_region" maxlength="80" placeholder="Quetzaltenango"></label>
+                        </div>
+                        <p id="bloque-lote-ayuda" class="ayuda-campo">El lote dice desde cuándo está en bodega y hasta cuándo se puede vender. Si vence, deja de ofrecerse como fresco.</p>
+                        <div id="bloque-lote" class="fila">
+                            <label>Código de lote <input name="lote_codigo" maxlength="40" placeholder="LT-BAN-015"></label>
+                            <label>Ingresó <input name="lote_ingreso" type="date"></label>
+                            <label>Vence <input name="lote_vence" type="date"></label>
+                        </div>
+                        <label>Descripción <input name="descripcion" placeholder="Opcional" maxlength="500"></label>
+                        <label id="campo-producto-activo" class="casilla" hidden><input name="activo" type="checkbox"> Activo en la tienda</label>
+                        <label id="campo-producto-destacado" class="casilla" hidden><input name="destacado" type="checkbox"> Destacado</label>
+                        <div class="modal-acciones">
+                            <button type="button" id="cancelar-modal-producto" class="secundario">Cancelar</button>
+                            <button id="guardar-producto" type="submit">Guardar</button>
+                        </div>
+                    </form>
+                </dialog>
+                <input id="input-imagen" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th></th><th>Producto</th><th>Categoría</th><th>Marca</th><th>Venta</th><th>Compra</th><th>Stock</th><th>Destacado</th><th>Activo</th><th>Acciones</th></tr>
+                        </thead>
+                        <tbody id="tabla-productos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="admin-clasificacion" class="tab-panel tarjeta" hidden>
+                <div class="barra">
+                    <h2>Categorías y marcas</h2>
+                </div>
+                <p class="flujo-pedidos-ayuda">Primero existe la categoría y la marca. Después, al crear un producto, lo amarras a una categoría y, si tiene origen, a una marca. El número es cuántos productos usan cada una.</p>
+                <h3 class="subtitulo-admin">Categorías</h3>
+                <form id="form-categoria" class="form-cuenta">
+                    <div class="fila">
+                        <label>Nombre <input name="nombre" required maxlength="60" placeholder="Golosinas"></label>
+                        <button type="submit">Crear categoría</button>
+                    </div>
+                </form>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Categoría</th><th>Productos amarrados</th></tr>
+                        </thead>
+                        <tbody id="tabla-categorias"></tbody>
+                    </table>
+                </div>
+                <h3 class="subtitulo-admin">Marcas</h3>
+                <form id="form-marca" class="form-cuenta">
+                    <div class="fila">
+                        <label>Nombre <input name="nombre" required maxlength="120" placeholder="Dos Pinos"></label>
+                        <label>Región <input name="region" maxlength="80" placeholder="Guatemala"></label>
+                        <button type="submit">Crear marca</button>
+                    </div>
+                </form>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Marca</th><th>Región</th><th>Productos amarrados</th></tr>
+                        </thead>
+                        <tbody id="tabla-marcas"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="admin-pedidos" class="tab-panel" hidden>
+                <p class="flujo-pedidos-ayuda">
+                    Tú, como administrador, apruebas y avanzas cada pedido:
+                    <strong>pendiente → preparando → en camino → entregado</strong>.
+                    También puedes <strong>cancelar</strong> (se repone el stock).
+                </p>
+                <div id="lista-pedidos-admin" class="tarjeta">
+                    <div class="barra">
+                        <h2>Pedidos</h2>
+                        <select id="filtro-estado">
+                            <option value="">Todos los estados</option>
+                            <option>pendiente</option><option>pagado</option><option>preparando</option>
+                            <option>en_camino</option><option>entregado</option><option>cancelado</option>
+                        </select>
+                    </div>
+                    <div class="tabla-scroll">
+                        <table>
+                            <thead>
+                                <tr><th>Fecha</th><th>Cliente</th><th>Municipio</th><th>Total</th><th>Estado</th><th></th></tr>
+                            </thead>
+                            <tbody id="tabla-pedidos"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="panel-detalle-pedido" class="tarjeta detalle-pedido-panel" hidden>
+                    <div id="detalle-pedido-admin"></div>
+                </div>
+            </div>
+
+            <div id="admin-pagos" class="tab-panel tarjeta" hidden>
+                <form id="form-regalo" class="form-usuario">
+                    <h3>Emitir tarjeta de regalo</h3>
+                    <input name="alias" placeholder="Para quién" required maxlength="40">
+                    <input name="saldo" type="number" min="1" max="2000" step="0.01" required placeholder="Saldo Q">
+                    <button type="submit">Emitir código</button>
+                </form>
+                <p id="codigo-regalo" class="nota-seguridad"></p>
+                <div class="barra">
+                    <h2>Pagos</h2>
+                    <select id="filtro-pago-estado">
+                        <option value="">Todos</option>
+                        <option>iniciado</option><option>completado</option>
+                        <option>fallido</option><option>cancelado</option>
+                    </select>
+                </div>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Fecha</th><th>Pedido</th><th>Cliente ID</th><th>Monto</th><th>Regalo</th><th>Medio</th><th>Estado</th><th>Proveedor</th></tr>
+                        </thead>
+                        <tbody id="tabla-pagos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="admin-usuarios" class="tab-panel tarjeta" hidden>
+                <div class="barra">
+                    <h2>Usuarios</h2>
+                    <button id="btn-nuevo-usuario" type="button">+ Nuevo usuario</button>
+                </div>
+                <form id="form-usuario" class="form-usuario" hidden>
+                    <input name="nombre" placeholder="Nombre" required maxlength="100">
+                    <input name="email" type="email" placeholder="Email" required maxlength="120">
+                    <input name="password" type="password" placeholder="Contraseña" required minlength="8" maxlength="72">
+                    <select name="rol" required>
+                        <option value="cliente">cliente</option>
+                        <option value="operador">operador</option>
+                        <option value="contador">contador</option>
+                        <option value="admin">admin</option>
+                    </select>
+                    <button type="submit">Crear</button>
+                </form>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>ID</th><th>Nombre</th><th>Email</th><th>Rol</th><th>Estado</th><th>Último login</th><th>Acciones</th></tr>
+                        </thead>
+                        <tbody id="tabla-usuarios"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="admin-roles" class="tab-panel tarjeta" hidden>
+                <div class="barra">
+                    <h2>Roles y permisos</h2>
+                </div>
+                <div id="matriz-roles" class="matriz-roles"></div>
+            </div>
+
+            <div id="admin-clientes" class="tab-panel tarjeta" hidden>
+                <div class="barra">
+                    <h2>Clientes</h2>
+                    <button id="btn-exportar" type="button" class="secundario">Exportar CSV</button>
+                </div>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Nombre</th><th>Email</th><th>Pedidos</th><th>Total comprado</th><th>Última compra</th></tr>
+                        </thead>
+                        <tbody id="tabla-clientes"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="admin-fefo" class="tab-panel tarjeta" hidden>
+                <div class="barra">
+                    <h2>Control de frescura (FEFO)</h2>
+                    <button id="btn-recibir-lote" type="button">Recibir lote</button>
+                </div>
+                <p class="flujo-pedidos-ayuda">Hay dos listas para no mezclar la información. Arriba va lo que debe estar en frío. Abajo va lo fresco o seco que no necesita refri, como banano, azúcar o golosinas. En las dos, el lote que vence primero sale primero.</p>
+                <dialog id="modal-lote" class="modal">
+                    <form id="form-lote" class="form-modal">
+                        <div class="modal-cabecera">
+                            <h2>Recibir lote</h2>
+                            <button type="button" id="cerrar-modal-lote" class="boton-texto" aria-label="Cerrar">Cerrar</button>
+                        </div>
+                        <label>Código <input name="codigo" placeholder="LT-BAN-015" required maxlength="40" pattern="[A-Za-z0-9-]{4,40}"></label>
+                        <label>Producto <select name="producto_id" required></select></label>
+                        <label>Cantidad <input name="cantidad" type="number" min="1" placeholder="Cantidad que entra" required></label>
+                        <div class="fila">
+                            <label>Venta anterior <input id="venta-anterior" readonly></label>
+                            <label>Venta nueva (Q) <input name="precio" type="number" step="0.01" min="0.01" required></label>
+                        </div>
+                        <div class="fila">
+                            <label>Compra anterior <input id="compra-anterior" readonly></label>
+                            <label>Compra nueva (Q) <input name="precio_compra" type="number" step="0.01" min="0" required></label>
+                        </div>
+                        <p class="nota-seguridad">Si la venta o la compra cambian, se guarda el precio anterior y después queda el nuevo. La cantidad entra al stock y el costo de esta compra sale del efectivo del mes.</p>
+                        <div class="fila">
+                            <label>Ingresó <input name="fecha_ingreso" type="date"></label>
+                            <label>Vence <input name="fecha_vencimiento" type="date" required></label>
+                        </div>
+                        <label id="campo-temperatura-lote">Temperatura de cámara (°C) <input name="temperatura" type="number" step="0.1" min="-5" max="40" placeholder="4"></label>
+                        <label>Nota <input name="nota" placeholder="Cámara o procedencia" maxlength="200"></label>
+                        <div class="modal-acciones">
+                            <button type="button" id="cancelar-modal-lote" class="secundario">Cancelar</button>
+                            <button type="submit">Guardar lote</button>
+                        </div>
+                    </form>
+                </dialog>
+                <h3 class="subtitulo-admin">Refrigerados</h3>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Ingresó</th><th>Vence</th><th>Código</th><th>Producto</th><th>Cant.</th><th>°C</th><th>Estado</th><th></th></tr>
+                        </thead>
+                        <tbody id="tabla-lotes"></tbody>
+                    </table>
+                </div>
+                <h3 class="subtitulo-admin">Frescos y secos, sin refrigerar</h3>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Ingresó</th><th>Vence</th><th>Código</th><th>Producto</th><th>Cant.</th><th>Estado</th><th></th></tr>
+                        </thead>
+                        <tbody id="tabla-lotes-ambiente"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="admin-capital" class="tab-panel tarjeta" hidden>
+                <div class="barra">
+                    <h2>Capital</h2>
+                    <form id="form-capital-mes" class="fila">
+                        <label>Mes <input id="capital-mes" type="month" required></label>
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
+                <p id="capital-mes-activo" class="flujo-pedidos-ayuda">Elige el mes y pulsa Buscar. El efectivo y la ganancia son de ese mes. El capital en productos es la mercancía que hay hoy.</p>
+                <div id="capital-cifras" class="capital-cifras"></div>
+
+                <h3 id="capital-titulo-productos" class="subtitulo-admin">Capital en productos, hoy</h3>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Producto</th><th>Stock</th><th>Compra</th><th>Venta</th><th>Capital</th><th>Margen</th></tr>
+                        </thead>
+                        <tbody id="tabla-capital-productos"></tbody>
+                    </table>
+                </div>
+
+                <h3 id="capital-titulo-efectivo" class="subtitulo-admin">Efectivo del mes</h3>
+                <form id="form-capital-inyectar" class="form-cuenta">
+                    <div class="fila">
+                        <label>Inyectar efectivo (Q) <input name="monto" type="number" min="0.01" step="0.01" required></label>
+                        <label>Nota <input name="nota" maxlength="200" placeholder="Apertura de caja o aporte del mes"></label>
+                    </div>
+                    <button type="submit">Inyectar a la caja</button>
+                </form>
+                <form id="form-capital-retirar" class="form-cuenta">
+                    <p id="capital-retiro-ayuda" class="ayuda-campo">El retiro sale del efectivo de la tienda en el mes buscado: lo que se inyectó, más lo que pagaron los clientes, menos las compras. El capital en productos es mercancía y se queda en bodega.</p>
+                    <div class="fila">
+                        <label>Retirar efectivo (Q) <input name="monto" type="number" min="0.01" step="0.01" required></label>
+                        <label>Nota <input name="nota" maxlength="200" placeholder="Retiro del dueño o pago de un gasto"></label>
+                    </div>
+                    <button type="submit" class="secundario">Retirar de la caja</button>
+                </form>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Fecha</th><th>Movimiento</th><th>Nota</th><th>Monto</th></tr>
+                        </thead>
+                        <tbody id="tabla-capital-caja"></tbody>
+                    </table>
+                </div>
+
+                <h3 id="capital-titulo-ganancia" class="subtitulo-admin">Ganancias del mes</h3>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Pedido</th><th>Producto</th><th>Venta</th><th>Costo</th><th>Ganancia</th></tr>
+                        </thead>
+                        <tbody id="tabla-capital-ganancia"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="admin-reportes" class="tab-panel tarjeta" hidden>
+                <div class="barra">
+                    <h2>Reportería de ventas</h2>
+                    <label>Mes <input id="reporte-mes" type="month"></label>
+                </div>
+                <p class="flujo-pedidos-ayuda">Ventas del mes, cómo se cobraron y qué productos salieron. El efectivo pendiente es un pago contra entrega que todavía no se recibió en la puerta.</p>
+                <div id="reporte-cifras" class="capital-cifras"></div>
+                <h3 class="subtitulo-admin">Ventas por producto</h3>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Producto</th><th>Unidades</th><th>Venta</th></tr>
+                        </thead>
+                        <tbody id="tabla-reporte-productos"></tbody>
+                    </table>
+                </div>
+                <h3 class="subtitulo-admin">Pedidos por estado</h3>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Estado</th><th>Pedidos</th><th>Total</th></tr>
+                        </thead>
+                        <tbody id="tabla-reporte-estados"></tbody>
+                    </table>
+                </div>
+                <h3 class="subtitulo-admin">Cobros por medio</h3>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Medio</th><th>Estado del cobro</th><th>Pagos</th><th>Monto</th></tr>
+                        </thead>
+                        <tbody id="tabla-reporte-medios"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="admin-bitacora" class="tab-panel tarjeta" hidden>
+                <div class="barra">
+                    <h2>Bitácora de seguridad</h2>
+                    <div class="filtros-bitacora">
+                        <select id="filtro-accion">
+                            <option value="">Todas las acciones</option>
+                            <option>LOGIN_CLIENTE_EXITOSO</option>
+                            <option>LOGIN_CLIENTE_FALLIDO</option>
+                            <option>REGISTRO_CLIENTE</option>
+                            <option>PEDIDO_CREADO</option>
+                            <option>PEDIDO_ESTADO_CAMBIADO</option>
+                            <option>PRECIO_MODIFICADO</option>
+                            <option>PRODUCTO_AGOTADO</option>
+                            <option>EXPORTACION_CLIENTES</option>
+                            <option>ACCESO_ADMIN_PANEL</option>
+                            <option>TOKEN_REVOCADO</option>
+                            <option>LOTE_MERMA</option>
+                            <option>ENVASE_ACREDITADO</option>
+                            <option>RUTA_ACTUALIZADA</option>
+                            <option>CALIFICACION_PEDIDO</option>
+                        </select>
+                        <select id="filtro-resultado">
+                            <option value="">Todos los resultados</option>
+                            <option>EXITO</option>
+                            <option>FALLO</option>
+                            <option>FRAUDE</option>
+                        </select>
+                        <button id="btn-recargar-bitacora" type="button" class="secundario">Filtrar</button>
+                    </div>
+                </div>
+                <div id="resumen-bitacora" class="chips"></div>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr><th>Fecha/hora</th><th>Acción</th><th>Usuario</th><th>Resultado</th><th>Detalle</th></tr>
+                        </thead>
+                        <tbody id="tabla-bitacora"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+            </main>
+
+            <footer class="pie">© Mercado Verde · Supermercado en línea · Ciudad de Guatemala</footer>
+        </div>
+
+        <nav class="nav-inferior" aria-label="Navegación principal">
+            <a href="#catalogo" data-nav="catalogo"><span class="material-symbols-outlined">storefront</span>Inicio</a>
+            <a href="#productores" data-nav="productores"><span class="material-symbols-outlined">psychiatry</span>Origen</a>
+            <a href="#pedidos" data-nav="pedidos" data-requiere="sesion" hidden><span class="material-symbols-outlined">receipt_long</span>Pedidos</a>
+            <a href="#carrito" data-nav="carrito"><span class="material-symbols-outlined">shopping_basket</span>Canasta</a>
+            <a href="#cuenta"><span class="material-symbols-outlined">person</span>Cuenta</a>
+        </nav>
+    </div>
+
+    <script src="/js/chart.umd.min.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

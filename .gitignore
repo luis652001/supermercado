@@ -1,0 +1,22 @@
+# Secretos: nunca se suben al repositorio (PCI-DSS / OWASP A05)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Respaldos y volcados de BD
+backups/
+*.sql.gz
+*.dump
+
+# Logs y temporales
+*.log
+logs/
+tmp/
+
+# Editor / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
