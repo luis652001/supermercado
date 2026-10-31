@@ -22,6 +22,10 @@ function el(tag, atributos = {}, ...hijos) {
     return nodo;
 }
 
+function montar(nodo, ...hijos) {
+    nodo.replaceChildren(...hijos.flat().filter((hijo) => hijo instanceof Node));
+}
+
 let temporizadorAviso;
 function aviso(mensaje, esError = false) {
     const caja = $('#aviso');
@@ -83,6 +87,7 @@ const ADMIN_TABS = {
     admin: 'admin-dashboard',
     'admin-dashboard': 'admin-dashboard',
     'admin-productos': 'admin-productos',
+    'admin-inventario': 'admin-inventario',
     'admin-clasificacion': 'admin-clasificacion',
     'admin-fefo': 'admin-fefo',
     'admin-pedidos': 'admin-pedidos',
@@ -98,6 +103,7 @@ const ADMIN_TABS = {
 const TITULOS_ADMIN = {
     'admin-dashboard': 'Resumen',
     'admin-productos': 'Productos',
+    'admin-inventario': 'Inventario',
     'admin-clasificacion': 'Categorías y marcas',
     'admin-fefo': 'Frescura FEFO',
     'admin-pedidos': 'Pedidos',
@@ -144,6 +150,14 @@ function mostrarVista() {
     if (!cargadores[vista]) vista = 'catalogo';
     if (vista === 'pedidos' && !sesion.token) vista = 'cuenta';
     if (vista === 'admin' && !sesion.esStaff) vista = sesion.token ? 'catalogo' : 'cuenta';
+    if (vista !== 'admin' && vista !== 'cuenta' && !puedeVerNav(vista)) {
+        vista = puedeVerNav('catalogo') ? 'catalogo' : 'cuenta';
+        const actual = location.hash.slice(1) || 'catalogo';
+        if (actual !== vista) {
+            location.hash = vista;
+            return;
+        }
+    }
 
     document.querySelectorAll('[data-vista]').forEach((s) => { s.hidden = s.dataset.vista !== vista; });
     document.querySelectorAll('[data-nav]').forEach((a) => {
@@ -165,11 +179,22 @@ function sincronizarMenuLateral(vista) {
             n.hidden = true;
             return;
         }
+        if (!puedeVerNav(n.dataset.nav)) {
+            n.hidden = true;
+            return;
+        }
         if (n.matches('[data-requiere="sesion"]')) {
             n.hidden = !sesion.token;
         } else {
             n.hidden = false;
         }
+    });
+    document.querySelectorAll('.nav-inferior a[data-nav]').forEach((n) => {
+        if (!puedeVerNav(n.dataset.nav)) {
+            n.hidden = true;
+            return;
+        }
+        n.hidden = n.matches('[data-requiere="sesion"]') ? !sesion.token : false;
     });
     const cajaSesion = document.querySelector('.sesion');
     if (cajaSesion) cajaSesion.hidden = enAuth;
@@ -187,7 +212,7 @@ function refrescarSesion() {
         const permitido = alguno.length
             ? alguno.some((p) => sesion.puede(p))
             : (!a.dataset.permiso || sesion.puede(a.dataset.permiso));
-        a.hidden = !sesion.esStaff || !permitido;
+        a.hidden = !sesion.esStaff || !permitido || !puedeVerNav(a.dataset.nav);
     });
     const labelGestion = document.querySelector('.menu-label[data-requiere="admin"]');
     if (labelGestion) {
@@ -256,7 +281,7 @@ function tarjetaProducto(p) {
             el('div', { class: 'nombre' }, p.nombre),
             el('div', { class: 'chips-producto' },
                 p.productor ? el('span', { class: 'mini-chip' }, p.productor) : null,
-                p.presentaciones?.length ? el('span', { class: 'mini-chip' }, `${p.presentaciones.length} presentaciones`) : null,
+                p.presentaciones?.length ? el('span', { class: 'mini-chip' }, p.presentaciones.length === 1 ? '1 presentación' : `${p.presentaciones.length} presentaciones`) : null,
                 p.retornable ? el('span', { class: 'mini-chip' }, 'Retornable') : null),
             el('div', { class: 'desc' }, p.descripcion || ''),
             el('div', { class: 'precio' }, quetzales(p.precio), ' ', el('small', {}, `/ ${p.unidad}`)),
@@ -267,12 +292,12 @@ function tarjetaProducto(p) {
                     type: 'button',
                     disabled: p.stock === 0,
                     onclick: () => agregarAlCarrito(p, Number(cantidad.value), 0),
-                }, 'Agregar'),
-                el('button', {
-                    type: 'button',
-                    class: 'boton-texto',
-                    onclick: () => { location.hash = `producto-${p.id}`; },
-                }, 'Ver ficha'))));
+                }, 'Agregar')),
+            el('button', {
+                type: 'button',
+                class: 'ver-ficha',
+                onclick: () => { location.hash = `producto-${p.id}`; },
+            }, 'Ver ficha')));
 }
 
 async function agregarAlCarrito(producto, cantidad, presentacionId = 0) {
@@ -626,7 +651,7 @@ async function verPedido(uuid) {
     }
     const recienCreado = sessionStorage.getItem('pedidoRecienCreado') === uuid;
     if (recienCreado) sessionStorage.removeItem('pedidoRecienCreado');
-    $('#detalle-pedido').replaceChildren(
+    $('#detalle-pedido').replaceChildren(...[
         recienCreado ? el('div', { class: 'exito-compra' },
             el('strong', {}, 'Compra registrada'),
             el('p', {}, `Total ${quetzales(p.total)}. El precio lo confirmó el servidor. Puedes pagar con tarjeta o dejarlo contra entrega.`)) : null,
@@ -651,7 +676,8 @@ async function verPedido(uuid) {
             el('p', { class: 'nota-seguridad' }, 'Muéstralo al devolver el casco o la canasta. En Envases ese código acredita el depósito. El monto lo calcula el servidor.')) : null,
         mapaEntrega(p),
         bloqueChat(p),
-        bloqueCalificacion(p));
+        bloqueCalificacion(p),
+    ].filter((hijo) => hijo instanceof Node));
 }
 
 async function cargarProducto() {
@@ -998,7 +1024,7 @@ $('#form-tarjeta-regalo')?.addEventListener('submit', async (e) => {
 
 // ============================================================ Administración
 
-const graficos = { pedidos: null, seguridad: null };
+const graficos = { pedidos: null, seguridad: null, reporteDias: null };
 let productosAdmin = [];
 let pedidoAdminSeleccionado = null;
 let transicionesAdmin = {};
@@ -1007,7 +1033,7 @@ function sincronizarMenuAdmin() {
     const enlaces = [...document.querySelectorAll('.menu a[data-admin-tab]')];
     enlaces.forEach((a) => {
         const permiso = a.dataset.permiso;
-        a.hidden = !sesion.esStaff || (permiso ? !sesion.puede(permiso) : false);
+        a.hidden = !sesion.esStaff || (permiso ? !sesion.puede(permiso) : false) || !puedeVerNav(a.dataset.nav);
     });
     const label = document.querySelector('.menu-label[data-requiere="admin"]');
     if (label) label.hidden = !sesion.esStaff || enlaces.every((a) => a.hidden);
@@ -1027,17 +1053,6 @@ function sincronizarMenuAdmin() {
     document.querySelectorAll('.tab-panel').forEach((p) => { p.hidden = p.id !== tab; });
     const titulo = $('#titulo-admin');
     if (titulo) titulo.textContent = TITULOS_ADMIN[tab] || 'Panel';
-    const avisoRol = $('#rol-activo');
-    if (avisoRol && sesion.usuario) {
-        const nombres = { admin: 'Administrador', operador: 'Operador de bodega', contador: 'Contador' };
-        const secciones = enlaces.filter((a) => !a.hidden).map((a) => [...a.childNodes]
-            .filter((n) => n.nodeType === Node.TEXT_NODE)
-            .map((n) => n.textContent.trim())
-            .filter(Boolean)
-            .join(' '));
-        avisoRol.hidden = false;
-        avisoRol.textContent = `Sesión de ${nombres[sesion.usuario.rol] || sesion.usuario.rol}. En Gestión ves: ${secciones.join(', ')}.`;
-    }
     return tab;
 }
 
@@ -1056,6 +1071,7 @@ async function abrirAdmin() {
     ({
         'admin-dashboard': cargarDashboard,
         'admin-productos': cargarAdminProductos,
+        'admin-inventario': cargarInventario,
         'admin-clasificacion': cargarClasificacion,
         'admin-fefo': cargarFefo,
         'admin-pedidos': cargarAdminPedidos,
@@ -1162,7 +1178,7 @@ async function cargarDashboard() {
                 datasets: [{
                     label: 'Eventos',
                     data: top.map(([, n]) => n),
-                    backgroundColor: '#169c3f',
+                    backgroundColor: '#0f6f78',
                     borderRadius: 8,
                 }],
             },
@@ -1203,7 +1219,7 @@ async function cargarAdminProductos() {
 function pintarProductosAdmin() {
     const q = ($('#buscar-producto-admin').value || '').trim().toLowerCase();
     const lista = q ? productosAdmin.filter((p) => p.nombre.toLowerCase().includes(q) || p.categoria.toLowerCase().includes(q) || (p.productor || '').toLowerCase().includes(q)) : productosAdmin;
-    $('#tabla-productos').replaceChildren(...(lista.length ? lista.map(filaProducto) : [el('tr', {}, el('td', { colspan: '10', class: 'vacio' }, 'Sin resultados'))]));
+    $('#tabla-productos').replaceChildren(...(lista.length ? lista.map(filaProducto) : [el('tr', {}, el('td', { colspan: '11', class: 'vacio' }, 'Sin resultados'))]));
 }
 
 function filaProducto(p) {
@@ -1211,40 +1227,131 @@ function filaProducto(p) {
     const dias = fresco?.vence ? Math.round((new Date(`${fresco.vence}T00:00:00`) - new Date()) / 86400000) : null;
     const detalle = [
         p.conservacion === 'refrigerado' ? 'Refrigerado' : 'Sin refrigerar',
-        p.presentaciones?.length ? p.presentaciones.map((x) => x.nombre).join(', ') : '',
+        `Costo ${quetzales(p.precio_compra || 0)} + inyección ${quetzales(p.inyeccion || 0)} + margen ${quetzales(p.margen_utilidad || 0)}`,
+        p.presentaciones?.length ? p.presentaciones.map((x) => `${x.nombre} · ${x.factor} ${nombreUnidad(p.unidad)}`).join(', ') : '',
         fresco ? `Lote ${fresco.codigo} · ingresó ${fresco.ingreso || '—'} · vence ${fresco.vence} (${dias} d)` : 'Sin lote',
     ].filter(Boolean);
     return el('tr', {},
         el('td', {}, p.imagen_url ? el('img', { class: 'miniatura', src: p.imagen_url, alt: '' }) : el('span', { class: 'emoji' }, p.icono)),
-        el('td', {}, el('strong', {}, p.nombre), el('div', { class: 'stock' }, detalle.join(' · '))),
+        el('td', { class: 'celda-producto' },
+            el('strong', {}, p.nombre),
+            el('div', { class: 'detalle-producto' }, ...detalle.map((linea) => el('span', {}, linea)))),
         el('td', {}, p.categoria),
         el('td', {}, p.productor || 'Sin marca'),
         el('td', {}, quetzales(p.precio)),
         el('td', {}, Number(p.precio_compra) > 0 ? quetzales(p.precio_compra) : 'Sin costo'),
+        el('td', {}, quetzales(p.inyeccion || 0)),
         el('td', {}, String(p.stock)),
         el('td', {}, p.destacado ? 'Sí' : 'No'),
         el('td', {}, el('span', { class: p.activo ? 'badge-activo' : 'badge-inactivo' }, p.activo ? 'Activo' : 'Inactivo')),
-        el('td', {}, el('div', { class: 'acciones-producto' },
-            el('button', { type: 'button', class: 'mini', onclick: () => abrirEditarProducto(p) }, 'Editar'),
-            el('button', {
-                type: 'button',
-                class: 'mini secundario',
-                onclick: () => cambiarActivoProducto(p),
-            }, p.activo ? 'Desactivar' : 'Activar'),
-            p.activo ? el('button', { type: 'button', class: 'mini peligro', onclick: () => eliminarProducto(p) }, 'Eliminar') : null,
-            el('button', {
-                type: 'button', class: 'mini secundario',
-                onclick: () => { productoParaImagen = p; $('#input-imagen').click(); },
-            }, 'Imagen'))));
+        el('td', { class: 'celda-acciones' }, el('div', { class: 'acciones-producto' },
+            botonIcono('edit', 'Editar', '', () => abrirEditarProducto(p)),
+            botonIcono('image', 'Imagen', 'secundario', () => { productoParaImagen = p; $('#input-imagen').click(); }),
+            botonIcono(p.activo ? 'visibility_off' : 'visibility', p.activo ? 'Desactivar' : 'Activar', 'secundario', () => cambiarActivoProducto(p)),
+            p.activo ? botonIcono('delete', 'Eliminar', 'peligro', () => eliminarProducto(p)) : null)));
+}
+
+function botonIcono(icono, etiqueta, clase, onclick) {
+    return el('button', {
+        type: 'button',
+        class: `icono-accion${clase ? ` ${clase}` : ''}`,
+        title: etiqueta,
+        'aria-label': etiqueta,
+        onclick,
+    }, el('span', { class: 'material-symbols-outlined', 'aria-hidden': 'true' }, icono));
 }
 
 function camposExtraProducto(esNuevo) {
-    ['bloque-categoria-nueva', 'bloque-presentacion-ayuda', 'bloque-presentacion', 'bloque-marca-nueva', 'bloque-lote-ayuda', 'bloque-lote']
+    ['bloque-categoria-nueva', 'bloque-marca-nueva', 'bloque-lote-ayuda', 'bloque-lote']
         .forEach((id) => { const nodo = document.getElementById(id); if (nodo) nodo.hidden = !esNuevo; });
     const activo = document.getElementById('campo-producto-activo');
     const destacado = document.getElementById('campo-producto-destacado');
     if (activo) activo.hidden = esNuevo;
     if (destacado) destacado.hidden = esNuevo;
+}
+
+function ventaBaseProducto() {
+    const costo = Number($('#precio-costo')?.value || 0);
+    const inyeccion = Number($('#precio-inyeccion')?.value || 0);
+    const margen = Number($('#precio-margen')?.value || 0);
+    return Math.round((costo + inyeccion + margen) * 100) / 100;
+}
+
+function actualizarPreciosProducto() {
+    const venta = ventaBaseProducto();
+    const campo = $('#precio-venta');
+    if (campo) campo.value = venta > 0 ? venta.toFixed(2) : '';
+    document.querySelectorAll('#lista-presentaciones .presentacion-fila').forEach((fila) => {
+        const factor = Number(fila.querySelector('[data-campo=factor]')?.value || 0);
+        const destino = fila.querySelector('[data-campo=venta]');
+        if (destino) destino.value = venta > 0 && factor >= 1 ? (venta * factor).toFixed(2) : '';
+    });
+}
+
+const NOMBRES_UNIDAD = {
+    lb: 'libras', unidad: 'unidades', kg: 'kilogramos', docena: 'docenas',
+    paquete: 'paquetes', litro: 'litros', galon: 'galones',
+};
+
+function nombreUnidad(codigo) {
+    return NOMBRES_UNIDAD[codigo] || 'unidades';
+}
+
+function unidadBaseProducto() {
+    return nombreUnidad(document.querySelector('#form-producto [name=unidad]')?.value || 'unidad');
+}
+
+function refrescarUnidadesPresentacion() {
+    const texto = unidadBaseProducto();
+    document.querySelectorAll('#lista-presentaciones .unidad-base').forEach((nodo) => { nodo.textContent = texto; });
+}
+
+function agregarFilaPresentacion(datos = {}) {
+    const lista = $('#lista-presentaciones');
+    if (!lista) return;
+    const nombre = el('input', { 'data-campo': 'nombre', value: datos.nombre || '', maxlength: '80', placeholder: 'Red, docena, bolsa…' });
+    const factor = el('input', { 'data-campo': 'factor', type: 'number', min: '1', step: '1', value: datos.factor ? String(datos.factor) : '1', placeholder: '5' });
+    const venta = el('input', { 'data-campo': 'venta', readonly: true, placeholder: 'Se calcula' });
+    factor.addEventListener('input', actualizarPreciosProducto);
+    const fila = el('div', { class: 'presentacion-fila', 'data-id': datos.id ? String(datos.id) : '' },
+        el('label', {}, 'Nombre', nombre),
+        el('label', {}, 'Unidades de medida', factor, el('small', { class: 'unidad-base-nota' }, 'de ', el('span', { class: 'unidad-base' }, unidadBaseProducto()))),
+        el('label', {}, 'Venta (Q)', venta),
+        el('button', {
+            type: 'button',
+            class: 'icono-accion peligro',
+            title: 'Quitar presentación',
+            'aria-label': 'Quitar presentación',
+            onclick: () => { fila.remove(); actualizarPreciosProducto(); },
+        }, el('span', { class: 'material-symbols-outlined', 'aria-hidden': 'true' }, 'delete')));
+    lista.append(fila);
+    actualizarPreciosProducto();
+}
+
+function pintarPresentaciones(lista) {
+    const caja = $('#lista-presentaciones');
+    if (caja) caja.replaceChildren();
+    (lista || []).forEach((p) => agregarFilaPresentacion(p));
+}
+
+function leerPresentaciones() {
+    return [...document.querySelectorAll('#lista-presentaciones .presentacion-fila')].map((fila) => {
+        const item = {
+            nombre: fila.querySelector('[data-campo=nombre]')?.value.trim() || '',
+            factor: Number(fila.querySelector('[data-campo=factor]')?.value || 0),
+        };
+        if (fila.dataset.id) item.id = Number(fila.dataset.id);
+        return item;
+    }).filter((p) => p.nombre);
+}
+
+function desglosePrecioForm(form) {
+    return {
+        precio_compra: Number(form.precio_compra?.value || 0),
+        inyeccion: Number(form.inyeccion?.value || 0),
+        margen_utilidad: Number(form.margen_utilidad?.value || 0),
+        precio: ventaBaseProducto(),
+    };
 }
 
 function abrirNuevoProducto() {
@@ -1254,6 +1361,8 @@ function abrirNuevoProducto() {
     $('#titulo-modal-producto').textContent = 'Nuevo producto';
     $('#guardar-producto').textContent = 'Guardar';
     camposExtraProducto(true);
+    pintarPresentaciones([]);
+    actualizarPreciosProducto();
     const ingreso = form.lote_ingreso;
     if (ingreso && !ingreso.value) ingreso.value = new Date().toISOString().slice(0, 10);
     $('#modal-producto')?.showModal();
@@ -1265,8 +1374,13 @@ function abrirEditarProducto(p) {
     form.reset();
     form.nombre.value = p.nombre || '';
     form.categoria_id.value = String(p.categoria_id || '');
-    form.precio.value = Number(p.precio).toFixed(2);
-    form.precio_compra.value = Number(p.precio_compra) > 0 ? Number(p.precio_compra).toFixed(2) : '';
+    form.precio_compra.value = Number(p.precio_compra || 0).toFixed(2);
+    form.inyeccion.value = Number(p.inyeccion || 0).toFixed(2);
+    const margen = p.margen_utilidad != null
+        ? Number(p.margen_utilidad)
+        : Math.max(Number(p.precio || 0) - Number(p.precio_compra || 0), 0);
+    form.margen_utilidad.value = margen.toFixed(2);
+    actualizarPreciosProducto();
     form.stock.value = String(p.stock ?? 0);
     form.conservacion.value = p.conservacion || 'ambiente';
     form.unidad.value = p.unidad || 'unidad';
@@ -1277,6 +1391,7 @@ function abrirEditarProducto(p) {
     $('#titulo-modal-producto').textContent = 'Editar producto';
     $('#guardar-producto').textContent = 'Guardar cambios';
     camposExtraProducto(false);
+    pintarPresentaciones(p.presentaciones || []);
     $('#modal-producto')?.showModal();
 }
 
@@ -1297,6 +1412,111 @@ async function eliminarProducto(p) {
 
 $('#buscar-producto-admin').addEventListener('input', pintarProductosAdmin);
 
+const inventarioEstado = { productos: [], filtro: 'todos' };
+const FILTROS_INVENTARIO = [
+    ['todos', 'Todos'],
+    ['bajo', 'Bajo stock'],
+    ['agotado', 'Agotados'],
+    ['frio', 'Refrigerados'],
+    ['seco', 'Sin refrigerar'],
+    ['vence', 'Por vencer'],
+];
+
+function diasHastaFecha(fecha) {
+    if (!fecha) return null;
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    return Math.round((new Date(`${fecha}T00:00:00`) - hoy) / 86400000);
+}
+
+function clasificarInventario(p) {
+    const dias = diasHastaFecha(p.frescura?.vence);
+    if (!p.activo) return { clave: 'inactivo', texto: 'Inactivo', clase: 'badge-inactivo' };
+    if (Number(p.stock) <= 0) return { clave: 'agotado', texto: 'Agotado', clase: 'badge-inactivo' };
+    if (dias !== null && dias < 0) return { clave: 'vence', texto: 'Vencido', clase: 'badge-inactivo' };
+    if (dias !== null && dias <= 7) return { clave: 'vence', texto: 'Por vencer', clase: 'badge-alerta' };
+    if (Number(p.stock) <= 10) return { clave: 'bajo', texto: 'Bajo', clase: 'badge-alerta' };
+    return { clave: 'ok', texto: 'En bodega', clase: 'badge-activo' };
+}
+
+function pasaFiltroInventario(p, filtro) {
+    const estado = clasificarInventario(p);
+    if (filtro === 'bajo') return p.activo && Number(p.stock) > 0 && Number(p.stock) <= 10;
+    if (filtro === 'agotado') return p.activo && Number(p.stock) <= 0;
+    if (filtro === 'frio') return p.conservacion === 'refrigerado';
+    if (filtro === 'seco') return p.conservacion !== 'refrigerado';
+    if (filtro === 'vence') return estado.clave === 'vence';
+    return true;
+}
+
+function metroStock(stock) {
+    const cantidad = Math.max(0, Number(stock) || 0);
+    const pct = Math.max(cantidad === 0 ? 6 : 8, Math.min(100, (cantidad / 40) * 100));
+    const clase = cantidad <= 0 ? 'agotado' : cantidad <= 10 ? 'bajo' : 'ok';
+    return el('div', { class: 'metro-stock' },
+        el('div', { class: `metro-stock-pista ${clase}` }, el('i', { style: `width:${pct}%` })),
+        el('small', {}, String(cantidad)));
+}
+
+async function cargarInventario() {
+    const [productos, lotes] = await Promise.all([
+        api('GET', '/api/catalogo/admin/productos'),
+        api('GET', '/api/catalogo/admin/lotes'),
+    ]);
+    if (!productos.ok) { aviso(productos.datos.error || 'No se pudo cargar el inventario', true); return; }
+    const enLote = {};
+    (lotes.ok ? lotes.datos.lotes : []).forEach((lote) => {
+        if (!['recibido', 'en_camara', 'listo'].includes(lote.estado)) return;
+        enLote[lote.producto_id] = (enLote[lote.producto_id] || 0) + Number(lote.cantidad || 0);
+    });
+    inventarioEstado.productos = (productos.datos.productos || []).map((p) => ({ ...p, unidades_lote: enLote[p.id] || 0 }));
+    pintarInventario();
+}
+
+function pintarInventario() {
+    const q = ($('#buscar-inventario')?.value || '').trim().toLowerCase();
+    const lista = inventarioEstado.productos.filter((p) => {
+        const texto = `${p.nombre} ${p.categoria || ''} ${p.productor || ''}`.toLowerCase();
+        return (!q || texto.includes(q)) && pasaFiltroInventario(p, inventarioEstado.filtro);
+    });
+    const activos = inventarioEstado.productos.filter((p) => p.activo);
+    const unidades = activos.reduce((s, p) => s + Number(p.stock || 0), 0);
+    const valor = activos.reduce((s, p) => s + Number(p.stock || 0) * Number(p.precio_compra || 0), 0);
+    const bajos = activos.filter((p) => Number(p.stock) > 0 && Number(p.stock) <= 10).length;
+    const agotados = activos.filter((p) => Number(p.stock) <= 0).length;
+    const porVencer = inventarioEstado.productos.filter((p) => clasificarInventario(p).clave === 'vence').length;
+    $('#inventario-cifras')?.replaceChildren(
+        el('article', {}, el('span', {}, 'Productos activos'), el('strong', {}, String(activos.length))),
+        el('article', {}, el('span', {}, 'Unidades en bodega'), el('strong', {}, String(unidades))),
+        el('article', { class: bajos ? 'alerta' : '' }, el('span', {}, 'Bajo stock'), el('strong', {}, String(bajos))),
+        el('article', { class: agotados ? 'peligro' : '' }, el('span', {}, 'Agotados'), el('strong', {}, String(agotados))),
+        el('article', { class: porVencer ? 'alerta' : '' }, el('span', {}, 'Por vencer o vencidos'), el('strong', {}, String(porVencer))),
+        el('article', {}, el('span', {}, 'Valor a costo'), el('strong', {}, quetzales(valor))),
+    );
+    $('#filtros-inventario')?.replaceChildren(...FILTROS_INVENTARIO.map(([clave, texto]) => el('button', {
+        type: 'button',
+        class: inventarioEstado.filtro === clave ? 'activo' : '',
+        onclick: () => { inventarioEstado.filtro = clave; pintarInventario(); },
+    }, texto)));
+    $('#tabla-inventario')?.replaceChildren(...(lista.length ? lista.map((p) => {
+        const estado = clasificarInventario(p);
+        const dias = diasHastaFecha(p.frescura?.vence);
+        const lote = p.frescura
+            ? `${p.frescura.codigo} · vence ${p.frescura.vence}${dias === null ? '' : ` (${dias} d)`}${p.unidades_lote ? ` · ${p.unidades_lote} en lotes` : ''}`
+            : 'Sin lote';
+        return el('tr', {},
+            el('td', { class: 'celda-producto' }, el('strong', {}, p.nombre), el('div', { class: 'detalle-producto' }, el('span', {}, p.categoria || 'Sin categoría'))),
+            el('td', {}, p.conservacion === 'refrigerado' ? 'Refrigerado' : 'Sin refrigerar'),
+            el('td', {}, metroStock(p.stock)),
+            el('td', {}, el('div', {}, quetzales(p.inyeccion || 0), el('div', { class: 'detalle-producto' }, el('span', {}, `en bodega ${quetzales(Number(p.stock || 0) * Number(p.inyeccion || 0))}`)))),
+            el('td', {}, lote),
+            el('td', {}, el('span', { class: estado.clase }, estado.texto)),
+            el('td', {}, Number(p.precio_compra) > 0 ? quetzales(Number(p.stock || 0) * Number(p.precio_compra)) : 'Sin costo'));
+    }) : [el('tr', {}, el('td', { colspan: '7', class: 'vacio' }, 'No hay productos con ese filtro'))]));
+}
+
+$('#buscar-inventario')?.addEventListener('input', pintarInventario);
+
 async function cargarClasificacion() {
     const { ok, datos } = await api('GET', '/api/catalogo/admin/clasificacion');
     if (!ok) { aviso(datos.error || 'No se pudo cargar categorías y marcas', true); return; }
@@ -1311,12 +1531,39 @@ async function cargarClasificacion() {
     )) : [el('tr', {}, el('td', { colspan: '3', class: 'vacio' }, 'Aún no hay marcas'))]));
 }
 
+function abrirDialogo(id) {
+    document.getElementById(id)?.showModal();
+}
+
+function cerrarDialogo(id) {
+    const modal = document.getElementById(id);
+    if (modal?.open) modal.close();
+}
+
+$('#btn-nueva-categoria')?.addEventListener('click', () => {
+    $('#form-categoria')?.reset();
+    abrirDialogo('modal-categoria');
+});
+$('#btn-nueva-marca')?.addEventListener('click', () => {
+    $('#form-marca')?.reset();
+    abrirDialogo('modal-marca');
+});
+['cerrar-modal-categoria', 'cancelar-modal-categoria'].forEach((id) => {
+    document.getElementById(id)?.addEventListener('click', () => cerrarDialogo('modal-categoria'));
+});
+['cerrar-modal-marca', 'cancelar-modal-marca'].forEach((id) => {
+    document.getElementById(id)?.addEventListener('click', () => cerrarDialogo('modal-marca'));
+});
+$('#modal-categoria')?.addEventListener('click', (e) => { if (e.target === e.currentTarget) cerrarDialogo('modal-categoria'); });
+$('#modal-marca')?.addEventListener('click', (e) => { if (e.target === e.currentTarget) cerrarDialogo('modal-marca'); });
+
 $('#form-categoria')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const { ok, datos } = await api('POST', '/api/catalogo/admin/categorias', Object.fromEntries(new FormData(e.target)));
     if (!ok) { aviso(datos.error, true); return; }
     aviso('Categoría lista. Ya puedes amarrarla a un producto.');
     e.target.reset();
+    cerrarDialogo('modal-categoria');
     estado.categorias = [];
     cargarClasificacion();
 });
@@ -1327,6 +1574,7 @@ $('#form-marca')?.addEventListener('submit', async (e) => {
     if (!ok) { aviso(datos.error, true); return; }
     aviso('Marca lista. Ya puedes amarrarla a un producto.');
     e.target.reset();
+    cerrarDialogo('modal-marca');
     cargarClasificacion();
 });
 
@@ -1335,6 +1583,11 @@ function cerrarModalProducto() {
     if (modal?.open) modal.close();
 }
 $('#btn-nuevo-producto').addEventListener('click', abrirNuevoProducto);
+['precio-costo', 'precio-inyeccion', 'precio-margen'].forEach((id) => {
+    document.getElementById(id)?.addEventListener('input', actualizarPreciosProducto);
+});
+$('#btn-agregar-presentacion')?.addEventListener('click', () => agregarFilaPresentacion());
+document.querySelector('#form-producto [name=unidad]')?.addEventListener('change', refrescarUnidadesPresentacion);
 $('#cerrar-modal-producto').addEventListener('click', cerrarModalProducto);
 $('#cancelar-modal-producto').addEventListener('click', cerrarModalProducto);
 $('#modal-producto').addEventListener('click', (e) => { if (e.target === e.currentTarget) cerrarModalProducto(); });
@@ -1343,18 +1596,19 @@ $('#form-producto').addEventListener('submit', async (e) => {
     e.preventDefault();
     const datosForm = Object.fromEntries(new FormData(e.target));
     if (productoEditando) {
+        const precios = desglosePrecioForm(e.target);
         const cuerpo = {
             nombre: datosForm.nombre,
             descripcion: datosForm.descripcion || '',
-            precio: Number(datosForm.precio),
+            ...precios,
             stock: Number(datosForm.stock),
             categoria_id: Number(datosForm.categoria_id),
             unidad: datosForm.unidad,
             conservacion: datosForm.conservacion,
             activo: Boolean(e.target.activo?.checked),
             destacado: Boolean(e.target.destacado?.checked),
+            presentaciones: leerPresentaciones(),
         };
-        if (datosForm.precio_compra !== '' && datosForm.precio_compra != null) cuerpo.precio_compra = Number(datosForm.precio_compra);
         if (datosForm.productor_id) cuerpo.productor_id = Number(datosForm.productor_id);
         const respuesta = await api('PUT', `/api/catalogo/admin/productos/${productoEditando.id}`, cuerpo);
         if (!respuesta.ok) { aviso(respuesta.datos.error, true); return; }
@@ -1365,7 +1619,8 @@ $('#form-producto').addEventListener('submit', async (e) => {
         cargarAdminProductos();
         return;
     }
-    datosForm.precio = Number(datosForm.precio);
+    Object.assign(datosForm, desglosePrecioForm(e.target));
+    datosForm.presentaciones = leerPresentaciones();
     datosForm.stock = Number(datosForm.stock);
     datosForm.categoria_id = Number(datosForm.categoria_id);
     if (datosForm.precio_compra !== '') datosForm.precio_compra = Number(datosForm.precio_compra);
@@ -1503,10 +1758,10 @@ async function verPedidoAdmin(uuid) {
             : 'Este pedido está cancelado. No hay más cambios.')];
     const acciones = el('div', { class: 'acciones-estado' }, ...botonesEstado);
 
-    $('#detalle-pedido-admin').replaceChildren(
+    montar($('#detalle-pedido-admin'),
         el('div', { class: 'barra' },
             el('h2', {}, 'Gestionar pedido'),
-            el('button', { type: 'button', class: 'secundario', onclick: cerrarDetallePedidoAdmin }, '← Volver a la lista')),
+            el('button', { type: 'button', class: 'secundario', onclick: cerrarDetallePedidoAdmin }, 'Volver a la lista')),
         el('p', { class: 'uuid' }, p.uuid),
         el('p', {}, 'Estado actual: ', etiquetaEstado(p.estado)),
         pasos,
@@ -1518,10 +1773,11 @@ async function verPedidoAdmin(uuid) {
         el('p', {}, el('strong', {}, 'Teléfono: '), p.telefono),
         p.referencias ? el('p', {}, el('strong', {}, 'Referencias: '), p.referencias) : null,
         p.notas ? el('p', {}, el('strong', {}, 'Notas: '), p.notas) : null,
-        el('table', {},
+        el('h3', { class: 'subtitulo-admin' }, 'Productos'),
+        el('div', { class: 'tabla-scroll' }, el('table', {},
             el('thead', {}, el('tr', {}, el('th', {}, 'Producto'), el('th', {}, 'Cant.'), el('th', {}, 'Subtotal'))),
             el('tbody', {}, ...p.detalle.map((d) => el('tr', {},
-                el('td', {}, d.nombre), el('td', {}, d.cantidad), el('td', {}, quetzales(d.subtotal)))))),
+                el('td', {}, d.nombre || '—'), el('td', {}, d.cantidad), el('td', {}, quetzales(d.subtotal))))))),
         el('p', { class: 'total' }, 'Total: ', el('strong', {}, quetzales(p.total))),
         bloqueEfectivoAdmin(p),
         formularioRuta(p));
@@ -1641,15 +1897,24 @@ function sincronizarTemperaturaLote() {
 
 function llenarPreciosLote() {
     const opcion = $('#form-lote')?.producto_id?.selectedOptions?.[0];
-    const venta = Number(opcion?.dataset.precio || 0);
-    const compra = Number(opcion?.dataset.precioCompra || 0);
-    const ventaAnterior = $('#venta-anterior');
-    const compraAnterior = $('#compra-anterior');
+    const costo = Number(opcion?.dataset.precioCompra || 0);
+    const inyeccion = Number(opcion?.dataset.inyeccion || 0);
+    const margen = Number(opcion?.dataset.margen || 0);
     const form = $('#form-lote');
-    if (ventaAnterior) ventaAnterior.value = venta > 0 ? quetzales(venta) : 'Sin precio anterior';
-    if (compraAnterior) compraAnterior.value = quetzales(compra);
-    if (form?.precio) form.precio.value = venta > 0 ? venta.toFixed(2) : '';
-    if (form?.precio_compra) form.precio_compra.value = compra.toFixed(2);
+    if ($('#compra-anterior')) $('#compra-anterior').value = quetzales(costo);
+    if ($('#inyeccion-anterior')) $('#inyeccion-anterior').value = quetzales(inyeccion);
+    if ($('#margen-anterior')) $('#margen-anterior').value = quetzales(margen);
+    if (form?.precio_compra) form.precio_compra.value = costo.toFixed(2);
+    if (form?.inyeccion) form.inyeccion.value = inyeccion.toFixed(2);
+    if (form?.margen_utilidad) form.margen_utilidad.value = margen.toFixed(2);
+    actualizarVentaLote();
+}
+
+function actualizarVentaLote() {
+    const form = $('#form-lote');
+    const venta = Number(form?.precio_compra?.value || 0) + Number(form?.inyeccion?.value || 0) + Number(form?.margen_utilidad?.value || 0);
+    const campo = $('#venta-lote');
+    if (campo) campo.value = venta > 0 ? quetzales(venta) : '';
 }
 
 async function cargarFefo() {
@@ -1666,6 +1931,8 @@ async function cargarFefo() {
             'data-conservacion': p.conservacion || 'ambiente',
             'data-precio': String(p.precio || 0),
             'data-precio-compra': String(p.precio_compra || 0),
+            'data-inyeccion': String(p.inyeccion || 0),
+            'data-margen': String(p.margen_utilidad || 0),
         }, `${p.nombre} · ${p.conservacion === 'refrigerado' ? 'frío' : 'sin refri'}`)));
         if (elegido) select.value = elegido;
         sincronizarTemperaturaLote();
@@ -1681,6 +1948,9 @@ async function cargarFefo() {
 $('#form-lote')?.producto_id?.addEventListener('change', () => {
     sincronizarTemperaturaLote();
     llenarPreciosLote();
+});
+['precio_compra', 'inyeccion', 'margen_utilidad'].forEach((nombre) => {
+    $('#form-lote')?.[nombre]?.addEventListener('input', actualizarVentaLote);
 });
 
 $('#filtro-estado').addEventListener('change', () => {
@@ -1748,7 +2018,8 @@ async function cargarCapital() {
             ? Number(porProducto.get(linea.producto_id)?.precio_compra || 0) * Number(linea.factor || 1)
             : Number(linea.costo_unitario);
         const costoLinea = costoUnit * Number(linea.cantidad);
-        const ganancia = Number(linea.subtotal) - costoLinea;
+        const margenLinea = linea.margen_unitario == null ? null : Number(linea.margen_unitario) * Number(linea.cantidad);
+        const ganancia = margenLinea == null ? Number(linea.subtotal) - costoLinea : margenLinea;
         ventaCobrada += Number(linea.subtotal);
         costoVendido += costoLinea;
         gananciaFilas.push({ linea, costoLinea, ganancia, estimado });
@@ -1770,11 +2041,12 @@ async function cargarCapital() {
             el('td', {}, p.nombre),
             el('td', {}, p.stock),
             el('td', {}, sinCosto ? 'Sin precio de compra' : quetzales(p.precio_compra)),
+            el('td', {}, quetzales(p.inyeccion || 0)),
+            el('td', {}, sinCosto ? 'Falta el costo' : quetzales(p.margen)),
             el('td', {}, quetzales(p.precio_venta)),
             el('td', {}, sinCosto ? 'Q0.00' : quetzales(p.capital)),
-            el('td', {}, sinCosto ? 'Falta el costo' : quetzales(p.margen)),
         );
-    }) : [el('tr', {}, el('td', { colspan: '6', class: 'vacio' }, 'No hay productos activos'))]));
+    }) : [el('tr', {}, el('td', { colspan: '7', class: 'vacio' }, 'No hay productos activos'))]));
     $('#tabla-capital-caja').replaceChildren(...(caja.datos.movimientos.length ? caja.datos.movimientos.map((m) => el('tr', {},
         el('td', {}, new Date(String(m.created_at).replace(' ', 'T')).toLocaleString('es-GT')),
         el('td', {}, m.tipo === 'inyeccion' ? 'Inyección' : (m.tipo === 'retiro' ? 'Retiro' : 'Compra')),
@@ -1826,46 +2098,167 @@ $('#form-capital-retirar')?.addEventListener('submit', async (e) => {
 });
 
 const MEDIO_PAGO = { stripe: 'Tarjeta', efectivo: 'Efectivo contra entrega', regalo: 'Tarjeta de regalo' };
+const RUTA_PEDIDO = [
+    ['pendiente', 'Recibido', 'inbox'],
+    ['pagado', 'Pagado', 'payments'],
+    ['preparando', 'En bodega', 'inventory_2'],
+    ['en_camino', 'En ruta', 'local_shipping'],
+    ['entregado', 'Entregado', 'home'],
+];
 
-async function cargarReportes() {
-    const mesInput = $('#reporte-mes');
-    if (mesInput && !mesInput.value) {
-        const hoy = new Date();
-        mesInput.value = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}`;
-    }
-    const mes = encodeURIComponent(mesInput?.value || '');
-    const [ventas, cobros] = await Promise.all([
-        api('GET', `/api/pedidos/admin/reporte?mes=${mes}`),
-        api('GET', `/api/pagos/admin/reporte?mes=${mes}`),
-    ]);
-    if (!ventas.ok || !cobros.ok) {
-        aviso(ventas.datos?.error || cobros.datos?.error || 'No se pudo cargar la reportería', true);
+function barraRanking(nombre, detalle, pct) {
+    return el('div', { class: 'ranking-fila' },
+        el('span', {}, nombre),
+        el('small', {}, detalle),
+        el('div', { class: 'ranking-pista' }, el('i', { style: `width:${Math.max(4, Math.min(100, pct))}%` })));
+}
+
+function pintarGraficoDias(dias) {
+    const avisoVacio = $('#reporte-dias-vacio');
+    const canvas = $('#chart-reporte-dias');
+    destruirGrafico('reporteDias');
+    if (!canvas) return;
+    if (!dias.length || typeof Chart === 'undefined') {
+        canvas.hidden = true;
+        if (avisoVacio) avisoVacio.hidden = dias.length > 0;
         return;
     }
-    const estados = ventas.datos.estados || [];
-    const vendido = estados.filter((e) => e.estado !== 'cancelado').reduce((s, e) => s + Number(e.total), 0);
-    const medios = cobros.datos.medios || [];
+    canvas.hidden = false;
+    if (avisoVacio) avisoVacio.hidden = true;
+    graficos.reporteDias = new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: dias.map((d) => String(d.dia).slice(8)),
+            datasets: [{
+                label: 'Venta',
+                data: dias.map((d) => Number(d.total)),
+                backgroundColor: '#0f6f78',
+                borderRadius: 8,
+            }],
+        },
+        options: {
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true }, x: { ticks: { maxRotation: 0 } } },
+        },
+    });
+}
+
+function cifraReporte(texto, valor, clase = '') {
+    return el('article', { class: clase }, el('span', {}, texto), el('strong', {}, valor));
+}
+
+function pintarReporteInventario(productos) {
+    const activos = productos.filter((p) => p.activo);
+    const unidades = activos.reduce((s, p) => s + Number(p.stock || 0), 0);
+    const valor = activos.reduce((s, p) => s + Number(p.stock || 0) * Number(p.precio_compra || 0), 0);
+    const bajos = activos.filter((p) => Number(p.stock) > 0 && Number(p.stock) <= 10).length;
+    const agotados = activos.filter((p) => Number(p.stock) <= 0).length;
+    const porVencer = productos.filter((p) => clasificarInventario(p).clave === 'vence').length;
+    const orden = { vence: 0, agotado: 1, bajo: 2, ok: 3, inactivo: 4 };
+    const lista = [...productos].sort((a, b) => (orden[clasificarInventario(a).clave] ?? 9) - (orden[clasificarInventario(b).clave] ?? 9));
+    $('#reporte-inventario-cifras')?.replaceChildren(
+        cifraReporte('Productos activos', String(activos.length)),
+        cifraReporte('Unidades', String(unidades)),
+        cifraReporte('Bajo stock', String(bajos), bajos ? 'alerta' : ''),
+        cifraReporte('Agotados', String(agotados), agotados ? 'peligro' : ''),
+        cifraReporte('Por vencer', String(porVencer), porVencer ? 'alerta' : ''),
+        cifraReporte('Valor a costo', quetzales(valor)),
+    );
+    $('#tabla-reporte-inventario')?.replaceChildren(...(lista.length ? lista.map((p) => {
+        const estado = clasificarInventario(p);
+        const dias = diasHastaFecha(p.frescura?.vence);
+        const lote = p.frescura
+            ? `${p.frescura.codigo} · ${p.frescura.vence}${dias === null ? '' : ` (${dias} d)`}`
+            : 'Sin lote';
+        return el('tr', {},
+            el('td', {}, el('strong', {}, p.nombre)),
+            el('td', {}, metroStock(p.stock)),
+            el('td', {}, el('span', { class: estado.clase }, estado.texto)),
+            el('td', {}, lote),
+            el('td', {}, Number(p.precio_compra) > 0 ? quetzales(Number(p.stock || 0) * Number(p.precio_compra)) : 'Sin costo'));
+    }) : [el('tr', {}, el('td', { colspan: '5', class: 'vacio' }, 'No hay productos en bodega'))]));
+}
+
+function filaReporteStock(p) {
+    const estado = clasificarInventario(p);
+    const dias = diasHastaFecha(p.frescura?.vence);
+    const lote = p.frescura
+        ? `${p.frescura.codigo} · ${p.frescura.vence}${dias === null ? '' : ` (${dias} d)`}`
+        : 'Sin lote';
+    return el('tr', {},
+        el('td', {}, el('strong', {}, p.nombre)),
+        el('td', {}, metroStock(p.stock)),
+        el('td', {}, el('span', { class: estado.clase }, estado.texto)),
+        el('td', {}, lote),
+        el('td', {}, Number(p.precio_compra) > 0 ? quetzales(Number(p.stock || 0) * Number(p.precio_compra)) : 'Sin costo'));
+}
+
+function pintarReporteCritico(productos) {
+    const lista = productos
+        .filter((p) => p.activo && Number(p.stock) <= 10)
+        .sort((a, b) => Number(a.stock) - Number(b.stock));
+    const bajos = lista.filter((p) => Number(p.stock) > 0).length;
+    const agotados = lista.filter((p) => Number(p.stock) <= 0).length;
+    $('#reporte-critico-cifras')?.replaceChildren(
+        cifraReporte('Con poco stock', String(bajos), bajos ? 'alerta' : ''),
+        cifraReporte('Agotados', String(agotados), agotados ? 'peligro' : ''),
+        cifraReporte('Para reponer', String(lista.length), lista.length ? 'alerta' : ''),
+    );
+    $('#tabla-reporte-critico')?.replaceChildren(...(lista.length
+        ? lista.map(filaReporteStock)
+        : [el('tr', {}, el('td', { colspan: '5', class: 'vacio' }, 'No hay productos con stock crítico'))]));
+}
+
+function pintarReporteVence(lotes) {
+    const vivos = lotes.filter((l) => ['recibido', 'en_camara', 'listo'].includes(l.estado));
+    const conDias = vivos.map((l) => ({ ...l, dias: diasHastaFecha(l.fecha_vencimiento) }));
+    const vencidos = conDias.filter((l) => l.dias !== null && l.dias < 0);
+    const semana = conDias.filter((l) => l.dias !== null && l.dias >= 0 && l.dias <= 7);
+    const quincena = conDias.filter((l) => l.dias !== null && l.dias > 7 && l.dias <= 15);
+    const frios = [...vencidos, ...semana].filter((l) => l.conservacion === 'refrigerado').length;
+    const lista = conDias.filter((l) => l.dias !== null && l.dias <= 15).sort((a, b) => a.dias - b.dias);
+    $('#reporte-vence-cifras')?.replaceChildren(
+        cifraReporte('Vencidos', String(vencidos.length), vencidos.length ? 'peligro' : ''),
+        cifraReporte('Vencen en 7 días', String(semana.length), semana.length ? 'alerta' : ''),
+        cifraReporte('Vencen en 15 días', String(quincena.length), quincena.length ? 'alerta' : ''),
+        cifraReporte('En frío y urgentes', String(frios), frios ? 'alerta' : ''),
+    );
+    $('#tabla-reporte-vence')?.replaceChildren(...(lista.length ? lista.map((l) => {
+        const texto = l.dias < 0 ? 'Vencido' : l.dias <= 7 ? 'Por vencer' : 'En ventana';
+        const clase = l.dias < 0 ? 'badge-inactivo' : 'badge-alerta';
+        return el('tr', {},
+            el('td', {}, el('strong', {}, l.producto)),
+            el('td', {}, l.codigo),
+            el('td', {}, l.conservacion === 'refrigerado' ? 'Refrigerado' : 'Sin refrigerar'),
+            el('td', {}, String(l.cantidad)),
+            el('td', {}, l.fecha_vencimiento),
+            el('td', {}, String(l.dias)),
+            el('td', {}, el('span', { class: clase }, texto)));
+    }) : [el('tr', {}, el('td', { colspan: '7', class: 'vacio' }, 'Ningún lote vence en los próximos 15 días'))]));
+}
+
+function pintarReportePagos(medios) {
     const sumaMedio = (proveedor, estado) => medios
         .filter((m) => m.proveedor === proveedor && (!estado || m.estado === estado))
         .reduce((s, m) => s + Number(m.monto), 0);
-    $('#reporte-cifras').replaceChildren(
-        el('article', {}, el('span', {}, 'Ventas del mes'), el('strong', {}, quetzales(vendido))),
-        el('article', {}, el('span', {}, 'Cobrado con tarjeta'), el('strong', {}, quetzales(sumaMedio('stripe', 'completado')))),
-        el('article', {}, el('span', {}, 'Cobrado en efectivo'), el('strong', {}, quetzales(sumaMedio('efectivo', 'completado')))),
-        el('article', {}, el('span', {}, 'Efectivo por cobrar'), el('strong', {}, quetzales(sumaMedio('efectivo', 'iniciado')))),
+    const tarjeta = sumaMedio('stripe', 'completado');
+    const efectivo = sumaMedio('efectivo', 'completado');
+    const regalo = sumaMedio('regalo', 'completado');
+    const porCobrar = sumaMedio('efectivo', 'iniciado');
+    const cobrado = tarjeta + efectivo + regalo;
+    const maxCobro = Math.max(1, cobrado, porCobrar);
+    $('#reporte-pagos-cifras')?.replaceChildren(
+        cifraReporte('Cobrado', quetzales(cobrado)),
+        cifraReporte('Tarjeta', quetzales(tarjeta)),
+        cifraReporte('Efectivo recibido', quetzales(efectivo)),
+        cifraReporte('Por cobrar en la puerta', quetzales(porCobrar), porCobrar ? 'alerta' : ''),
+        cifraReporte('Tarjeta de regalo', quetzales(regalo)),
     );
-    const productos = ventas.datos.productos || [];
-    $('#tabla-reporte-productos').replaceChildren(...(productos.length ? productos.map((p) => el('tr', {},
-        el('td', {}, p.nombre),
-        el('td', {}, p.unidades),
-        el('td', {}, quetzales(p.venta)),
-    )) : [el('tr', {}, el('td', { colspan: '3', class: 'vacio' }, 'Este mes no tiene ventas'))]));
-    $('#tabla-reporte-estados').replaceChildren(...(estados.length ? estados.map((e) => el('tr', {},
-        el('td', {}, e.estado.replace('_', ' ')),
-        el('td', {}, e.pedidos),
-        el('td', {}, quetzales(e.total)),
-    )) : [el('tr', {}, el('td', { colspan: '3', class: 'vacio' }, 'Este mes no tiene pedidos'))]));
-    $('#tabla-reporte-medios').replaceChildren(...(medios.length ? medios.map((m) => el('tr', {},
+    $('#cobros-reporte')?.replaceChildren(
+        barraRanking('Ya cobrado', quetzales(cobrado), (cobrado / maxCobro) * 100),
+        barraRanking('Por cobrar en la puerta', quetzales(porCobrar), (porCobrar / maxCobro) * 100),
+    );
+    $('#tabla-reporte-medios')?.replaceChildren(...(medios.length ? medios.map((m) => el('tr', {},
         el('td', {}, MEDIO_PAGO[m.proveedor] || m.proveedor),
         el('td', {}, m.estado),
         el('td', {}, m.pagos),
@@ -1873,7 +2266,181 @@ async function cargarReportes() {
     )) : [el('tr', {}, el('td', { colspan: '4', class: 'vacio' }, 'Este mes no tiene cobros'))]));
 }
 
-$('#reporte-mes')?.addEventListener('change', cargarReportes);
+function pintarReporteVentas(datos) {
+    const estados = datos.estados || [];
+    const porEstado = Object.fromEntries(estados.map((e) => [e.estado, e]));
+    const vendido = estados.filter((e) => e.estado !== 'cancelado').reduce((s, e) => s + Number(e.total), 0);
+    const pedidosMes = estados.filter((e) => e.estado !== 'cancelado').reduce((s, e) => s + Number(e.pedidos), 0);
+    const cancelados = Number(porEstado.cancelado?.pedidos || 0);
+    $('#reporte-cifras')?.replaceChildren(
+        cifraReporte('Venta del mes', quetzales(vendido)),
+        cifraReporte('Pedidos', String(pedidosMes)),
+        cifraReporte('Ticket promedio', pedidosMes ? quetzales(vendido / pedidosMes) : quetzales(0)),
+        cifraReporte('En ruta', String(porEstado.en_camino?.pedidos || 0)),
+        cifraReporte('Entregados', String(porEstado.entregado?.pedidos || 0)),
+        cifraReporte('Cancelados', String(cancelados), cancelados ? 'peligro' : ''),
+    );
+    $('#reporte-flujo')?.replaceChildren(...RUTA_PEDIDO.map(([clave, titulo, icono]) => {
+        const fila = porEstado[clave] || { pedidos: 0, total: 0 };
+        return el('article', { class: 'etapa-logistica' },
+            el('span', { class: 'material-symbols-outlined', 'aria-hidden': 'true' }, icono),
+            el('b', {}, titulo),
+            el('strong', {}, String(fila.pedidos)),
+            el('small', {}, quetzales(fila.total)));
+    }));
+    pintarGraficoDias(datos.dias || []);
+}
+
+function pintarReporteVendidos(datos) {
+    const productos = datos.productos || [];
+    const unidades = productos.reduce((s, p) => s + Number(p.unidades || 0), 0);
+    const venta = productos.reduce((s, p) => s + Number(p.venta || 0), 0);
+    const maxVenta = Math.max(1, ...productos.map((p) => Number(p.venta) || 0));
+    $('#reporte-vendidos-cifras')?.replaceChildren(
+        cifraReporte('Productos con salida', String(productos.length)),
+        cifraReporte('Unidades vendidas', String(unidades)),
+        cifraReporte('Venta', quetzales(venta)),
+    );
+    $('#ranking-productos')?.replaceChildren(...(productos.length ? productos.slice(0, 8).map((p) => barraRanking(
+        p.nombre,
+        `${p.unidades} u · ${quetzales(p.venta)}`,
+        (Number(p.venta) / maxVenta) * 100,
+    )) : [el('p', { class: 'vacio' }, 'Este mes no tiene salidas de bodega')]));
+    $('#tabla-reporte-vendidos')?.replaceChildren(...(productos.length ? productos.map((p) => el('tr', {},
+        el('td', {}, el('strong', {}, p.nombre)),
+        el('td', {}, String(p.unidades)),
+        el('td', {}, quetzales(p.venta)),
+    )) : [el('tr', {}, el('td', { colspan: '3', class: 'vacio' }, 'Este mes no tiene salidas de bodega'))]));
+}
+
+function pintarReporteEntregas(datos) {
+    const municipios = datos.municipios || [];
+    const pedidos = municipios.reduce((s, m) => s + Number(m.pedidos || 0), 0);
+    const venta = municipios.reduce((s, m) => s + Number(m.total || 0), 0);
+    const maxMunicipio = Math.max(1, ...municipios.map((m) => Number(m.pedidos) || 0));
+    $('#reporte-entregas-cifras')?.replaceChildren(
+        cifraReporte('Municipios', String(municipios.length)),
+        cifraReporte('Pedidos', String(pedidos)),
+        cifraReporte('Venta', quetzales(venta)),
+    );
+    $('#tabla-reporte-municipios')?.replaceChildren(...(municipios.length ? municipios.map((m) => el('tr', {},
+        el('td', {}, el('div', { class: 'ranking-fila' },
+            el('span', {}, m.municipio),
+            el('small', {}, String(m.pedidos)),
+            el('div', { class: 'ranking-pista' }, el('i', { style: `width:${(Number(m.pedidos) / maxMunicipio) * 100}%` })))),
+        el('td', {}, String(m.pedidos)),
+        el('td', {}, quetzales(m.total)),
+    )) : [el('tr', {}, el('td', { colspan: '3', class: 'vacio' }, 'Este mes no tiene entregas'))]));
+    $('#zonas-reporte')?.replaceChildren(...(datos.zonas || []).map((z) => el('span', {}, `${z.zona}: ${z.pedidos}`)));
+}
+
+const REPORTES = [
+    { id: 'inventario', titulo: 'Reporte de inventario', nota: 'Mercancía de hoy: stock, estado y valor a costo.', icono: 'warehouse', permiso: 'catalogo.gestionar', mes: false },
+    { id: 'critico', titulo: 'Reporte de stock crítico', nota: 'Productos con poco stock o agotados, para reponer.', icono: 'warning', permiso: 'catalogo.gestionar', mes: false },
+    { id: 'vence', titulo: 'Reporte de vencimiento', nota: 'Lotes vencidos o que vencen en los próximos 15 días.', icono: 'event_busy', permiso: 'catalogo.gestionar', mes: false },
+    { id: 'pagos', titulo: 'Reporte de pagos', nota: 'Cobros del mes: tarjeta, efectivo y tarjeta de regalo.', icono: 'payments', mes: true },
+    { id: 'ventas', titulo: 'Reporte de ventas', nota: 'Pedidos del mes y en qué paso de la ruta van.', icono: 'local_shipping', mes: true },
+    { id: 'vendidos', titulo: 'Reporte de productos vendidos', nota: 'Lo que salió de bodega en el mes.', icono: 'sell', mes: true },
+    { id: 'entregas', titulo: 'Reporte de entregas', nota: 'Pedidos y venta por municipio y zona.', icono: 'pin_drop', mes: true },
+];
+let reporteAbierto = null;
+
+function mesReporte() {
+    const mesInput = $('#reporte-mes');
+    if (mesInput && !mesInput.value) {
+        const hoy = new Date();
+        mesInput.value = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}`;
+    }
+    return mesInput?.value || '';
+}
+
+function pintarIndiceReportes() {
+    const lista = REPORTES.filter((r) => !r.permiso || sesion.puede(r.permiso));
+    $('#rejilla-reportes')?.replaceChildren(...lista.map((r) => el('button', {
+        type: 'button',
+        class: 'tarjeta-reporte',
+        onclick: () => abrirReporte(r.id),
+    },
+    el('span', { class: 'material-symbols-outlined', 'aria-hidden': 'true' }, r.icono),
+    el('strong', {}, r.titulo),
+    el('small', {}, r.nota))));
+}
+
+function mostrarIndiceReportes() {
+    reporteAbierto = null;
+    const indice = $('#reporte-indice');
+    const hoja = $('#reporte-hoja');
+    if (indice) indice.hidden = false;
+    if (hoja) hoja.hidden = true;
+}
+
+async function abrirReporte(id) {
+    reporteAbierto = id;
+    const indice = $('#reporte-indice');
+    const hoja = $('#reporte-hoja');
+    if (indice) indice.hidden = true;
+    if (hoja) hoja.hidden = false;
+    document.querySelectorAll('#reporte-hoja .bloque-reporte').forEach((bloque) => {
+        bloque.hidden = bloque.id !== `reporte-bloque-${id}`;
+    });
+    await cargarReporteAbierto();
+    hoja?.scrollIntoView({ block: 'start' });
+}
+
+async function cargarReporteAbierto() {
+    const def = REPORTES.find((r) => r.id === reporteAbierto);
+    if (!def) return;
+    const mes = mesReporte();
+    const titulo = $('#reporte-hoja-titulo');
+    const nota = $('#reporte-hoja-nota');
+    if (titulo) titulo.textContent = def.titulo;
+    if (nota) nota.textContent = def.mes ? `${def.nota} Mes ${mes}.` : `${def.nota} Corte de hoy.`;
+    if (def.id === 'inventario' || def.id === 'critico' || def.id === 'vence') {
+        const [productos, lotes] = await Promise.all([
+            api('GET', '/api/catalogo/admin/productos'),
+            api('GET', '/api/catalogo/admin/lotes'),
+        ]);
+        if (!productos.ok || !lotes.ok) {
+            aviso(productos.datos?.error || lotes.datos?.error || 'No se pudo cargar el reporte', true);
+            return;
+        }
+        if (def.id === 'inventario') pintarReporteInventario(productos.datos.productos || []);
+        if (def.id === 'critico') pintarReporteCritico(productos.datos.productos || []);
+        if (def.id === 'vence') pintarReporteVence(lotes.datos.lotes || []);
+        return;
+    }
+    if (def.id === 'pagos') {
+        const cobros = await api('GET', `/api/pagos/admin/reporte?mes=${encodeURIComponent(mes)}`);
+        if (!cobros.ok) { aviso(cobros.datos?.error || 'No se pudo cargar el reporte de pagos', true); return; }
+        pintarReportePagos(cobros.datos.medios || []);
+        return;
+    }
+    const ventas = await api('GET', `/api/pedidos/admin/reporte?mes=${encodeURIComponent(mes)}`);
+    if (!ventas.ok) { aviso(ventas.datos?.error || 'No se pudo cargar el reporte', true); return; }
+    if (def.id === 'ventas') pintarReporteVentas(ventas.datos);
+    if (def.id === 'vendidos') pintarReporteVendidos(ventas.datos);
+    if (def.id === 'entregas') pintarReporteEntregas(ventas.datos);
+}
+
+async function cargarReportes() {
+    mesReporte();
+    pintarIndiceReportes();
+    if (reporteAbierto) await cargarReporteAbierto();
+    else mostrarIndiceReportes();
+}
+
+$('#form-reporte-mes')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (reporteAbierto) cargarReporteAbierto();
+});
+$('#btn-volver-reportes')?.addEventListener('click', mostrarIndiceReportes);
+$('#btn-imprimir-reporte')?.addEventListener('click', () => {
+    document.body.classList.add('imprimiendo-reporte');
+    const quitar = () => document.body.classList.remove('imprimiendo-reporte');
+    window.addEventListener('afterprint', quitar, { once: true });
+    window.print();
+    setTimeout(quitar, 1000);
+});
 
 $('#form-regalo')?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -1956,19 +2523,167 @@ $('#form-usuario').addEventListener('submit', async (e) => {
 
 // ---------- Roles
 
-async function cargarAdminRoles() {
-    const { ok, datos } = await api('GET', '/api/auth/admin/roles');
-    if (!ok) { aviso(datos.error, true); return; }
-    const nombresPermiso = datos.permisos || {};
-    $('#matriz-roles').replaceChildren(...datos.roles.map((r) => {
-        const items = r.permisos.length
-            ? r.permisos.map((p) => el('li', {}, nombresPermiso[p] || p))
-            : [el('li', {}, 'Sin acceso al panel')];
-        return el('div', { class: 'rol-card' },
-            el('h3', {}, r.nombre),
-            el('p', {}, `${r.rol} — ${r.descripcion}`),
-            el('ul', {}, ...items));
+const ROLES_SISTEMA = [
+    { rol: 'admin', nombre: 'Administrador' },
+    { rol: 'operador', nombre: 'Operador' },
+    { rol: 'contador', nombre: 'Contador' },
+    { rol: 'cliente', nombre: 'Cliente' },
+];
+
+const ACCIONES_ROL = [
+    { id: 'ver', nombre: 'Ver' },
+    { id: 'editar', nombre: 'Editar' },
+    { id: 'eliminar', nombre: 'Eliminar' },
+    { id: 'cancelar', nombre: 'Cancelar' },
+];
+
+const MATRIZ_ROL = [
+    { apartado: 'Productos', cliente: ['ver'], operador: ['ver', 'editar', 'eliminar'], contador: [], admin: ['ver', 'editar', 'eliminar'] },
+    { apartado: 'Canasta', cliente: ['ver', 'editar'], operador: [], contador: [], admin: [] },
+    { apartado: 'Mis pedidos', cliente: ['ver', 'cancelar'], operador: [], contador: [], admin: [] },
+    { apartado: 'Envases', cliente: ['ver'], operador: [], contador: [], admin: [] },
+    { apartado: 'Cuenta', cliente: ['ver', 'editar'], operador: [], contador: [], admin: [] },
+    { apartado: 'Inventario', cliente: [], operador: ['ver', 'editar'], contador: [], admin: ['ver', 'editar'] },
+    { apartado: 'Categorías y marcas', cliente: [], operador: ['ver', 'editar'], contador: [], admin: ['ver', 'editar'] },
+    { apartado: 'Frescura', cliente: [], operador: ['ver', 'editar'], contador: [], admin: ['ver', 'editar'] },
+    { apartado: 'Pedidos del local', cliente: [], operador: ['ver', 'editar', 'cancelar'], contador: [], admin: ['ver', 'editar', 'cancelar'] },
+    { apartado: 'Pagos', cliente: [], operador: [], contador: ['ver'], admin: ['ver'] },
+    { apartado: 'Capital', cliente: [], operador: [], contador: ['ver', 'editar'], admin: ['ver', 'editar'] },
+    { apartado: 'Clientes', cliente: [], operador: [], contador: ['ver'], admin: ['ver'] },
+    { apartado: 'Reportería', cliente: [], operador: ['ver'], contador: ['ver'], admin: ['ver'] },
+    { apartado: 'Usuarios', cliente: [], operador: [], contador: [], admin: ['ver', 'editar', 'eliminar'] },
+    { apartado: 'Roles', cliente: [], operador: ['ver'], contador: ['ver'], admin: ['ver'] },
+    { apartado: 'Bitácora', cliente: [], operador: [], contador: [], admin: ['ver'] },
+];
+
+const rolesEstado = { filtro: 'admin' };
+const CLAVE_MATRIZ_ROL = 'mv-matriz-rol';
+
+const NAV_APARTADO = {
+    catalogo: 'Productos',
+    producto: 'Productos',
+    carrito: 'Canasta',
+    pedidos: 'Mis pedidos',
+    envases: 'Envases',
+    'admin-productos': 'Productos',
+    'admin-inventario': 'Inventario',
+    'admin-clasificacion': 'Categorías y marcas',
+    'admin-fefo': 'Frescura',
+    'admin-pedidos': 'Pedidos del local',
+    'admin-pagos': 'Pagos',
+    'admin-capital': 'Capital',
+    'admin-clientes': 'Clientes',
+    'admin-reportes': 'Reportería',
+    'admin-usuarios': 'Usuarios',
+    'admin-roles': 'Roles',
+    'admin-bitacora': 'Bitácora',
+};
+
+function leerMatrizRol() {
+    try {
+        const data = JSON.parse(localStorage.getItem(CLAVE_MATRIZ_ROL) || 'null');
+        return data && typeof data === 'object' ? data : null;
+    } catch {
+        return null;
+    }
+}
+
+function accionesDe(rol, apartado) {
+    const custom = leerMatrizRol()?.[rol]?.[apartado];
+    if (Array.isArray(custom)) return custom;
+    const fila = MATRIZ_ROL.find((f) => f.apartado === apartado);
+    return fila ? [...(fila[rol] || [])] : [];
+}
+
+function rolDeLaSesion() {
+    return sesion.usuario?.rol || 'cliente';
+}
+
+function puedeVerNav(nav) {
+    const apartado = NAV_APARTADO[nav];
+    if (!apartado) return true;
+    return accionesDe(rolDeLaSesion(), apartado).includes('ver');
+}
+
+function guardarAccionRol(rol, apartado, accion, activo) {
+    if (rol === 'admin' && apartado === 'Roles' && accion === 'ver' && !activo) {
+        aviso('Roles se queda visible para el administrador. Si se apaga, no habría cómo volver a marcarlo.', true);
+        pintarPermisosRol();
+        return;
+    }
+    const todo = {};
+    ROLES_SISTEMA.forEach((r) => {
+        todo[r.rol] = {};
+        MATRIZ_ROL.forEach((fila) => {
+            todo[r.rol][fila.apartado] = [...accionesDe(r.rol, fila.apartado)];
+        });
+    });
+    const marcas = new Set(todo[rol][apartado]);
+    if (activo) {
+        marcas.add(accion);
+        if (accion !== 'ver') marcas.add('ver');
+    } else if (accion === 'ver') {
+        marcas.clear();
+    } else {
+        marcas.delete(accion);
+    }
+    todo[rol][apartado] = [...marcas];
+    localStorage.setItem(CLAVE_MATRIZ_ROL, JSON.stringify(todo));
+    pintarPermisosRol();
+    refrescarSesion();
+    const nombreRol = ROLES_SISTEMA.find((r) => r.rol === rol)?.nombre || rol;
+    const verbo = ACCIONES_ROL.find((a) => a.id === accion)?.nombre || accion;
+    aviso(activo
+        ? `${nombreRol} ahora puede ${verbo.toLowerCase()} en ${apartado}.`
+        : `${nombreRol} ya no puede ${verbo.toLowerCase()} en ${apartado}. El menú se actualiza.`);
+}
+
+function fraseDelRol(rol) {
+    const partes = MATRIZ_ROL.map((fila) => {
+        const acciones = accionesDe(rol, fila.apartado);
+        if (!acciones.length) return '';
+        const nombres = ACCIONES_ROL.filter((a) => acciones.includes(a.id)).map((a) => a.nombre.toLowerCase());
+        const texto = nombres.length === 1 ? nombres[0] : `${nombres.slice(0, -1).join(', ')} y ${nombres.at(-1)}`;
+        return `en ${fila.apartado} puede ${texto}`;
+    }).filter(Boolean);
+    const nombre = ROLES_SISTEMA.find((r) => r.rol === rol)?.nombre || rol;
+    return partes.length ? `${nombre}: ${partes.join('; ')}.` : `${nombre}: no abre apartados.`;
+}
+
+function pintarSelectorRoles() {
+    $('#selector-roles')?.replaceChildren(...ROLES_SISTEMA.map((r) => el('button', {
+        type: 'button',
+        class: rolesEstado.filtro === r.rol ? 'activo' : '',
+        onclick: () => { rolesEstado.filtro = r.rol; pintarSelectorRoles(); pintarPermisosRol(); },
+    }, r.nombre)));
+}
+
+function pintarPermisosRol() {
+    const rol = rolesEstado.filtro;
+    const resumen = $('#resumen-rol');
+    if (resumen) resumen.textContent = fraseDelRol(rol);
+    const cuerpo = $('#tabla-permisos-rol');
+    if (!cuerpo) return;
+    cuerpo.replaceChildren(...MATRIZ_ROL.map((fila) => {
+        const acciones = accionesDe(rol, fila.apartado);
+        return el('tr', {},
+            el('td', {}, fila.apartado),
+            ...ACCIONES_ROL.map((accion) => {
+                const bloqueado = rol === 'admin' && fila.apartado === 'Roles' && accion.id === 'ver';
+                return el('td', {}, el('input', {
+                    type: 'checkbox',
+                    checked: acciones.includes(accion.id),
+                    disabled: bloqueado,
+                    'aria-label': `${fila.apartado}: ${accion.nombre}`,
+                    onchange: (e) => guardarAccionRol(rol, fila.apartado, accion.id, e.target.checked),
+                }));
+            }));
     }));
+}
+
+function cargarAdminRoles() {
+    pintarSelectorRoles();
+    pintarPermisosRol();
 }
 
 // ---------- Clientes
@@ -2095,8 +2810,10 @@ $('#form-lote')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const datosForm = Object.fromEntries(new FormData(e.target));
     if ($('#campo-temperatura-lote')?.hidden) delete datosForm.temperatura;
-    datosForm.precio = Number(datosForm.precio);
     datosForm.precio_compra = Number(datosForm.precio_compra);
+    datosForm.inyeccion = Number(datosForm.inyeccion || 0);
+    datosForm.margen_utilidad = Number(datosForm.margen_utilidad || 0);
+    delete datosForm.precio;
     const { ok, datos } = await api('POST', '/api/catalogo/admin/lotes', datosForm);
     if (!ok) { aviso(datos.error, true); return; }
     aviso('Lote recibido. La compra salió del efectivo del mes y el stock aumentó.');

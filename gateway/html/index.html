@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,0,0&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/app.css?v=rolesvivo">
 </head>
 <body>
     <div class="app-shell">
@@ -60,6 +60,7 @@
                 <p id="menu-rol" class="menu-rol" hidden></p>
                 <a href="#admin-dashboard" data-nav="admin-dashboard" data-admin-tab="admin-dashboard" data-permiso="dashboard.ver" data-requiere="admin" hidden><span class="material-symbols-outlined">dashboard</span> Resumen</a>
                 <a href="#admin-productos" data-nav="admin-productos" data-admin-tab="admin-productos" data-permiso="catalogo.gestionar" data-requiere="admin" hidden><span class="material-symbols-outlined">inventory_2</span> Productos</a>
+                <a href="#admin-inventario" data-nav="admin-inventario" data-admin-tab="admin-inventario" data-permiso="catalogo.gestionar" data-requiere="admin" hidden><span class="material-symbols-outlined">warehouse</span> Inventario</a>
                 <a href="#admin-clasificacion" data-nav="admin-clasificacion" data-admin-tab="admin-clasificacion" data-permiso="catalogo.gestionar" data-requiere="admin" hidden><span class="material-symbols-outlined">category</span> Categorías y marcas</a>
                 <a href="#admin-fefo" data-nav="admin-fefo" data-admin-tab="admin-fefo" data-permiso="catalogo.gestionar" data-requiere="admin" hidden><span class="material-symbols-outlined">ac_unit</span> Frescura</a>
                 <a href="#admin-pedidos" data-nav="admin-pedidos" data-admin-tab="admin-pedidos" data-permiso="pedidos.gestionar" data-requiere="admin" hidden><span class="material-symbols-outlined">local_shipping</span> Pedidos</a>
@@ -312,7 +313,6 @@
         <!-- ===================== Administración ===================== -->
         <section data-vista="admin" class="vista" hidden>
             <h1 id="titulo-admin">Resumen</h1>
-            <p id="rol-activo" class="nota-seguridad" hidden></p>
 
             <div id="admin-dashboard" class="tab-panel">
                 <div id="kpi-admin" class="kpi-grid"></div>
@@ -347,9 +347,12 @@
                         <label>Categoría <select name="categoria_id" required></select></label>
                         <p class="ayuda-campo">El producto queda amarrado a esta categoría. Si no está en la lista, créala en Categorías y marcas.</p>
                         <label id="bloque-categoria-nueva">Categoría nueva <input name="categoria_nueva" maxlength="60" placeholder="O escríbela aquí y se crea con este producto"></label>
+                        <p class="ayuda-campo">La venta no se escribe sola. Es el costo, más la inyección, más el margen. Ejemplo: 2 + 2 + 2 = 6.</p>
                         <div class="fila">
-                            <label>Precio de venta (Q) <input name="precio" type="number" step="0.01" min="0.01" placeholder="3.50" required></label>
-                            <label>Precio de compra (Q) <input name="precio_compra" type="number" step="0.01" min="0" placeholder="2.00"></label>
+                            <label>Costo (Q) <input id="precio-costo" name="precio_compra" type="number" step="0.01" min="0" placeholder="2.00" required></label>
+                            <label>Inyección (Q) <input id="precio-inyeccion" name="inyeccion" type="number" step="0.01" min="0" placeholder="2.00" value="0" required></label>
+                            <label>Margen (Q) <input id="precio-margen" name="margen_utilidad" type="number" step="0.01" min="0" placeholder="2.00" required></label>
+                            <label>Venta (Q) <input id="precio-venta" name="precio" type="number" step="0.01" readonly></label>
                         </div>
                         <div class="fila">
                             <label>Stock <input name="stock" type="number" min="0" placeholder="0" required></label>
@@ -371,11 +374,10 @@
                                 </select>
                             </label>
                         </div>
-                        <p id="bloque-presentacion-ayuda" class="ayuda-campo">Otra forma de venderlo, por ejemplo banano por libra y también una red de 5 lb. El factor es cuántas unidades base incluye.</p>
-                        <div id="bloque-presentacion" class="fila">
-                            <label>Presentación <input name="presentacion_nombre" maxlength="80" placeholder="Red de 5 lb"></label>
-                            <label>Incluye <input name="presentacion_factor" type="number" min="1" placeholder="5"></label>
-                            <label>Precio de esa presentación <input name="presentacion_precio" type="number" step="0.01" min="0.01" placeholder="16.00"></label>
+                        <div id="bloque-presentacion">
+                            <p id="bloque-presentacion-ayuda" class="ayuda-campo">La medida de arriba es la base. Cada presentación lleva un nombre y cuántas de esas unidades incluye. La venta se calcula sola. El bote quita esa presentación.</p>
+                            <div id="lista-presentaciones"></div>
+                            <button id="btn-agregar-presentacion" type="button" class="secundario">Agregar presentación</button>
                         </div>
                         <label>Marca <select name="productor_id"><option value="">Elige la marca</option></select></label>
                         <p class="ayuda-campo">Si eliges una marca, el producto queda amarrado a ese origen. Las marcas se registran en Categorías y marcas.</p>
@@ -402,57 +404,74 @@
                 <div class="tabla-scroll">
                     <table>
                         <thead>
-                            <tr><th></th><th>Producto</th><th>Categoría</th><th>Marca</th><th>Venta</th><th>Compra</th><th>Stock</th><th>Destacado</th><th>Activo</th><th>Acciones</th></tr>
+                            <tr><th></th><th>Producto</th><th>Categoría</th><th>Marca</th><th>Venta</th><th>Compra</th><th>Inyección</th><th>Stock</th><th>Destacado</th><th>Activo</th><th>Acciones</th></tr>
                         </thead>
                         <tbody id="tabla-productos"></tbody>
                     </table>
                 </div>
             </div>
 
-            <div id="admin-clasificacion" class="tab-panel tarjeta" hidden>
-                <div class="barra">
-                    <h2>Categorías y marcas</h2>
+            <div id="admin-clasificacion" class="tab-panel" hidden>
+                <div class="panel-clasificacion">
+                    <section class="tarjeta panel-lista">
+                        <div class="barra">
+                            <h3>Categorías</h3>
+                            <button type="button" id="btn-nueva-categoria">Crear categoría</button>
+                        </div>
+                        <div class="tabla-scroll">
+                            <table>
+                                <thead>
+                                    <tr><th>Categoría</th><th>Productos amarrados</th></tr>
+                                </thead>
+                                <tbody id="tabla-categorias"></tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section class="tarjeta panel-lista">
+                        <div class="barra">
+                            <h3>Marcas</h3>
+                            <button type="button" id="btn-nueva-marca">Crear marca</button>
+                        </div>
+                        <div class="tabla-scroll">
+                            <table>
+                                <thead>
+                                    <tr><th>Marca</th><th>Región</th><th>Productos amarrados</th></tr>
+                                </thead>
+                                <tbody id="tabla-marcas"></tbody>
+                            </table>
+                        </div>
+                    </section>
                 </div>
-                <p class="flujo-pedidos-ayuda">Primero existe la categoría y la marca. Después, al crear un producto, lo amarras a una categoría y, si tiene origen, a una marca. El número es cuántos productos usan cada una.</p>
-                <h3 class="subtitulo-admin">Categorías</h3>
-                <form id="form-categoria" class="form-cuenta">
-                    <div class="fila">
+                <dialog id="modal-categoria" class="modal modal-chico">
+                    <form id="form-categoria" class="form-modal">
+                        <div class="modal-cabecera">
+                            <h2>Nueva categoría</h2>
+                            <button type="button" id="cerrar-modal-categoria" class="boton-texto" aria-label="Cerrar">Cerrar</button>
+                        </div>
                         <label>Nombre <input name="nombre" required maxlength="60" placeholder="Golosinas"></label>
-                        <button type="submit">Crear categoría</button>
-                    </div>
-                </form>
-                <div class="tabla-scroll">
-                    <table>
-                        <thead>
-                            <tr><th>Categoría</th><th>Productos amarrados</th></tr>
-                        </thead>
-                        <tbody id="tabla-categorias"></tbody>
-                    </table>
-                </div>
-                <h3 class="subtitulo-admin">Marcas</h3>
-                <form id="form-marca" class="form-cuenta">
-                    <div class="fila">
+                        <div class="modal-acciones">
+                            <button type="button" id="cancelar-modal-categoria" class="secundario">Cancelar</button>
+                            <button type="submit">Crear categoría</button>
+                        </div>
+                    </form>
+                </dialog>
+                <dialog id="modal-marca" class="modal modal-chico">
+                    <form id="form-marca" class="form-modal">
+                        <div class="modal-cabecera">
+                            <h2>Nueva marca</h2>
+                            <button type="button" id="cerrar-modal-marca" class="boton-texto" aria-label="Cerrar">Cerrar</button>
+                        </div>
                         <label>Nombre <input name="nombre" required maxlength="120" placeholder="Dos Pinos"></label>
                         <label>Región <input name="region" maxlength="80" placeholder="Guatemala"></label>
-                        <button type="submit">Crear marca</button>
-                    </div>
-                </form>
-                <div class="tabla-scroll">
-                    <table>
-                        <thead>
-                            <tr><th>Marca</th><th>Región</th><th>Productos amarrados</th></tr>
-                        </thead>
-                        <tbody id="tabla-marcas"></tbody>
-                    </table>
-                </div>
+                        <div class="modal-acciones">
+                            <button type="button" id="cancelar-modal-marca" class="secundario">Cancelar</button>
+                            <button type="submit">Crear marca</button>
+                        </div>
+                    </form>
+                </dialog>
             </div>
 
             <div id="admin-pedidos" class="tab-panel" hidden>
-                <p class="flujo-pedidos-ayuda">
-                    Tú, como administrador, apruebas y avanzas cada pedido:
-                    <strong>pendiente → preparando → en camino → entregado</strong>.
-                    También puedes <strong>cancelar</strong> (se repone el stock).
-                </p>
                 <div id="lista-pedidos-admin" class="tarjeta">
                     <div class="barra">
                         <h2>Pedidos</h2>
@@ -529,11 +548,28 @@
                 </div>
             </div>
 
-            <div id="admin-roles" class="tab-panel tarjeta" hidden>
+            <div id="admin-roles" class="tab-panel" hidden>
                 <div class="barra">
                     <h2>Roles y permisos</h2>
                 </div>
-                <div id="matriz-roles" class="matriz-roles"></div>
+                <div id="selector-roles" class="selector-roles"></div>
+                <p id="resumen-rol" class="resumen-rol"></p>
+                <div class="tarjeta">
+                    <div class="tabla-scroll">
+                        <table class="tabla-permisos">
+                            <thead>
+                                <tr>
+                                    <th>Apartado</th>
+                                    <th>Ver</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
+                                    <th>Cancelar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-permisos-rol"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <div id="admin-clientes" class="tab-panel tarjeta" hidden>
@@ -551,12 +587,30 @@
                 </div>
             </div>
 
+            <div id="admin-inventario" class="tab-panel" hidden>
+                <div class="barra">
+                    <h2>Inventario de bodega</h2>
+                    <input id="buscar-inventario" type="search" placeholder="Buscar producto…" maxlength="60">
+                </div>
+                <div id="inventario-cifras" class="kpi-logistica grande"></div>
+                <div id="filtros-inventario" class="filtros-inventario"></div>
+                <div class="tarjeta">
+                    <div class="tabla-scroll">
+                        <table>
+                            <thead>
+                                <tr><th>Producto</th><th>Conservación</th><th>Stock</th><th>Inyección</th><th>Lote próximo</th><th>Estado</th><th>Valor a costo</th></tr>
+                            </thead>
+                            <tbody id="tabla-inventario"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <div id="admin-fefo" class="tab-panel tarjeta" hidden>
                 <div class="barra">
                     <h2>Control de frescura (FEFO)</h2>
                     <button id="btn-recibir-lote" type="button">Recibir lote</button>
                 </div>
-                <p class="flujo-pedidos-ayuda">Hay dos listas para no mezclar la información. Arriba va lo que debe estar en frío. Abajo va lo fresco o seco que no necesita refri, como banano, azúcar o golosinas. En las dos, el lote que vence primero sale primero.</p>
                 <dialog id="modal-lote" class="modal">
                     <form id="form-lote" class="form-modal">
                         <div class="modal-cabecera">
@@ -566,15 +620,20 @@
                         <label>Código <input name="codigo" placeholder="LT-BAN-015" required maxlength="40" pattern="[A-Za-z0-9-]{4,40}"></label>
                         <label>Producto <select name="producto_id" required></select></label>
                         <label>Cantidad <input name="cantidad" type="number" min="1" placeholder="Cantidad que entra" required></label>
+                        <p class="nota-seguridad">La venta es costo + inyección + margen. Si alguno cambia, se guarda el anterior y queda el nuevo. De la caja solo sale el costo por la cantidad que entra.</p>
                         <div class="fila">
-                            <label>Venta anterior <input id="venta-anterior" readonly></label>
-                            <label>Venta nueva (Q) <input name="precio" type="number" step="0.01" min="0.01" required></label>
+                            <label>Costo anterior <input id="compra-anterior" readonly></label>
+                            <label>Costo nuevo (Q) <input name="precio_compra" type="number" step="0.01" min="0" required></label>
                         </div>
                         <div class="fila">
-                            <label>Compra anterior <input id="compra-anterior" readonly></label>
-                            <label>Compra nueva (Q) <input name="precio_compra" type="number" step="0.01" min="0" required></label>
+                            <label>Inyección anterior <input id="inyeccion-anterior" readonly></label>
+                            <label>Inyección nueva (Q) <input name="inyeccion" type="number" step="0.01" min="0" required></label>
                         </div>
-                        <p class="nota-seguridad">Si la venta o la compra cambian, se guarda el precio anterior y después queda el nuevo. La cantidad entra al stock y el costo de esta compra sale del efectivo del mes.</p>
+                        <div class="fila">
+                            <label>Margen anterior <input id="margen-anterior" readonly></label>
+                            <label>Margen nuevo (Q) <input name="margen_utilidad" type="number" step="0.01" min="0" required></label>
+                        </div>
+                        <label>Venta, la suma <input id="venta-lote" readonly></label>
                         <div class="fila">
                             <label>Ingresó <input name="fecha_ingreso" type="date"></label>
                             <label>Vence <input name="fecha_vencimiento" type="date" required></label>
@@ -622,7 +681,7 @@
                 <div class="tabla-scroll">
                     <table>
                         <thead>
-                            <tr><th>Producto</th><th>Stock</th><th>Compra</th><th>Venta</th><th>Capital</th><th>Margen</th></tr>
+                            <tr><th>Producto</th><th>Stock</th><th>Costo</th><th>Inyección</th><th>Margen</th><th>Venta</th><th>Capital</th></tr>
                         </thead>
                         <tbody id="tabla-capital-productos"></tbody>
                     </table>
@@ -664,40 +723,112 @@
                 </div>
             </div>
 
-            <div id="admin-reportes" class="tab-panel tarjeta" hidden>
-                <div class="barra">
-                    <h2>Reportería de ventas</h2>
-                    <label>Mes <input id="reporte-mes" type="month"></label>
+            <div id="admin-reportes" class="tab-panel" hidden>
+                <div id="reporte-controles" class="barra no-imprimir">
+                    <h2>Reportería</h2>
+                    <form id="form-reporte-mes" class="fila">
+                        <label>Mes <input id="reporte-mes" type="month" required></label>
+                        <button type="submit">Aplicar mes</button>
+                    </form>
                 </div>
-                <p class="flujo-pedidos-ayuda">Ventas del mes, cómo se cobraron y qué productos salieron. El efectivo pendiente es un pago contra entrega que todavía no se recibió en la puerta.</p>
-                <div id="reporte-cifras" class="capital-cifras"></div>
-                <h3 class="subtitulo-admin">Ventas por producto</h3>
-                <div class="tabla-scroll">
-                    <table>
-                        <thead>
-                            <tr><th>Producto</th><th>Unidades</th><th>Venta</th></tr>
-                        </thead>
-                        <tbody id="tabla-reporte-productos"></tbody>
-                    </table>
+                <div id="reporte-indice">
+                    <div id="rejilla-reportes" class="rejilla-reportes"></div>
                 </div>
-                <h3 class="subtitulo-admin">Pedidos por estado</h3>
-                <div class="tabla-scroll">
-                    <table>
-                        <thead>
-                            <tr><th>Estado</th><th>Pedidos</th><th>Total</th></tr>
-                        </thead>
-                        <tbody id="tabla-reporte-estados"></tbody>
-                    </table>
-                </div>
-                <h3 class="subtitulo-admin">Cobros por medio</h3>
-                <div class="tabla-scroll">
-                    <table>
-                        <thead>
-                            <tr><th>Medio</th><th>Estado del cobro</th><th>Pagos</th><th>Monto</th></tr>
-                        </thead>
-                        <tbody id="tabla-reporte-medios"></tbody>
-                    </table>
-                </div>
+                <article id="reporte-hoja" class="hoja-reporte" hidden>
+                    <div class="barra no-imprimir">
+                        <button type="button" id="btn-volver-reportes" class="secundario">Volver a reportería</button>
+                        <button type="button" id="btn-imprimir-reporte">Imprimir</button>
+                    </div>
+                    <header class="membrete-reporte">
+                        <p class="membrete-marca">Mercado Verde · Supermercado en línea</p>
+                        <h2 id="reporte-hoja-titulo">Reporte</h2>
+                        <p id="reporte-hoja-nota" class="nota-bloque"></p>
+                    </header>
+
+                <section id="reporte-bloque-inventario" class="bloque-reporte" hidden>
+                    <div id="reporte-inventario-cifras" class="kpi-logistica grande"></div>
+                    <div class="tabla-scroll">
+                        <table>
+                            <thead>
+                                <tr><th>Producto</th><th>Stock</th><th>Estado</th><th>Próximo lote</th><th>Valor a costo</th></tr>
+                            </thead>
+                            <tbody id="tabla-reporte-inventario"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="reporte-bloque-critico" class="bloque-reporte" hidden>
+                    <div id="reporte-critico-cifras" class="kpi-logistica grande"></div>
+                    <div class="tabla-scroll">
+                        <table>
+                            <thead>
+                                <tr><th>Producto</th><th>Stock</th><th>Estado</th><th>Próximo lote</th><th>Valor a costo</th></tr>
+                            </thead>
+                            <tbody id="tabla-reporte-critico"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="reporte-bloque-vence" class="bloque-reporte" hidden>
+                    <div id="reporte-vence-cifras" class="kpi-logistica grande"></div>
+                    <div class="tabla-scroll">
+                        <table>
+                            <thead>
+                                <tr><th>Producto</th><th>Lote</th><th>Conservación</th><th>Cantidad</th><th>Vence</th><th>Días</th><th>Estado</th></tr>
+                            </thead>
+                            <tbody id="tabla-reporte-vence"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="reporte-bloque-pagos" class="bloque-reporte" hidden>
+                    <div id="reporte-pagos-cifras" class="kpi-logistica grande"></div>
+                    <div id="cobros-reporte" class="reporte-barras"></div>
+                    <div class="tabla-scroll">
+                        <table>
+                            <thead>
+                                <tr><th>Medio</th><th>Estado</th><th>Pagos</th><th>Monto</th></tr>
+                            </thead>
+                            <tbody id="tabla-reporte-medios"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="reporte-bloque-ventas" class="bloque-reporte" hidden>
+                    <div id="reporte-cifras" class="kpi-logistica grande"></div>
+                    <h4 class="subtitulo-admin">Ruta del pedido</h4>
+                    <div id="reporte-flujo" class="flujo-logistica"></div>
+                    <h4 class="subtitulo-admin">Salidas del mes</h4>
+                    <canvas id="chart-reporte-dias" height="220"></canvas>
+                    <p id="reporte-dias-vacio" class="vacio" hidden>Este mes no tiene pedidos.</p>
+                </section>
+
+                <section id="reporte-bloque-vendidos" class="bloque-reporte" hidden>
+                    <div id="reporte-vendidos-cifras" class="kpi-logistica grande"></div>
+                    <div id="ranking-productos"></div>
+                    <div class="tabla-scroll">
+                        <table>
+                            <thead>
+                                <tr><th>Producto</th><th>Unidades</th><th>Venta</th></tr>
+                            </thead>
+                            <tbody id="tabla-reporte-vendidos"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="reporte-bloque-entregas" class="bloque-reporte" hidden>
+                    <div id="reporte-entregas-cifras" class="kpi-logistica grande"></div>
+                    <div class="tabla-scroll">
+                        <table>
+                            <thead>
+                                <tr><th>Municipio</th><th>Pedidos</th><th>Venta</th></tr>
+                            </thead>
+                            <tbody id="tabla-reporte-municipios"></tbody>
+                        </table>
+                    </div>
+                    <div id="zonas-reporte" class="chips-zonas"></div>
+                </section>
+                </article>
             </div>
 
             <div id="admin-bitacora" class="tab-panel tarjeta" hidden>
@@ -756,6 +887,6 @@
     </div>
 
     <script src="/js/chart.umd.min.js"></script>
-    <script src="/js/app.js"></script>
+    <script src="/js/app.js?v=rolesvivo"></script>
 </body>
 </html>

@@ -132,14 +132,15 @@ final class PedidosService
             $pedidoId = (int) $db->lastInsertId();
 
             $detalle = $db->prepare(
-                'INSERT INTO detalle_pedidos (pedido_id, producto_id, nombre_producto, precio_unitario, cantidad, subtotal, factor, costo_unitario)
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+                'INSERT INTO detalle_pedidos (pedido_id, producto_id, nombre_producto, precio_unitario, cantidad, subtotal, factor, costo_unitario, margen_unitario)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
             );
             foreach ($carrito['items'] as $item) {
                 $nombre = $item['presentacion'] ? $item['nombre'] . ' · ' . $item['presentacion'] : $item['nombre'];
                 $detalle->execute([
                     $pedidoId, $item['producto_id'], $nombre, $item['precio'], $item['cantidad'], $item['subtotal'], $item['factor'],
                     $item['costo_unitario'],
+                    $item['margen_unitario'],
                 ]);
             }
             if ($descuento > 0) {
@@ -485,7 +486,7 @@ final class PedidosService
         $fin = date('Y-m-d H:i:s', strtotime($inicio . ' +1 month'));
         $stmt = Db::get()->prepare(
             'SELECT p.uuid, p.estado, d.producto_id, d.nombre_producto, d.cantidad, d.precio_unitario,
-                    d.costo_unitario, d.subtotal, d.factor
+                    d.costo_unitario, d.margen_unitario, d.subtotal, d.factor
              FROM pedidos p JOIN detalle_pedidos d ON d.pedido_id = p.id
              WHERE p.estado <> \'cancelado\' AND p.fecha >= ? AND p.fecha < ?
              ORDER BY p.fecha DESC, d.id'
@@ -500,6 +501,7 @@ final class PedidosService
                 'cantidad' => (int) $fila['cantidad'],
                 'precio_unitario' => round((float) $fila['precio_unitario'], 2),
                 'costo_unitario' => $fila['costo_unitario'] === null ? null : round((float) $fila['costo_unitario'], 2),
+                'margen_unitario' => $fila['margen_unitario'] === null ? null : round((float) $fila['margen_unitario'], 2),
                 'subtotal' => round((float) $fila['subtotal'], 2),
                 'factor' => (int) ($fila['factor'] ?? 1),
             ];
@@ -536,6 +538,32 @@ final class PedidosService
              GROUP BY d.nombre_producto ORDER BY venta DESC, nombre'
         );
         $productos->execute([$inicio, $fin]);
+        $municipios = $db->prepare(
+            'SELECT municipio, COUNT(*) AS pedidos, COALESCE(SUM(total), 0) AS total
+             FROM pedidos
+             WHERE estado <> \'cancelado\' AND fecha >= ? AND fecha < ?
+             GROUP BY municipio
+             ORDER BY pedidos DESC, municipio'
+        );
+        $municipios->execute([$inicio, $fin]);
+        $zonas = $db->prepare(
+            'SELECT COALESCE(NULLIF(zona, \'\'), \'Sin zona\') AS zona, COUNT(*) AS pedidos
+             FROM pedidos
+             WHERE estado <> \'cancelado\' AND fecha >= ? AND fecha < ?
+             GROUP BY COALESCE(NULLIF(zona, \'\'), \'Sin zona\')
+             ORDER BY pedidos DESC, zona'
+        );
+        $zonas->execute([$inicio, $fin]);
+        $dias = $db->prepare(
+            'SELECT DATE(fecha) AS dia,
+                    SUM(estado <> \'cancelado\') AS pedidos,
+                    COALESCE(SUM(CASE WHEN estado <> \'cancelado\' THEN total ELSE 0 END), 0) AS total
+             FROM pedidos
+             WHERE fecha >= ? AND fecha < ?
+             GROUP BY DATE(fecha)
+             ORDER BY dia'
+        );
+        $dias->execute([$inicio, $fin]);
         Http::json(200, [
             'mes' => $mes,
             'estados' => array_map(static function (array $fila): array {
@@ -552,6 +580,26 @@ final class PedidosService
                     'venta' => round((float) $fila['venta'], 2),
                 ];
             }, $productos->fetchAll()),
+            'municipios' => array_map(static function (array $fila): array {
+                return [
+                    'municipio' => $fila['municipio'],
+                    'pedidos' => (int) $fila['pedidos'],
+                    'total' => round((float) $fila['total'], 2),
+                ];
+            }, $municipios->fetchAll()),
+            'zonas' => array_map(static function (array $fila): array {
+                return [
+                    'zona' => $fila['zona'],
+                    'pedidos' => (int) $fila['pedidos'],
+                ];
+            }, $zonas->fetchAll()),
+            'dias' => array_map(static function (array $fila): array {
+                return [
+                    'dia' => $fila['dia'],
+                    'pedidos' => (int) $fila['pedidos'],
+                    'total' => round((float) $fila['total'], 2),
+                ];
+            }, $dias->fetchAll()),
         ]);
     }
 
@@ -559,7 +607,7 @@ final class PedidosService
     {
         $carrito = self::carritoDetallado($clienteId);
         foreach ($carrito['items'] as &$item) {
-            unset($item['costo_unitario']);
+            unset($item['costo_unitario'], $item['margen_unitario']);
         }
         unset($item);
         return $carrito;
@@ -609,6 +657,7 @@ final class PedidosService
                 'unidad' => $producto['unidad'],
                 'precio' => (float) $oferta['precio'],
                 'costo_unitario' => round((float) ($producto['precio_compra'] ?? 0) * (int) $oferta['factor'], 2),
+                'margen_unitario' => round((float) ($producto['margen_utilidad'] ?? 0) * (int) $oferta['factor'], 2),
                 'cantidad' => $cantidad,
                 'subtotal' => $subtotal,
                 'stock' => $producto['stock'],

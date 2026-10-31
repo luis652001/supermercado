@@ -10,7 +10,7 @@ final class CatalogoService
     private const MAX_CANTIDAD_ITEM = 50;
     private const COLUMNAS = 'p.id, p.categoria_id, c.nombre AS categoria, c.icono, p.nombre, p.descripcion, p.precio,
                               p.unidad, p.stock, p.imagen_url, p.destacado, p.activo, p.updated_at,
-                              p.productor_id, p.retornable, p.deposito_envase, p.precio_compra, p.conservacion';
+                              p.productor_id, p.retornable, p.deposito_envase, p.precio_compra, p.inyeccion, p.margen_utilidad, p.conservacion';
 
     // ---------------------------------------------------------------- Público
 
@@ -217,7 +217,7 @@ final class CatalogoService
                 implode(', ', array_fill(0, count($columnas), '?'))
             ))->execute(array_values($datos));
             $id = (int) $db->lastInsertId();
-            self::guardarPresentacionInicial($id, $cuerpo);
+            self::sincronizarPresentaciones($db, $id, $cuerpo, (float) $datos['precio']);
             self::guardarLoteInicial($id, (int) $datos['stock'], $cuerpo, (float) ($datos['precio_compra'] ?? 0));
             $db->commit();
         } catch (Throwable $e) {
@@ -241,7 +241,8 @@ final class CatalogoService
     {
         $admin = Guard::requirePermiso('catalogo.gestionar');
         $id = (int) $id;
-        $cambios = self::validarProducto(Http::body(), true);
+        $cuerpo = Http::body();
+        $cambios = self::validarProducto($cuerpo, true);
         if (!$cambios) {
             throw new HttpError(422, 'No se envió ningún campo válido para actualizar');
         }
@@ -254,17 +255,23 @@ final class CatalogoService
         $db = Db::get();
         $db->beginTransaction();
         try {
-            $stmt = $db->prepare('SELECT id, nombre, precio, precio_compra, stock FROM productos WHERE id = ? FOR UPDATE');
+            $stmt = $db->prepare('SELECT id, nombre, precio, precio_compra, inyeccion, margen_utilidad, stock FROM productos WHERE id = ? FOR UPDATE');
             $stmt->execute([$id]);
             $anterior = $stmt->fetch() ?: throw new HttpError(404, 'Producto no encontrado');
             $ventaAnterior = round((float) $anterior['precio'], 2);
             $compraAnterior = round((float) $anterior['precio_compra'], 2);
+            $inyeccionAnterior = round((float) $anterior['inyeccion'], 2);
+            $margenAnterior = round((float) $anterior['margen_utilidad'], 2);
             $ventaNueva = array_key_exists('precio', $cambios) ? (float) $cambios['precio'] : $ventaAnterior;
             $compraNueva = array_key_exists('precio_compra', $cambios) ? (float) $cambios['precio_compra'] : $compraAnterior;
-            $cambioPrecio = $ventaAnterior !== $ventaNueva || $compraAnterior !== $compraNueva;
+            $inyeccionNueva = array_key_exists('inyeccion', $cambios) ? (float) $cambios['inyeccion'] : $inyeccionAnterior;
+            $margenNuevo = array_key_exists('margen_utilidad', $cambios) ? (float) $cambios['margen_utilidad'] : $margenAnterior;
+            $cambioPrecio = $ventaAnterior !== $ventaNueva || $compraAnterior !== $compraNueva
+                || $inyeccionAnterior !== $inyeccionNueva || $margenAnterior !== $margenNuevo;
             if ($cambioPrecio) {
-                self::registrarPrecio($db, $id, null, $ventaAnterior, $compraAnterior, $ventaNueva, $compraNueva);
+                self::registrarPrecio($db, $id, null, $ventaAnterior, $compraAnterior, $ventaNueva, $compraNueva, $inyeccionAnterior, $margenAnterior, $inyeccionNueva, $margenNuevo);
             }
+            self::sincronizarPresentaciones($db, $id, $cuerpo, $ventaNueva);
 
             $cambios['updated_by'] = (int) $admin['sub'];
             $sets = implode(', ', array_map(static fn (string $col): string => "$col = ?", array_keys($cambios)));
@@ -360,12 +367,14 @@ final class CatalogoService
         self::exigirCaja();
         $mes = self::mesConsulta($_GET['mes'] ?? null);
         $db = Db::get();
-        $filas = $db->query('SELECT id, nombre, stock, precio, precio_compra FROM productos WHERE activo = 1 ORDER BY nombre')->fetchAll();
+        $filas = $db->query('SELECT id, nombre, stock, precio, precio_compra, inyeccion, margen_utilidad FROM productos WHERE activo = 1 ORDER BY nombre')->fetchAll();
         $productos = [];
         $capital = 0.0;
         foreach ($filas as $fila) {
             $stock = (int) $fila['stock'];
             $compra = round((float) $fila['precio_compra'], 2);
+            $inyeccion = round((float) $fila['inyeccion'], 2);
+            $margen = round((float) $fila['margen_utilidad'], 2);
             $venta = round((float) $fila['precio'], 2);
             $invertido = round($stock * $compra, 2);
             $capital += $invertido;
@@ -374,9 +383,10 @@ final class CatalogoService
                 'nombre' => $fila['nombre'],
                 'stock' => $stock,
                 'precio_compra' => $compra,
+                'inyeccion' => $inyeccion,
                 'precio_venta' => $venta,
                 'capital' => $invertido,
-                'margen' => round($venta - $compra, 2),
+                'margen' => $margen,
             ];
         }
         $stmt = $db->prepare(
@@ -507,19 +517,23 @@ final class CatalogoService
         if (mb_strlen($nota) > 200) {
             throw new HttpError(422, 'La nota del lote no puede superar 200 caracteres');
         }
-        [$venta, $compra] = self::leerPrecios($cuerpo);
+        [$venta, $compra, $inyeccion, $margen] = self::leerDesglose($cuerpo);
 
         $db = Db::get();
         $db->beginTransaction();
         $cambioPrecio = false;
         $ventaAnterior = 0.0;
         $compraAnterior = 0.0;
+        $inyeccionAnterior = 0.0;
+        $margenAnterior = 0.0;
         try {
-            $stmt = $db->prepare('SELECT precio, precio_compra FROM productos WHERE id = ? FOR UPDATE');
+            $stmt = $db->prepare('SELECT precio, precio_compra, inyeccion, margen_utilidad FROM productos WHERE id = ? FOR UPDATE');
             $stmt->execute([$productoId]);
             $producto = $stmt->fetch() ?: throw new HttpError(404, 'Producto no encontrado');
             $ventaAnterior = round((float) $producto['precio'], 2);
             $compraAnterior = round((float) $producto['precio_compra'], 2);
+            $inyeccionAnterior = round((float) $producto['inyeccion'], 2);
+            $margenAnterior = round((float) $producto['margen_utilidad'], 2);
             $ingreso = self::fecha($cuerpo['fecha_ingreso'] ?? '') ?? date('Y-m-d');
             if ($fecha < $ingreso) {
                 throw new HttpError(422, 'La fecha de vencimiento no puede ser anterior al ingreso');
@@ -529,11 +543,12 @@ final class CatalogoService
                  VALUES (?, ?, ?, ?, ?, ?, \'en_camara\', ?)'
             )->execute([$productoId, $codigo, $cantidad, $ingreso, $fecha, $temperatura, $nota !== '' ? $nota : null]);
             $loteId = (int) $db->lastInsertId();
-            $cambioPrecio = $ventaAnterior !== $venta || $compraAnterior !== $compra;
+            $cambioPrecio = $ventaAnterior !== $venta || $compraAnterior !== $compra
+                || $inyeccionAnterior !== $inyeccion || $margenAnterior !== $margen;
             if ($cambioPrecio) {
-                self::registrarPrecio($db, $productoId, $loteId, $ventaAnterior, $compraAnterior, $venta, $compra);
-                $db->prepare('UPDATE productos SET precio = ?, precio_compra = ?, updated_by = ? WHERE id = ?')
-                    ->execute([$venta, $compra, (int) $admin['sub'], $productoId]);
+                self::registrarPrecio($db, $productoId, $loteId, $ventaAnterior, $compraAnterior, $venta, $compra, $inyeccionAnterior, $margenAnterior, $inyeccion, $margen);
+                $db->prepare('UPDATE productos SET precio = ?, precio_compra = ?, inyeccion = ?, margen_utilidad = ?, updated_by = ? WHERE id = ?')
+                    ->execute([$venta, $compra, $inyeccion, $margen, (int) $admin['sub'], $productoId]);
             }
             $db->prepare('UPDATE productos SET stock = stock + ? WHERE id = ?')->execute([$cantidad, $productoId]);
             self::registrarCaja($db, substr($ingreso, 0, 7), 'compra', round($cantidad * $compra, 2), 'Lote ' . $codigo, $loteId);
@@ -585,24 +600,35 @@ final class CatalogoService
         ]);
     }
 
-    /** @return array{0: float, 1: float} */
-    private static function leerPrecios(array $cuerpo): array
+    /** @return array{0: float, 1: float, 2: float, 3: float} venta, costo, inyección, margen */
+    private static function leerDesglose(array $cuerpo): array
     {
-        $venta = filter_var($cuerpo['precio'] ?? null, FILTER_VALIDATE_FLOAT);
-        $compra = filter_var($cuerpo['precio_compra'] ?? null, FILTER_VALIDATE_FLOAT);
-        if ($venta === false || $venta <= 0 || $venta > 99999.99) {
-            throw new HttpError(422, 'El precio de venta debe ser mayor a 0');
+        $compra = self::montoPrecio($cuerpo['precio_compra'] ?? null, 'El costo', true);
+        $inyeccion = self::montoPrecio($cuerpo['inyeccion'] ?? 0, 'La inyección', true);
+        $margen = self::montoPrecio($cuerpo['margen_utilidad'] ?? 0, 'El margen', true);
+        $venta = round($compra + $inyeccion + $margen, 2);
+        if ($venta <= 0 || $venta > 99999.99) {
+            throw new HttpError(422, 'La venta es costo + inyección + margen y tiene que ser mayor a 0');
         }
-        if ($compra === false || $compra < 0 || $compra > 99999.99) {
-            throw new HttpError(422, 'El precio de compra no puede ser negativo');
+        return [$venta, $compra, $inyeccion, $margen];
+    }
+
+    private static function montoPrecio(mixed $valor, string $nombre, bool $permiteCero): float
+    {
+        if ($valor === '' || $valor === null) {
+            $valor = 0;
         }
-        return [round((float) $venta, 2), round((float) $compra, 2)];
+        $monto = filter_var($valor, FILTER_VALIDATE_FLOAT);
+        if ($monto === false || $monto > 99999.99 || ($permiteCero ? $monto < 0 : $monto <= 0)) {
+            throw new HttpError(422, $permiteCero ? "$nombre no puede ser negativo" : "$nombre debe ser mayor a 0");
+        }
+        return round((float) $monto, 2);
     }
 
     public static function adminCambiarPrecioLote(string $id): never
     {
         $admin = Guard::requirePermiso('catalogo.gestionar');
-        [$venta, $compra] = self::leerPrecios(Http::body());
+        [$venta, $compra, $inyeccion, $margen] = self::leerDesglose(Http::body());
 
         $db = Db::get();
         $db->beginTransaction();
@@ -610,12 +636,14 @@ final class CatalogoService
             $lote = self::loteConPrecio((int) $id, true);
             $ventaAnterior = $lote['precio_venta'];
             $compraAnterior = $lote['precio_compra'];
-            if ($ventaAnterior === $venta && $compraAnterior === $compra) {
+            $inyeccionAnterior = $lote['inyeccion'];
+            $margenAnterior = $lote['margen_utilidad'];
+            if ($ventaAnterior === $venta && $compraAnterior === $compra && $inyeccionAnterior === $inyeccion && $margenAnterior === $margen) {
                 throw new HttpError(422, 'Esos ya son los precios actuales');
             }
-            self::registrarPrecio($db, $lote['producto_id'], $lote['id'], $ventaAnterior, $compraAnterior, $venta, $compra);
-            $db->prepare('UPDATE productos SET precio = ?, precio_compra = ?, updated_by = ? WHERE id = ?')
-                ->execute([$venta, $compra, (int) $admin['sub'], $lote['producto_id']]);
+            self::registrarPrecio($db, $lote['producto_id'], $lote['id'], $ventaAnterior, $compraAnterior, $venta, $compra, $inyeccionAnterior, $margenAnterior, $inyeccion, $margen);
+            $db->prepare('UPDATE productos SET precio = ?, precio_compra = ?, inyeccion = ?, margen_utilidad = ?, updated_by = ? WHERE id = ?')
+                ->execute([$venta, $compra, $inyeccion, $margen, (int) $admin['sub'], $lote['producto_id']]);
             $db->commit();
         } catch (Throwable $e) {
             if ($db->inTransaction()) {
@@ -819,6 +847,81 @@ final class CatalogoService
     }
 
     /** @param array<string, mixed> $cuerpo */
+    private static function sincronizarPresentaciones(\PDO $db, int $productoId, array $cuerpo, float $ventaUnitaria): void
+    {
+        if (!array_key_exists('presentaciones', $cuerpo)) {
+            self::guardarPresentacionInicial($productoId, $cuerpo);
+            return;
+        }
+        if (!is_array($cuerpo['presentaciones'])) {
+            throw new HttpError(422, 'Las presentaciones no tienen un formato válido');
+        }
+        if (count($cuerpo['presentaciones']) > 8) {
+            throw new HttpError(422, 'Un producto puede tener hasta 8 presentaciones');
+        }
+        $ids = [];
+        $vistos = [];
+        foreach ($cuerpo['presentaciones'] as $item) {
+            if (!is_array($item)) {
+                throw new HttpError(422, 'Hay una presentación inválida');
+            }
+            $nombre = trim((string) ($item['nombre'] ?? ''));
+            if ($nombre === '') {
+                continue;
+            }
+            if (!preg_match('/^[\p{L}\p{N} .\'-]{2,80}$/u', $nombre)) {
+                throw new HttpError(422, 'El nombre de la presentación no es válido');
+            }
+            $clave = mb_strtolower($nombre);
+            if (isset($vistos[$clave])) {
+                throw new HttpError(422, 'No repitas el nombre de una presentación');
+            }
+            $vistos[$clave] = true;
+            $factor = filter_var($item['factor'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 500]]);
+            if ($factor === false) {
+                throw new HttpError(422, 'Cada presentación indica cuántas unidades base incluye');
+            }
+            $precio = round($factor * $ventaUnitaria, 2);
+            if ($precio <= 0 || $precio > 99999.99) {
+                throw new HttpError(422, 'Primero arma la venta base. La presentación la multiplica por lo que incluye');
+            }
+            $id = self::enteroPositivo($item['id'] ?? null);
+            if ($id) {
+                $propia = $db->prepare('SELECT id FROM presentaciones WHERE id = ? AND producto_id = ?');
+                $propia->execute([$id, $productoId]);
+                if (!$propia->fetch()) {
+                    $id = null;
+                }
+            }
+            if ($id) {
+                $db->prepare('UPDATE presentaciones SET nombre = ?, factor = ?, precio = ?, activa = 1 WHERE id = ? AND producto_id = ?')
+                    ->execute([$nombre, $factor, $precio, $id, $productoId]);
+                $ids[] = $id;
+                continue;
+            }
+            $ya = $db->prepare('SELECT id FROM presentaciones WHERE producto_id = ? AND nombre = ?');
+            $ya->execute([$productoId, $nombre]);
+            $existente = $ya->fetchColumn();
+            if ($existente) {
+                $db->prepare('UPDATE presentaciones SET factor = ?, precio = ?, activa = 1 WHERE id = ?')
+                    ->execute([$factor, $precio, (int) $existente]);
+                $ids[] = (int) $existente;
+                continue;
+            }
+            $db->prepare('INSERT INTO presentaciones (producto_id, nombre, factor, precio) VALUES (?, ?, ?, ?)')
+                ->execute([$productoId, $nombre, $factor, $precio]);
+            $ids[] = (int) $db->lastInsertId();
+        }
+        if ($ids) {
+            $marcas = implode(',', array_fill(0, count($ids), '?'));
+            $db->prepare("UPDATE presentaciones SET activa = 0 WHERE producto_id = ? AND id NOT IN ($marcas)")
+                ->execute([$productoId, ...$ids]);
+        } else {
+            $db->prepare('UPDATE presentaciones SET activa = 0 WHERE producto_id = ?')->execute([$productoId]);
+        }
+    }
+
+    /** @param array<string, mixed> $cuerpo */
     private static function guardarPresentacionInicial(int $productoId, array $cuerpo): void
     {
         $nombre = trim((string) ($cuerpo['presentacion_nombre'] ?? ''));
@@ -892,7 +995,7 @@ final class CatalogoService
             }
             $datos['descripcion'] = $descripcion === '' ? null : $descripcion;
         }
-        if (array_key_exists('precio', $cuerpo)) {
+        if (array_key_exists('precio', $cuerpo) && !array_key_exists('inyeccion', $cuerpo) && !array_key_exists('margen_utilidad', $cuerpo)) {
             $precio = filter_var($cuerpo['precio'], FILTER_VALIDATE_FLOAT);
             if ($precio === false || $precio <= 0 || $precio > 99999.99) {
                 throw new HttpError(422, 'Precio inválido (mayor a 0 y menor a 100,000)');
@@ -900,11 +1003,21 @@ final class CatalogoService
             $datos['precio'] = round($precio, 2);
         }
         if (array_key_exists('precio_compra', $cuerpo) && $cuerpo['precio_compra'] !== '' && $cuerpo['precio_compra'] !== null) {
-            $compra = filter_var($cuerpo['precio_compra'], FILTER_VALIDATE_FLOAT);
-            if ($compra === false || $compra < 0 || $compra > 99999.99) {
-                throw new HttpError(422, 'Precio de compra inválido');
+            $datos['precio_compra'] = self::montoPrecio($cuerpo['precio_compra'], 'El costo', true);
+        }
+        if (array_key_exists('inyeccion', $cuerpo) || array_key_exists('margen_utilidad', $cuerpo)) {
+            if (!array_key_exists('precio_compra', $datos)) {
+                throw new HttpError(422, 'El costo tiene que venir junto con la inyección y el margen');
             }
-            $datos['precio_compra'] = round($compra, 2);
+            $inyeccion = self::montoPrecio($cuerpo['inyeccion'] ?? 0, 'La inyección', true);
+            $margen = self::montoPrecio($cuerpo['margen_utilidad'] ?? 0, 'El margen', true);
+            $venta = round($datos['precio_compra'] + $inyeccion + $margen, 2);
+            if ($venta <= 0 || $venta > 99999.99) {
+                throw new HttpError(422, 'La venta es costo + inyección + margen y tiene que ser mayor a 0');
+            }
+            $datos['inyeccion'] = $inyeccion;
+            $datos['margen_utilidad'] = $margen;
+            $datos['precio'] = $venta;
         }
         if (array_key_exists('productor_id', $cuerpo) && $cuerpo['productor_id'] !== '' && $cuerpo['productor_id'] !== null) {
             $productor = self::enteroPositivo($cuerpo['productor_id']);
@@ -1014,6 +1127,8 @@ final class CatalogoService
         $fila['retornable'] = (bool) ($fila['retornable'] ?? false);
         $fila['deposito_envase'] = round((float) ($fila['deposito_envase'] ?? 0), 2);
         $fila['precio_compra'] = round((float) ($fila['precio_compra'] ?? 0), 2);
+        $fila['inyeccion'] = round((float) ($fila['inyeccion'] ?? 0), 2);
+        $fila['margen_utilidad'] = round((float) ($fila['margen_utilidad'] ?? 0), 2);
         $fila['conservacion'] = ($fila['conservacion'] ?? 'ambiente') === 'refrigerado' ? 'refrigerado' : 'ambiente';
         return $fila;
     }
@@ -1022,7 +1137,7 @@ final class CatalogoService
     private static function sinCosto(array $productos): array
     {
         foreach ($productos as &$producto) {
-            unset($producto['precio_compra']);
+            unset($producto['precio_compra'], $producto['inyeccion'], $producto['margen_utilidad']);
         }
         unset($producto);
         return $productos;
@@ -1140,7 +1255,7 @@ final class CatalogoService
 
     private static function loteConPrecio(int $id, bool $bloquear = false): array
     {
-        $sql = 'SELECT l.id, l.codigo, l.producto_id, p.precio AS precio_venta, p.precio_compra
+        $sql = 'SELECT l.id, l.codigo, l.producto_id, p.precio AS precio_venta, p.precio_compra, p.inyeccion, p.margen_utilidad
                 FROM lotes l JOIN productos p ON p.id = l.producto_id WHERE l.id = ?';
         if ($bloquear) {
             $sql .= ' FOR UPDATE';
@@ -1154,15 +1269,17 @@ final class CatalogoService
             'producto_id' => (int) $fila['producto_id'],
             'precio_venta' => round((float) $fila['precio_venta'], 2),
             'precio_compra' => round((float) $fila['precio_compra'], 2),
+            'inyeccion' => round((float) $fila['inyeccion'], 2),
+            'margen_utilidad' => round((float) $fila['margen_utilidad'], 2),
         ];
     }
 
-    private static function registrarPrecio(\PDO $db, int $productoId, ?int $loteId, float $ventaAnterior, float $compraAnterior, float $ventaNueva, float $compraNueva): void
+    private static function registrarPrecio(\PDO $db, int $productoId, ?int $loteId, float $ventaAnterior, float $compraAnterior, float $ventaNueva, float $compraNueva, float $inyeccionAnterior = 0, float $margenAnterior = 0, float $inyeccionNueva = 0, float $margenNueva = 0): void
     {
         $db->prepare(
-            'INSERT INTO historial_precios (producto_id, lote_id, venta_anterior, compra_anterior, venta_nueva, compra_nueva)
-             VALUES (?, ?, ?, ?, ?, ?)'
-        )->execute([$productoId, $loteId, $ventaAnterior, $compraAnterior, $ventaNueva, $compraNueva]);
+            'INSERT INTO historial_precios (producto_id, lote_id, venta_anterior, compra_anterior, venta_nueva, compra_nueva, inyeccion_anterior, margen_anterior, inyeccion_nueva, margen_nueva)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        )->execute([$productoId, $loteId, $ventaAnterior, $compraAnterior, $ventaNueva, $compraNueva, $inyeccionAnterior, $margenAnterior, $inyeccionNueva, $margenNueva]);
     }
 
     private static function exigirCaja(): array
